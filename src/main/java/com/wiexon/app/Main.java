@@ -1,6 +1,7 @@
 package com.wiexon.app;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,6 +18,9 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
         primaryStage.show();
+        primaryStage.setOnCloseRequest(e->{
+            Platform.exit();
+        });
     }
 
 
