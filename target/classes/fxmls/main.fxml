@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import de.jensd.fx.glyphs.materialicons.*?>
-<?import de.jensd.fx.glyphs.fontawesome.*?>
-<?import com.jfoenix.controls.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <MenuBar layoutX="150.0" layoutY="90.0" AnchorPane.bottomAnchor="475.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <MenuBar layoutX="150.0" layoutY="90.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
@@ -33,39 +34,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="152.0" layoutY="40.0" style="-fx-background-color: #fff;" text=" " textFill="#00960a">
-         <graphic>
-            <MaterialIconView fill="#009407" glyphName="ADD" size="25" />
-         </graphic>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </JFXButton>
-      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="273.0" layoutY="40.0" style="-fx-background-color: #fff;" text=" " textFill="#e40000">
-         <graphic>
-            <MaterialIconView fill="#e40000" glyphName="REMOVE" size="25" />
-         </graphic>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </JFXButton>
-      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="338.0" layoutY="40.0" style="-fx-background-color: #fff;" text=" " textFill="#00960a">
-         <graphic>
-            <MaterialIconView fill="#009407" glyphName="CHECK" size="25" />
-         </graphic>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </JFXButton>
-      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="402.0" layoutY="40.0" style="-fx-background-color: #fff;" text=" " textFill="#e40000">
-         <graphic>
-            <MaterialIconView fill="#e40000" glyphName="CLOSE" size="25" />
-         </graphic>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </JFXButton>
-      <TableView layoutX="63.0" layoutY="83.0" prefHeight="412.0" prefWidth="690.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="83.0">
+      <TableView fx:id="serviceTable" layoutX="6.0" layoutY="78.0" prefHeight="395.0" prefWidth="690.0" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="78.0">
         <columns>
           <TableColumn prefWidth="39.0" text="SL" />
           <TableColumn prefWidth="134.0" text="Term" />
@@ -76,37 +45,103 @@
             <TableColumn prefWidth="71.0" text="Status" />
         </columns>
       </TableView>
-      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="40.0" style="-fx-background-color: #fff;" text=" " textFill="#00960a" AnchorPane.topAnchor="40.0">
-         <graphic>
-            <MaterialIconView fill="#009407" glyphName="PLAY_ARROW" size="25" />
-         </graphic>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </JFXButton>
-      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="84.0" layoutY="40.0" style="-fx-background-color: #fff;" text=" " textFill="#e40000" AnchorPane.topAnchor="40.0">
-         <graphic>
-            <MaterialIconView fill="#e40000" glyphName="STOP" size="25" />
-         </graphic>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </JFXButton>
-      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="642.0" layoutY="40.0" style="-fx-background-color: #fff;" text=" " textFill="#ffe100">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <graphic>
-            <MaterialIconView fill="#ffdd00" glyphName="ERROR" size="25" />
-         </graphic>
-      </JFXButton>
-      <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="212.0" layoutY="40.0" style="-fx-background-color: #fff;" text=" " textFill="#ffae00">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <graphic>
-            <MaterialIconView fill="#ffae00" glyphName="EDIT" size="25" />
-         </graphic>
-      </JFXButton>
+      <Text fx:id="portNameView" layoutX="193.0" layoutY="491.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Port: 8085" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="200.0" />
+      <Text fx:id="hostNameView" layoutX="61.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Host: localhost" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="50.0" />
+      <HBox layoutX="6.0" layoutY="25.0" prefHeight="47.0" prefWidth="449.0" AnchorPane.leftAnchor="6.0" AnchorPane.topAnchor="25.0">
+         <children>
+            <JFXButton alignment="CENTER" contentDisplay="CENTER" onAction="#StartServices" style="-fx-background-color: #fff; -fx-border-radius: 0;" text=" " textFill="#00960a" HBox.hgrow="ALWAYS">
+               <graphic>
+                  <MaterialIconView fill="#009407" glyphName="PLAY_ARROW" size="25" />
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </JFXButton>
+            <JFXButton alignment="CENTER" contentDisplay="CENTER" onAction="#StopServices" style="-fx-background-color: #fff;" text=" " textFill="#e40000">
+               <graphic>
+                  <MaterialIconView fill="#e40000" glyphName="STOP" size="25" />
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </JFXButton>
+            <JFXButton fx:id="AddService" alignment="CENTER" contentDisplay="CENTER" onAction="#AddService" style="-fx-background-color: #fff;" text=" " textFill="#00960a">
+               <graphic>
+                  <MaterialIconView fill="#009407" glyphName="ADD" size="25" />
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </JFXButton>
+            <JFXButton alignment="CENTER" contentDisplay="CENTER" onAction="#EditService" style="-fx-background-color: #fff;" text=" " textFill="#ffae00">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <MaterialIconView fill="#ffae00" glyphName="EDIT" size="25" />
+               </graphic>
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </JFXButton>
+            <JFXButton alignment="CENTER" contentDisplay="CENTER" onAction="#RemoveService" style="-fx-background-color: #fff;" text=" " textFill="#e40000">
+               <graphic>
+                  <MaterialIconView fill="#e40000" glyphName="REMOVE" size="25" />
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </JFXButton>
+            <JFXButton alignment="CENTER" contentDisplay="CENTER" onAction="#EnableService" style="-fx-background-color: #fff;" text=" " textFill="#00960a">
+               <graphic>
+                  <MaterialIconView fill="#009407" glyphName="CHECK" size="25" />
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </JFXButton>
+            <JFXButton alignment="CENTER" contentDisplay="CENTER" onAction="#DisableService" style="-fx-background-color: #fff;" text=" " textFill="#e40000">
+               <graphic>
+                  <MaterialIconView fill="#e40000" glyphName="CLOSE" size="25" />
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </JFXButton>
+         </children>
+      </HBox>
+      <HBox alignment="TOP_RIGHT" layoutX="496.0" layoutY="25.0" prefHeight="47.0" prefWidth="100.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="25.0">
+         <children>
+            <JFXButton alignment="CENTER" contentDisplay="CENTER" onAction="#ShowErrors" style="-fx-background-color: #fff;" text=" " textFill="#ffe100">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <MaterialIconView fill="#ffdd00" glyphName="ERROR" size="25" />
+               </graphic>
+               <HBox.margin>
+                  <Insets right="10.0" top="10.0" />
+               </HBox.margin>
+            </JFXButton>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

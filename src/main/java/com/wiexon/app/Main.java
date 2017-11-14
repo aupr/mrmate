@@ -10,7 +10,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/fxmls/main.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmls/main.fxml"));
+        fxmlLoader.setController(new Controller());
+        Parent root = fxmlLoader.load();
         primaryStage.setTitle("Modbus REST Mate");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);

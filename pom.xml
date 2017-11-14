@@ -23,6 +23,28 @@
             <version>8.6</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/de.bluebiz/modbus-javacomm -->
+        <dependency>
+            <groupId>de.bluebiz</groupId>
+            <artifactId>modbus-javacomm</artifactId>
+            <version>1.6</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.sun.jersey/jersey-server -->
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>1.19</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.sun.jersey/jersey-json -->
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-json</artifactId>
+            <version>1.19</version>
+        </dependency>
+
+
     </dependencies>
 
 </project>
