@@ -1,6 +1,9 @@
 package com.wiexon.app;
 
 import com.jfoenix.controls.JFXButton;
+import com.sparetimelabs.serial.CommPortIdentifier;
+import com.sparetimelabs.serial.PureJavaSerialPort;
+import com.sparetimelabs.serial.SerialPort;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,8 +13,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import jssc.SerialPortList;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 public class Controller {
 
@@ -50,6 +55,10 @@ public class Controller {
         newService.setAlwaysOnTop(true);
         newService.setScene(new Scene(root));
         newService.setOnHidden(e->{
+            if (newServiceController.isMake) {
+                
+
+            }
             System.out.println("new form hiding!");
         });
         newService.show();
@@ -85,6 +94,11 @@ public class Controller {
     void StartServices(ActionEvent event) {
 
         System.out.println("Working Start service!");
+        //Enumeration<String> list=
+        //System.out.println(list);
+        //System.out.println(SerialPortList.getPortNames()[0]);
+        //System.out.println(CommPortIdentifier.getPortIdentifiers());
+
 
     }
 
