@@ -36,13 +36,13 @@
       </MenuBar>
       <TableView fx:id="serviceTable" layoutX="6.0" layoutY="78.0" prefHeight="395.0" prefWidth="690.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="78.0">
         <columns>
-          <TableColumn prefWidth="39.0" text="SL" />
-          <TableColumn prefWidth="134.0" text="Term" />
-            <TableColumn prefWidth="119.0" text="URI" />
-            <TableColumn prefWidth="64.0" text="PID" />
-            <TableColumn prefWidth="175.0" text="Connection" />
-            <TableColumn prefWidth="87.0" text="Mode" />
-            <TableColumn prefWidth="71.0" text="Status" />
+          <TableColumn fx:id="sl" prefWidth="39.0" text="SL" />
+          <TableColumn fx:id="term" prefWidth="134.0" text="Term" />
+            <TableColumn fx:id="uri" prefWidth="119.0" text="URI" />
+            <TableColumn fx:id="pid" prefWidth="64.0" text="PID" />
+            <TableColumn fx:id="connection" prefWidth="175.0" text="Connection" />
+            <TableColumn fx:id="mode" prefWidth="87.0" text="Mode" />
+            <TableColumn fx:id="status" prefWidth="71.0" text="Status" />
         </columns>
       </TableView>
       <Text fx:id="portNameView" layoutX="193.0" layoutY="491.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Port: 8085" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="200.0" />
