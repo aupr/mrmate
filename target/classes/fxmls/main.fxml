@@ -71,7 +71,7 @@
                   <Insets left="10.0" top="10.0" />
                </HBox.margin>
             </JFXButton>
-            <JFXButton fx:id="AddService" alignment="CENTER" contentDisplay="CENTER" onAction="#AddService" style="-fx-background-color: #fff;" text=" " textFill="#00960a">
+            <JFXButton alignment="CENTER" contentDisplay="CENTER" onAction="#AddService" style="-fx-background-color: #fff;" text=" " textFill="#00960a">
                <graphic>
                   <MaterialIconView fill="#009407" glyphName="ADD" size="25" />
                </graphic>

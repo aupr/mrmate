@@ -11,11 +11,11 @@ public class ServiceTableData {
     private final SimpleStringProperty mode;
     private final SimpleStringProperty status;
 
-    public ServiceTableData(String sl, String term, String uri, String pid, String connection, String mode, String status) {
-        this.sl = new SimpleStringProperty(sl);
+    public ServiceTableData(Integer sl, String term, String uri, Integer pid, String connection, String mode, String status) {
+        this.sl = new SimpleStringProperty(sl.toString());
         this.term = new SimpleStringProperty(term);
         this.uri = new SimpleStringProperty(uri);
-        this.pid = new SimpleStringProperty(pid);
+        this.pid = new SimpleStringProperty(pid.toString());
         this.connection = new SimpleStringProperty(connection);
         this.mode = new SimpleStringProperty(mode);
         this.status = new SimpleStringProperty(status);
