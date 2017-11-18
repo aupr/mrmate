@@ -34,7 +34,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TableView fx:id="serviceTable" layoutX="6.0" layoutY="78.0" prefHeight="395.0" prefWidth="690.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="78.0">
+      <TableView fx:id="serviceTable" layoutX="6.0" layoutY="78.0" onMouseClicked="#tableRowSelect" prefHeight="395.0" prefWidth="690.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="78.0">
         <columns>
           <TableColumn fx:id="sl" prefWidth="39.0" text="SL" />
           <TableColumn fx:id="term" prefWidth="134.0" text="Term" />
@@ -49,7 +49,7 @@
       <Text fx:id="hostNameView" layoutX="61.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Host: localhost" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="50.0" />
       <HBox layoutX="6.0" layoutY="25.0" prefHeight="47.0" prefWidth="449.0" AnchorPane.leftAnchor="6.0" AnchorPane.topAnchor="25.0">
          <children>
-            <JFXButton alignment="CENTER" contentDisplay="CENTER" onAction="#StartServices" style="-fx-background-color: #fff; -fx-border-radius: 0;" text=" " textFill="#00960a" HBox.hgrow="ALWAYS">
+            <JFXButton fx:id="playButton" alignment="CENTER" contentDisplay="CENTER" onAction="#StartServices" style="-fx-background-color: #fff; -fx-border-radius: 0;" text=" " textFill="#00960a" HBox.hgrow="ALWAYS">
                <graphic>
                   <MaterialIconView fill="#009407" glyphName="PLAY_ARROW" size="25" />
                </graphic>
@@ -60,7 +60,7 @@
                   <Insets left="10.0" top="10.0" />
                </HBox.margin>
             </JFXButton>
-            <JFXButton alignment="CENTER" contentDisplay="CENTER" disable="true" onAction="#StopServices" style="-fx-background-color: #fff;" text=" " textFill="#e40000">
+            <JFXButton fx:id="stopButton" alignment="CENTER" contentDisplay="CENTER" disable="true" onAction="#StopServices" style="-fx-background-color: #fff;" text=" " textFill="#e40000">
                <graphic>
                   <MaterialIconView fill="#e40000" glyphName="STOP" size="25" />
                </graphic>
@@ -71,7 +71,7 @@
                   <Insets left="10.0" top="10.0" />
                </HBox.margin>
             </JFXButton>
-            <JFXButton alignment="CENTER" contentDisplay="CENTER" onAction="#AddService" style="-fx-background-color: #fff;" text=" " textFill="#00960a">
+            <JFXButton fx:id="addButton" alignment="CENTER" contentDisplay="CENTER" onAction="#AddService" style="-fx-background-color: #fff;" text=" " textFill="#00960a">
                <graphic>
                   <MaterialIconView fill="#009407" glyphName="ADD" size="25" />
                </graphic>
@@ -82,7 +82,7 @@
                   <Insets left="10.0" top="10.0" />
                </HBox.margin>
             </JFXButton>
-            <JFXButton alignment="CENTER" contentDisplay="CENTER" disable="true" onAction="#EditService" style="-fx-background-color: #fff;" text=" " textFill="#ffae00">
+            <JFXButton fx:id="editButton" alignment="CENTER" contentDisplay="CENTER" disable="true" onAction="#EditService" style="-fx-background-color: #fff;" text=" " textFill="#ffae00">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -93,7 +93,7 @@
                   <Insets left="10.0" top="10.0" />
                </HBox.margin>
             </JFXButton>
-            <JFXButton alignment="CENTER" contentDisplay="CENTER" disable="true" onAction="#RemoveService" style="-fx-background-color: #fff;" text=" " textFill="#e40000">
+            <JFXButton fx:id="subButton" alignment="CENTER" contentDisplay="CENTER" disable="true" onAction="#RemoveService" style="-fx-background-color: #fff;" text=" " textFill="#e40000">
                <graphic>
                   <MaterialIconView fill="#e40000" glyphName="REMOVE" size="25" />
                </graphic>
@@ -104,7 +104,7 @@
                   <Insets left="10.0" top="10.0" />
                </HBox.margin>
             </JFXButton>
-            <JFXButton alignment="CENTER" contentDisplay="CENTER" disable="true" onAction="#EnableService" style="-fx-background-color: #fff;" text=" " textFill="#00960a">
+            <JFXButton fx:id="checkButton" alignment="CENTER" contentDisplay="CENTER" disable="true" onAction="#EnableService" style="-fx-background-color: #fff;" text=" " textFill="#00960a">
                <graphic>
                   <MaterialIconView fill="#009407" glyphName="CHECK" size="25" />
                </graphic>
@@ -115,7 +115,7 @@
                   <Insets left="10.0" top="10.0" />
                </HBox.margin>
             </JFXButton>
-            <JFXButton alignment="CENTER" contentDisplay="CENTER" disable="true" onAction="#DisableService" style="-fx-background-color: #fff;" text=" " textFill="#e40000">
+            <JFXButton fx:id="crossButton" alignment="CENTER" contentDisplay="CENTER" disable="true" onAction="#DisableService" style="-fx-background-color: #fff;" text=" " textFill="#e40000">
                <graphic>
                   <MaterialIconView fill="#e40000" glyphName="CLOSE" size="25" />
                </graphic>

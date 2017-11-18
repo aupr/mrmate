@@ -26,6 +26,22 @@ import java.util.Enumeration;
 public class Controller {
     Connection con;
 
+    // JFX buttons
+    @FXML
+    private JFXButton playButton;
+    @FXML
+    private JFXButton stopButton;
+    @FXML
+    private JFXButton addButton;
+    @FXML
+    private JFXButton editButton;
+    @FXML
+    private JFXButton subButton;
+    @FXML
+    private JFXButton checkButton;
+    @FXML
+    private JFXButton crossButton;
+
     //private final
 
     @FXML
@@ -66,9 +82,7 @@ public class Controller {
                     storeNewService(nsc.serviceName.getText().toString(), nsc.serviceURI.getText().toString(), nsc.connectionType.getValue().toString(),
                             nsc.responseTimuout.getText().toString(), nsc.ipAddress.getText().toString(), nsc.portNumber.getText().toString(),
                             nsc.connectionTimeout.getText().toString(), nsc.comPortNumber.getValue().toString(), nsc.baudRate.getValue().toString(),
-                            nsc.dataBits.getValue().toString(), nsc.parityBit.getValue().toString(), nsc.stopBit.getValue().toString(), nsc.encoding.getValue().toString());
-
-                    //System.out.println(nsc.connectionType.getValue().toString());
+                            nsc.dataBits.getValue().toString(), nsc.parityBit.getValue().toString(), nsc.stopBit.getValue().toString(), nsc.encoding.getValue().toString(), "Enabled");
 
                     loadTable();
                 } catch (ClassNotFoundException e1) {
@@ -119,6 +133,15 @@ public class Controller {
     }
 
     @FXML
+    private void tableRowSelect() {
+        System.out.println("table clicked!");
+        if (serviceTable.getSelectionModel().getSelectedItem() != null) {
+            System.out.println(serviceTable.getSelectionModel().getSelectedItem().getSl());
+        }
+
+    }
+
+    @FXML
     private void initialize() throws SQLException, ClassNotFoundException {
         // Table column property settings
         // serviceTable.setEditable(true);
@@ -130,16 +153,10 @@ public class Controller {
         mode.setCellValueFactory(new PropertyValueFactory<ServiceTableData, String>("mode"));
         status.setCellValueFactory(new PropertyValueFactory<ServiceTableData, String>("status"));
 
-        serviceTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection)->{
-            System.out.println("table row selected!");
-            System.out.println(obs.getValue().getSl().toString());
-        });
-
         loadTable();
     }
 
     private void loadTable() throws ClassNotFoundException, SQLException {
-
         ObservableList<ServiceTableData> tableDataList = FXCollections.observableArrayList();
 
         // Database Connection for table data and other services
@@ -148,26 +165,30 @@ public class Controller {
         Statement state = con.createStatement();
 
         ResultSet resultSet = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='service'");
+
         if (!resultSet.next()) {
             System.out.println("Service Table not exists! Creating New table...");
             state.execute("CREATE TABLE service(id INTEGER PRIMARY KEY, serviceName VARCHAR(20), uri VARCHAR(20), connectionType VARCHAR(30), responseTimeout INT, host VARCHAR(30), port VARCHAR(10), connectionTimeout INT, comport VARCHAR(10), baudRate VARCHAR(30), dataBits VARCHAR(30), parityBits VARCHAR(30), stopBits VARCHAR(30), mode VARCHAR(20), modeView VARCHAR(20))");
         } else {
             System.out.println("Table exists fetching data!");
             ResultSet res = state.executeQuery("SELECT * FROM service");
+            int i=0;
             while (res.next()) {
+                i++;
                 tableDataList.add(new ServiceTableData(res.getInt("id"), res.getString("serviceName"), res.getString("uri"), 1010, res.getString("connectionType"), res.getString("modeView"), "ok"));
+            }
+            if (i>=20){
+                //addButton.setDisable(true);
             }
         }
         serviceTable.setItems(tableDataList);
-
-
     }
 
-    private void storeNewService(String serviceName, String uri, String connectionType, String responseTimeout, String host, String port, String connectionTimeout, String comport, String baudRate, String dataBits, String parityBits, String stopBits, String mode) throws SQLException {
+    private void storeNewService(String serviceName, String uri, String connectionType, String responseTimeout, String host, String port, String connectionTimeout, String comport, String baudRate, String dataBits, String parityBits, String stopBits, String mode, String modeView) throws SQLException {
 
         PreparedStatement preps = con.prepareStatement("INSERT INTO service (rowid, serviceName, uri, connectionType," +
-                " responseTimeout, host, port, connectionTimeout, comport, baudRate, dataBits, parityBits, stopBits, mode)" +
-                " VALUES ( null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                " responseTimeout, host, port, connectionTimeout, comport, baudRate, dataBits, parityBits, stopBits, mode, modeView)" +
+                " VALUES ( null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         preps.setString(1, serviceName);
         preps.setString(2, uri);
         preps.setString(3, connectionType);
@@ -181,9 +202,8 @@ public class Controller {
         preps.setString(11, parityBits);
         preps.setString(12, stopBits);
         preps.setString(13, mode);
+        preps.setString(14, modeView);
 
         preps.execute();
     }
-
-
 }
