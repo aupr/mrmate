@@ -43,8 +43,8 @@ public class Controller {
         Stage newService = new Stage();
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmls/newService.fxml"));
-        NewServiceController newServiceController = new NewServiceController();
-        fxmlLoader.setController(newServiceController);
+        NewServiceController nsc = new NewServiceController();
+        fxmlLoader.setController(nsc);
 
         Parent root = null;
         try {
@@ -59,23 +59,27 @@ public class Controller {
         newService.setAlwaysOnTop(true);
         newService.setScene(new Scene(root));
         newService.setOnHidden(e->{
-            if (newServiceController.isMake) {
+            if (nsc.isMake) {
 
-
-                //serviceTable.setItems(tableDataList);
+                // serviceName, uri, connectionType, responseTimeout, host, port, connectionTimeout, comport, baudRate, dataBits, parityBits, stopBits, mode, modeView
                 try {
+                    storeNewService(nsc.serviceName.getText().toString(), nsc.serviceURI.getText().toString(), nsc.connectionType.getValue().toString(),
+                            nsc.responseTimuout.getText().toString(), nsc.ipAddress.getText().toString(), nsc.portNumber.getText().toString(),
+                            nsc.connectionTimeout.getText().toString(), nsc.comPortNumber.getValue().toString(), nsc.baudRate.getValue().toString(),
+                            nsc.dataBits.getValue().toString(), nsc.parityBit.getValue().toString(), nsc.stopBit.getValue().toString(), nsc.encoding.getValue().toString());
+
+                    //System.out.println(nsc.connectionType.getValue().toString());
+
                     loadTable();
                 } catch (ClassNotFoundException e1) {
                     e1.printStackTrace();
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
-
             }
             System.out.println("new form hiding!");
         });
         newService.show();
-
     }
 
     @FXML
@@ -107,12 +111,6 @@ public class Controller {
     void StartServices(ActionEvent event) {
 
         System.out.println("Working Start service!");
-        //Enumeration<String> list=
-        //System.out.println(list);
-        //System.out.println(SerialPortList.getPortNames()[0]);
-        //System.out.println(CommPortIdentifier.getPortIdentifiers());
-
-
     }
 
     @FXML
@@ -122,7 +120,6 @@ public class Controller {
 
     @FXML
     private void initialize() throws SQLException, ClassNotFoundException {
-
         // Table column property settings
         // serviceTable.setEditable(true);
         sl.setCellValueFactory(new PropertyValueFactory<ServiceTableData,String>("sl"));
@@ -133,19 +130,27 @@ public class Controller {
         mode.setCellValueFactory(new PropertyValueFactory<ServiceTableData, String>("mode"));
         status.setCellValueFactory(new PropertyValueFactory<ServiceTableData, String>("status"));
 
+        serviceTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection)->{
+            System.out.println("table row selected!");
+            System.out.println(obs.getValue().getSl().toString());
+        });
+
         loadTable();
     }
 
     private void loadTable() throws ClassNotFoundException, SQLException {
+
         ObservableList<ServiceTableData> tableDataList = FXCollections.observableArrayList();
+
         // Database Connection for table data and other services
         Class.forName("org.sqlite.JDBC");
         con = DriverManager.getConnection("jdbc:sqlite:Base.db");
         Statement state = con.createStatement();
+
         ResultSet resultSet = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='service'");
         if (!resultSet.next()) {
             System.out.println("Service Table not exists! Creating New table...");
-            state.execute("CREATE TABLE service(id INT PRIMARY KEY, serviceName VARCHAR(20), uri VARCHAR(20), connectionType VARCHAR(30), responseTimeout INT, host VARCHAR(30), port VARCHAR(10), connectionTimeout INT, comport VARCHAR(10), baudRate VARCHAR(30), dataBits VARCHAR(30), parityBits VARCHAR(30), stopBits VARCHAR(30), mode VARCHAR(20), modeView VARCHAR(20))");
+            state.execute("CREATE TABLE service(id INTEGER PRIMARY KEY, serviceName VARCHAR(20), uri VARCHAR(20), connectionType VARCHAR(30), responseTimeout INT, host VARCHAR(30), port VARCHAR(10), connectionTimeout INT, comport VARCHAR(10), baudRate VARCHAR(30), dataBits VARCHAR(30), parityBits VARCHAR(30), stopBits VARCHAR(30), mode VARCHAR(20), modeView VARCHAR(20))");
         } else {
             System.out.println("Table exists fetching data!");
             ResultSet res = state.executeQuery("SELECT * FROM service");
@@ -153,11 +158,31 @@ public class Controller {
                 tableDataList.add(new ServiceTableData(res.getInt("id"), res.getString("serviceName"), res.getString("uri"), 1010, res.getString("connectionType"), res.getString("modeView"), "ok"));
             }
         }
-
-        //tableDataList.add();
-        //tableDataList.add(new ServiceTableData(1, "abc", "def", 7, "connection", "mode", "runnning"));
         serviceTable.setItems(tableDataList);
 
+
+    }
+
+    private void storeNewService(String serviceName, String uri, String connectionType, String responseTimeout, String host, String port, String connectionTimeout, String comport, String baudRate, String dataBits, String parityBits, String stopBits, String mode) throws SQLException {
+
+        PreparedStatement preps = con.prepareStatement("INSERT INTO service (rowid, serviceName, uri, connectionType," +
+                " responseTimeout, host, port, connectionTimeout, comport, baudRate, dataBits, parityBits, stopBits, mode)" +
+                " VALUES ( null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        preps.setString(1, serviceName);
+        preps.setString(2, uri);
+        preps.setString(3, connectionType);
+        preps.setInt(4, Integer.parseInt(responseTimeout));
+        preps.setString(5, host);
+        preps.setString(6, port);
+        preps.setInt(7, Integer.parseInt(connectionTimeout));
+        preps.setString(8, comport);
+        preps.setString(9, baudRate);
+        preps.setString(10, dataBits);
+        preps.setString(11, parityBits);
+        preps.setString(12, stopBits);
+        preps.setString(13, mode);
+
+        preps.execute();
     }
 
 
