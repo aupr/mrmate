@@ -8,46 +8,38 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-
 import java.io.IOException;
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Controller {
     private int selectedServiceId;
     Connection con;
 
-    // JFX buttons
+    // JFX Fields
     @FXML
-    private JFXButton playButton;
-    @FXML
-    private JFXButton stopButton;
-    @FXML
-    private JFXButton addButton;
-    @FXML
-    private JFXButton editButton;
-    @FXML
-    private JFXButton subButton;
-    @FXML
-    private JFXButton checkButton;
-    @FXML
-    private JFXButton crossButton;
-
-    //private final
-
+    private JFXButton playButton, stopButton, addButton, editButton, subButton, checkButton, crossButton;
     @FXML
     private TableView<ServiceTableData> serviceTable;
     @FXML
     private TableColumn sl, term, uri, pid, connection, mode, status;
-
     @FXML
     private Text hostNameView, portNameView;
 
+
+
+
+
+    // Fxml method and other methods/////////////////////////////////////////////////////////////////////////////////////////
     @FXML
     void AddService(ActionEvent event) throws IOException {
         System.out.println("Add Action event");
@@ -66,20 +58,33 @@ public class Controller {
         }
 
         newService.setTitle("Add New Service Form!");
+        //newService.initOwner(primaryStage);
         newService.setResizable(false);
-        newService.initStyle(StageStyle.UTILITY);
-        newService.setAlwaysOnTop(true);
+        newService.initModality(Modality.APPLICATION_MODAL);
+        //newService.initStyle(StageStyle.UTILITY);
+       // newService.setAlwaysOnTop(true);
         newService.setScene(new Scene(root));
         newService.setOnHidden(e->{
             if (nsc.isMake) {
-
-                // serviceName, uri, connectionType, responseTimeout, host, port, connectionTimeout, comport, baudRate, dataBits, parityBits, stopBits, mode, modeView
                 try {
-                    storeNewService(nsc.serviceName.getText().toString(), nsc.serviceURI.getText().toString(), nsc.connectionType.getValue().toString(),
-                            nsc.responseTimuout.getText().toString(), nsc.ipAddress.getText().toString(), nsc.portNumber.getText().toString(),
-                            nsc.connectionTimeout.getText().toString(), nsc.comPortNumber.getValue().toString(), nsc.baudRate.getValue().toString(),
-                            nsc.dataBits.getValue().toString(), nsc.parityBit.getValue().toString(), nsc.stopBit.getValue().toString(), nsc.encoding.getValue().toString(), "Enabled");
+                    Map<String, String> serviceDataMap= new HashMap<>();
 
+                    serviceDataMap.put("serviceName", nsc.serviceName.getText().toString());
+                    serviceDataMap.put("serviceURI", nsc.serviceURI.getText().toString());
+                    serviceDataMap.put("connectionType", nsc.connectionType.getValue().toString());
+                    serviceDataMap.put("responseTimuout", nsc.responseTimuout.getText().toString());
+                    serviceDataMap.put("ipAddress", nsc.ipAddress.getText().toString());
+                    serviceDataMap.put("portNumber", nsc.portNumber.getText().toString());
+                    serviceDataMap.put("connectionTimeout", nsc.connectionTimeout.getText().toString());
+                    serviceDataMap.put("comPortNumber", nsc.comPortNumber.getValue().toString());
+                    serviceDataMap.put("baudRate", nsc.baudRate.getValue().toString());
+                    serviceDataMap.put("dataBits", nsc.dataBits.getValue().toString());
+                    serviceDataMap.put("parityBit", nsc.parityBit.getValue().toString());
+                    serviceDataMap.put("stopBit", nsc.stopBit.getValue().toString());
+                    serviceDataMap.put("mode", nsc.encoding.getValue().toString());
+                    serviceDataMap.put("modeView", "Enabled");
+
+                    storeNewService(serviceDataMap);
                     loadTable();
                 } catch (ClassNotFoundException e1) {
                     e1.printStackTrace();
@@ -89,24 +94,33 @@ public class Controller {
             }
             System.out.println("new form hiding!");
         });
-        newService.show();
-    }
-
-    @FXML
-    void DisableService(ActionEvent event) {
-
-        System.out.println("Disable button.");
-
+        newService.showAndWait();
     }
 
     @FXML
     void EditService(ActionEvent event) {
-
+        System.out.println("Edit service clicked!");
     }
 
     @FXML
-    void EnableService(ActionEvent event) {
+    void EnableService(ActionEvent event) throws SQLException, ClassNotFoundException {
+        System.out.println("Enable button.");
+        if (alert("Do you confirm to enable it?")) {
+            Statement state = con.createStatement();
+            state.execute("UPDATE service SET modeView='Enabled' WHERE id="+selectedServiceId);
+            loadTable();
+        }
+    }
 
+    @FXML
+    void DisableService(ActionEvent event) throws SQLException, ClassNotFoundException {
+
+        System.out.println("Disable button.");
+        if (alert("Do you confirm to disable it?")) {
+            Statement state = con.createStatement();
+            state.execute("UPDATE service SET modeView='Disabled' WHERE id="+selectedServiceId);
+            loadTable();
+        }
     }
 
     @FXML
@@ -155,8 +169,15 @@ public class Controller {
             if (!playButton.isDisable()) {
                 editButton.setDisable(false);
                 subButton.setDisable(false);
-                checkButton.setDisable(false);
-                crossButton.setDisable(false);
+                if (serviceTable.getSelectionModel().getSelectedItem().getMode().equals("Enabled")) {
+                    checkButton.setDisable(true);
+                    crossButton.setDisable(false);
+                } else {
+                    checkButton.setDisable(false);
+                    crossButton.setDisable(true);
+                }
+
+
             }
         }
 
@@ -211,33 +232,46 @@ public class Controller {
         crossButton.setDisable(true);
     }
 
-    private void storeNewService(String serviceName, String uri, String connectionType, String responseTimeout, String host, String port, String connectionTimeout, String comport, String baudRate, String dataBits, String parityBits, String stopBits, String mode, String modeView) throws SQLException {
+    private void storeNewService(Map<String, String> data) throws SQLException {
 
         PreparedStatement preps = con.prepareStatement("INSERT INTO service (rowid, serviceName, uri, connectionType," +
                 " responseTimeout, host, port, connectionTimeout, comport, baudRate, dataBits, parityBits, stopBits, mode, modeView)" +
                 " VALUES ( null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        preps.setString(1, serviceName);
-        preps.setString(2, uri);
-        preps.setString(3, connectionType);
-        preps.setInt(4, Integer.parseInt(responseTimeout));
-        preps.setString(5, host);
-        preps.setString(6, port);
-        preps.setInt(7, Integer.parseInt(connectionTimeout));
-        preps.setString(8, comport);
-        preps.setString(9, baudRate);
-        preps.setString(10, dataBits);
-        preps.setString(11, parityBits);
-        preps.setString(12, stopBits);
-        preps.setString(13, mode);
-        preps.setString(14, modeView);
+
+        preps.setString(1, data.get("serviceName"));
+        preps.setString(2, data.get("serviceURI"));
+        preps.setString(3, data.get("connectionType"));
+        preps.setInt(4, Integer.parseInt(data.get("responseTimuout")));
+        preps.setString(5, data.get("ipAddress"));
+        preps.setString(6, data.get("portNumber"));
+        preps.setInt(7, Integer.parseInt(data.get("connectionTimeout")));
+        preps.setString(8, data.get("comPortNumber"));
+        preps.setString(9, data.get("baudRate"));
+        preps.setString(10, data.get("dataBits"));
+        preps.setString(11, data.get("parityBit"));
+        preps.setString(12, data.get("stopBit"));
+        preps.setString(13, data.get("mode"));
+        preps.setString(14, data.get("modeView"));
 
         preps.execute();
     }
 
     private void deleteService(int serviceId) throws SQLException, ClassNotFoundException {
-        PreparedStatement preps = con.prepareStatement("DELETE FROM service WHERE id=?");
-        preps.setInt(1, serviceId);
-        preps.execute();
-        loadTable();
+        if (alert("Do you confirm to remove this service!")) {
+            PreparedStatement preps = con.prepareStatement("DELETE FROM service WHERE id=?");
+            preps.setInt(1, serviceId);
+            preps.execute();
+            loadTable();
+        }
+    }
+
+    private boolean alert(String msg) {
+        Alert alert = new Alert(Alert.AlertType.NONE, msg, ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.YES) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
