@@ -1,9 +1,6 @@
 package com.wiexon.app;
 
 import com.jfoenix.controls.JFXButton;
-import com.sparetimelabs.serial.CommPortIdentifier;
-import com.sparetimelabs.serial.PureJavaSerialPort;
-import com.sparetimelabs.serial.SerialPort;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,13 +14,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import jssc.SerialPortList;
 
 import java.io.IOException;
 import java.sql.*;
-import java.util.Enumeration;
 
 public class Controller {
+    private int selectedServiceId;
     Connection con;
 
     // JFX buttons
@@ -99,6 +95,8 @@ public class Controller {
     @FXML
     void DisableService(ActionEvent event) {
 
+        System.out.println("Disable button.");
+
     }
 
     @FXML
@@ -112,8 +110,8 @@ public class Controller {
     }
 
     @FXML
-    void RemoveService(ActionEvent event) {
-
+    void RemoveService(ActionEvent event) throws SQLException, ClassNotFoundException {
+        deleteService(selectedServiceId);
     }
 
     @FXML
@@ -125,18 +123,41 @@ public class Controller {
     void StartServices(ActionEvent event) {
 
         System.out.println("Working Start service!");
+
+        playButton.setDisable(true);
+        stopButton.setDisable(false);
+        addButton.setDisable(true);
+        editButton.setDisable(true);
+        subButton.setDisable(true);
+        checkButton.setDisable(true);
+        crossButton.setDisable(true);
     }
 
     @FXML
     void StopServices(ActionEvent event) {
         System.out.println("Working Stop service!");
+        playButton.setDisable(false);
+        stopButton.setDisable(true);
+        addButton.setDisable(false);
+        editButton.setDisable(true);
+        subButton.setDisable(true);
+        checkButton.setDisable(true);
+        crossButton.setDisable(true);
     }
 
     @FXML
     private void tableRowSelect() {
         System.out.println("table clicked!");
         if (serviceTable.getSelectionModel().getSelectedItem() != null) {
-            System.out.println(serviceTable.getSelectionModel().getSelectedItem().getSl());
+            this.selectedServiceId = serviceTable.getSelectionModel().getSelectedItem().getId();
+            System.out.println(serviceTable.getSelectionModel().getSelectedItem().getId());
+
+            if (!playButton.isDisable()) {
+                editButton.setDisable(false);
+                subButton.setDisable(false);
+                checkButton.setDisable(false);
+                crossButton.setDisable(false);
+            }
         }
 
     }
@@ -175,13 +196,19 @@ public class Controller {
             int i=0;
             while (res.next()) {
                 i++;
-                tableDataList.add(new ServiceTableData(res.getInt("id"), res.getString("serviceName"), res.getString("uri"), 1010, res.getString("connectionType"), res.getString("modeView"), "ok"));
+                tableDataList.add(new ServiceTableData(res.getInt("id"), i, res.getString("serviceName"), res.getString("uri"), 1010, res.getString("connectionType"), res.getString("modeView"), "ok"));
             }
             if (i>=20){
-                //addButton.setDisable(true);
+                addButton.setDisable(true);
+            } else {
+                addButton.setDisable(false);
             }
         }
         serviceTable.setItems(tableDataList);
+        editButton.setDisable(true);
+        subButton.setDisable(true);
+        checkButton.setDisable(true);
+        crossButton.setDisable(true);
     }
 
     private void storeNewService(String serviceName, String uri, String connectionType, String responseTimeout, String host, String port, String connectionTimeout, String comport, String baudRate, String dataBits, String parityBits, String stopBits, String mode, String modeView) throws SQLException {
@@ -205,5 +232,12 @@ public class Controller {
         preps.setString(14, modeView);
 
         preps.execute();
+    }
+
+    private void deleteService(int serviceId) throws SQLException, ClassNotFoundException {
+        PreparedStatement preps = con.prepareStatement("DELETE FROM service WHERE id=?");
+        preps.setInt(1, serviceId);
+        preps.execute();
+        loadTable();
     }
 }

@@ -1,9 +1,11 @@
 package com.wiexon.app;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class ServiceTableData {
-    private final SimpleStringProperty sl;
+    private final SimpleIntegerProperty id;
+    private final SimpleIntegerProperty sl;
     private final SimpleStringProperty term;
     private final SimpleStringProperty uri;
     private final SimpleStringProperty pid;
@@ -11,8 +13,9 @@ public class ServiceTableData {
     private final SimpleStringProperty mode;
     private final SimpleStringProperty status;
 
-    public ServiceTableData(Integer sl, String term, String uri, Integer pid, String connection, String mode, String status) {
-        this.sl = new SimpleStringProperty(sl.toString());
+    public ServiceTableData(Integer id, Integer sl, String term, String uri, Integer pid, String connection, String mode, String status) {
+        this.id = new SimpleIntegerProperty(id);
+        this.sl = new SimpleIntegerProperty(sl);
         this.term = new SimpleStringProperty(term);
         this.uri = new SimpleStringProperty(uri);
         this.pid = new SimpleStringProperty(pid.toString());
@@ -21,15 +24,27 @@ public class ServiceTableData {
         this.status = new SimpleStringProperty(status);
     }
 
-    public String getSl() {
+    public int getSl() {
         return sl.get();
     }
 
-    public SimpleStringProperty slProperty() {
+    public int getId() {
+        return id.get();
+    }
+
+    public SimpleIntegerProperty idProperty() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id.set(id);
+    }
+
+    public SimpleIntegerProperty slProperty() {
         return sl;
     }
 
-    public void setSl(String sl) {
+    public void setSl(int sl) {
         this.sl.set(sl);
     }
 
