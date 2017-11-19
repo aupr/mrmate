@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <MenuBar layoutX="150.0" layoutY="90.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
@@ -37,12 +37,12 @@
       <TableView fx:id="serviceTable" layoutX="6.0" layoutY="78.0" onMouseClicked="#tableRowSelect" prefHeight="395.0" prefWidth="690.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="78.0">
         <columns>
           <TableColumn fx:id="sl" prefWidth="39.0" text="SL" />
-          <TableColumn fx:id="term" prefWidth="134.0" text="Term" />
-            <TableColumn fx:id="uri" prefWidth="119.0" text="URI" />
-            <TableColumn fx:id="pid" prefWidth="64.0" text="PID" />
-            <TableColumn fx:id="connection" prefWidth="175.0" text="Connection" />
+          <TableColumn fx:id="term" prefWidth="143.0" text="Term" />
+            <TableColumn fx:id="uri" prefWidth="124.0" text="URI" />
+            <TableColumn fx:id="pid" prefWidth="62.0" text="PID" />
+            <TableColumn fx:id="connection" prefWidth="179.0" text="Connection" />
             <TableColumn fx:id="mode" prefWidth="87.0" text="Mode" />
-            <TableColumn fx:id="status" prefWidth="71.0" text="Status" />
+            <TableColumn fx:id="status" prefWidth="79.0" text="Status" />
         </columns>
       </TableView>
       <Text fx:id="portNameView" layoutX="193.0" layoutY="491.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Port: 8085" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="200.0" />

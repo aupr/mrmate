@@ -12,12 +12,13 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmls/main.fxml"));
-        fxmlLoader.setController(new Controller());
+        fxmlLoader.setController(new Controller(primaryStage));
         Parent root = fxmlLoader.load();
         primaryStage.setTitle("Modbus REST Mate");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
         primaryStage.show();
+        //Platform.setImplicitExit(false);
         primaryStage.setOnCloseRequest(e->{
             Platform.exit();
         });

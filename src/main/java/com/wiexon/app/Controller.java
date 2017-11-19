@@ -16,12 +16,20 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.awt.*;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Controller {
+    private Stage primaryStage;
+    public Controller(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
+
     private int selectedServiceId;
     Connection con;
 
@@ -34,9 +42,6 @@ public class Controller {
     private TableColumn sl, term, uri, pid, connection, mode, status;
     @FXML
     private Text hostNameView, portNameView;
-
-
-
 
 
     // Fxml method and other methods/////////////////////////////////////////////////////////////////////////////////////////
@@ -100,6 +105,8 @@ public class Controller {
     @FXML
     void EditService(ActionEvent event) {
         System.out.println("Edit service clicked!");
+        //primaryStage
+
     }
 
     @FXML
@@ -237,6 +244,34 @@ public class Controller {
         PreparedStatement preps = con.prepareStatement("INSERT INTO service (rowid, serviceName, uri, connectionType," +
                 " responseTimeout, host, port, connectionTimeout, comport, baudRate, dataBits, parityBits, stopBits, mode, modeView)" +
                 " VALUES ( null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+        preps.setString(1, data.get("serviceName"));
+        preps.setString(2, data.get("serviceURI"));
+        preps.setString(3, data.get("connectionType"));
+        preps.setInt(4, Integer.parseInt(data.get("responseTimuout")));
+        preps.setString(5, data.get("ipAddress"));
+        preps.setString(6, data.get("portNumber"));
+        preps.setInt(7, Integer.parseInt(data.get("connectionTimeout")));
+        preps.setString(8, data.get("comPortNumber"));
+        preps.setString(9, data.get("baudRate"));
+        preps.setString(10, data.get("dataBits"));
+        preps.setString(11, data.get("parityBit"));
+        preps.setString(12, data.get("stopBit"));
+        preps.setString(13, data.get("mode"));
+        preps.setString(14, data.get("modeView"));
+
+        preps.execute();
+    }
+
+    private ResultSet readService(int serviceId) throws SQLException {
+        Statement state = con.createStatement();
+        return state.executeQuery("SELECT * FROM service WHERE id="+serviceId);
+    }
+
+    private void updateService(Map<String, String> data) throws SQLException {
+        PreparedStatement preps = con.prepareStatement("UPDATE service SET serviceName=?, uri=?, connectionType=?," +
+                " responseTimeout=?, host=?, port=?, connectionTimeout=?, comport=?, baudRate=?," +
+                " dataBits=?, parityBits=?, stopBits=?, mode=?, modeView=?");
 
         preps.setString(1, data.get("serviceName"));
         preps.setString(2, data.get("serviceURI"));
