@@ -1,6 +1,8 @@
 package com.wiexon.app;
 
 import com.jfoenix.controls.JFXButton;
+import com.sun.jersey.api.container.httpserver.HttpServerFactory;
+import com.sun.net.httpserver.HttpServer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,6 +30,7 @@ public class Controller {
     private String dbUrl = null;
     private Stage primaryStage = null;
     private int selectedServiceId;
+    HttpServer server = null;
 
     // JFX Fields
     @FXML
@@ -67,18 +70,25 @@ public class Controller {
 
         System.out.println("Working Start service!");
 
-        playButton.setDisable(true);
-        stopButton.setDisable(false);
-        addButton.setDisable(true);
-        editButton.setDisable(true);
-        subButton.setDisable(true);
-        checkButton.setDisable(true);
-        crossButton.setDisable(true);
+        try {
+            server = HttpServerFactory.create("http://localhost:8888/");
+            server.start();
+            playButton.setDisable(true);
+            stopButton.setDisable(false);
+            addButton.setDisable(true);
+            editButton.setDisable(true);
+            subButton.setDisable(true);
+            checkButton.setDisable(true);
+            crossButton.setDisable(true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void StopServices(ActionEvent event) {
         System.out.println("Working Stop service!");
+        server.stop(0);
         playButton.setDisable(false);
         stopButton.setDisable(true);
         addButton.setDisable(false);
@@ -103,7 +113,7 @@ public class Controller {
         newService.setTitle("Add New Service Form!");
         //newService.initOwner(primaryStage);
         newService.setResizable(false);
-        newService.initModality(Modality.WINDOW_MODAL);
+        newService.initModality(Modality.APPLICATION_MODAL);
         //newService.initStyle(StageStyle.UTILITY);
        // newService.setAlwaysOnTop(true);
         newService.setScene(new Scene(root));
