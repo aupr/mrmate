@@ -55,17 +55,12 @@ public class Controller {
         NewServiceController nsc = new NewServiceController();
         fxmlLoader.setController(nsc);
 
-        Parent root = null;
-        try {
-            root = fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Parent root = fxmlLoader.load();
 
         newService.setTitle("Add New Service Form!");
         //newService.initOwner(primaryStage);
         newService.setResizable(false);
-        newService.initModality(Modality.APPLICATION_MODAL);
+        newService.initModality(Modality.WINDOW_MODAL);
         //newService.initStyle(StageStyle.UTILITY);
        // newService.setAlwaysOnTop(true);
         newService.setScene(new Scene(root));
@@ -103,10 +98,73 @@ public class Controller {
     }
 
     @FXML
-    void EditService(ActionEvent event) {
+    void EditService(ActionEvent event) throws IOException, SQLException {
         System.out.println("Edit service clicked!");
-        //primaryStage
+        Stage editService = new Stage();
 
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmls/newService.fxml"));
+        NewServiceController serviceController = new NewServiceController();
+        fxmlLoader.setController(serviceController);
+        Parent editRoot = fxmlLoader.load();
+
+        editService.setScene(new Scene(editRoot));
+        editService.setTitle("Edit service!");
+        editService.setResizable(false);
+        editService.initModality(Modality.APPLICATION_MODAL);
+
+        ResultSet res = readService(selectedServiceId);
+        if (res.next()) {
+            //rowid, , , ," +
+            //" , , , , , , , , , , modeView
+            serviceController.serviceName.setText(res.getString("serviceName"));
+            serviceController.serviceURI.setText(res.getString("uri"));
+            serviceController.connectionType.setValue(res.getString("connectionType"));
+            serviceController.responseTimuout.setText(res.getString("responseTimeout"));
+            serviceController.ipAddress.setText(res.getString("host"));
+            serviceController.portNumber.setText(res.getString("port"));
+            serviceController.connectionTimeout.setText(res.getString("connectionTimeout"));
+            serviceController.comPortNumber.setValue(res.getString("comport"));
+            serviceController.baudRate.setValue(res.getString("baudRate"));
+            serviceController.dataBits.setValue(res.getString("dataBits"));
+            serviceController.parityBit.setValue(res.getString("parityBits"));
+            serviceController.stopBit.setValue(res.getString("stopBits"));
+            serviceController.encoding.setValue(res.getString("mode"));
+
+            serviceController.okButton.setText("Save Service");
+        }
+
+        editService.setOnHidden(e->{
+            System.out.println("hiding edit service window!");
+            if (serviceController.isMake) {
+                try {
+                    Map<String, String> serviceDataMap= new HashMap<>();
+
+                    serviceDataMap.put("serviceName", serviceController.serviceName.getText().toString());
+                    serviceDataMap.put("serviceURI", serviceController.serviceURI.getText().toString());
+                    serviceDataMap.put("connectionType", serviceController.connectionType.getValue().toString());
+                    serviceDataMap.put("responseTimuout", serviceController.responseTimuout.getText().toString());
+                    serviceDataMap.put("ipAddress", serviceController.ipAddress.getText().toString());
+                    serviceDataMap.put("portNumber", serviceController.portNumber.getText().toString());
+                    serviceDataMap.put("connectionTimeout", serviceController.connectionTimeout.getText().toString());
+                    serviceDataMap.put("comPortNumber", serviceController.comPortNumber.getValue().toString());
+                    serviceDataMap.put("baudRate", serviceController.baudRate.getValue().toString());
+                    serviceDataMap.put("dataBits", serviceController.dataBits.getValue().toString());
+                    serviceDataMap.put("parityBit", serviceController.parityBit.getValue().toString());
+                    serviceDataMap.put("stopBit", serviceController.stopBit.getValue().toString());
+                    serviceDataMap.put("mode", serviceController.encoding.getValue().toString());
+                    //serviceDataMap.put("modeView", "Enabled");
+
+                    updateService(serviceDataMap, selectedServiceId);
+                    loadTable();
+                } catch (ClassNotFoundException e1) {
+                    e1.printStackTrace();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        editService.showAndWait();
     }
 
     @FXML
@@ -268,10 +326,10 @@ public class Controller {
         return state.executeQuery("SELECT * FROM service WHERE id="+serviceId);
     }
 
-    private void updateService(Map<String, String> data) throws SQLException {
+    private void updateService(Map<String, String> data, int id) throws SQLException {
         PreparedStatement preps = con.prepareStatement("UPDATE service SET serviceName=?, uri=?, connectionType=?," +
                 " responseTimeout=?, host=?, port=?, connectionTimeout=?, comport=?, baudRate=?," +
-                " dataBits=?, parityBits=?, stopBits=?, mode=?, modeView=?");
+                " dataBits=?, parityBits=?, stopBits=?, mode=? WHERE id=?");
 
         preps.setString(1, data.get("serviceName"));
         preps.setString(2, data.get("serviceURI"));
@@ -286,9 +344,10 @@ public class Controller {
         preps.setString(11, data.get("parityBit"));
         preps.setString(12, data.get("stopBit"));
         preps.setString(13, data.get("mode"));
-        preps.setString(14, data.get("modeView"));
+        preps.setInt(14, id);
 
-        preps.execute();
+        preps.executeUpdate();
+        con.close();
     }
 
     private void deleteService(int serviceId) throws SQLException, ClassNotFoundException {

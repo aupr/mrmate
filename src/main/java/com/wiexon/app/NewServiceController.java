@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.VBox;
 import jssc.SerialPortList;
@@ -24,6 +25,8 @@ public class NewServiceController {
     public ChoiceBox connectionType;
     @FXML
     public JFXTextField responseTimuout;
+    @FXML
+    public Button okButton;
 
     // Modbus Serial port fx fields
     String[] comPortArray = SerialPortList.getPortNames();

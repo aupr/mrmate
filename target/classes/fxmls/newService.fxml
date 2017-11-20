@@ -87,7 +87,7 @@
             </JFXTextField>
          </children>
       </VBox>
-      <Button layoutX="379.0" layoutY="345.0" mnemonicParsing="false" onAction="#makeService" style="-fx-background-color: dodgerblue; -fx-padding: 5;" text="Make Service" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="okButton" layoutX="379.0" layoutY="345.0" mnemonicParsing="false" onAction="#makeService" style="-fx-background-color: dodgerblue; -fx-padding: 5;" text="Make Service" textAlignment="CENTER" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
