@@ -4,13 +4,8 @@
     <list default="true" id="81c52183-e47a-4c03-a4fe-e4db2ba474b1" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/Base.db" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/wiexon/app/Controller.class" afterPath="$PROJECT_DIR$/target/classes/com/wiexon/app/Controller.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/wiexon/app/Main.class" afterPath="$PROJECT_DIR$/target/classes/com/wiexon/app/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/wiexon/app/NewServiceController.class" afterPath="$PROJECT_DIR$/target/classes/com/wiexon/app/NewServiceController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/wiexon/app/Controller.java" afterPath="$PROJECT_DIR$/src/main/java/com/wiexon/app/Controller.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/wiexon/app/NewServiceController.java" afterPath="$PROJECT_DIR$/src/main/java/com/wiexon/app/NewServiceController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxmls/newService.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxmls/newService.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/fxmls/newService.fxml" afterPath="$PROJECT_DIR$/target/classes/fxmls/newService.fxml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,22 +30,35 @@
       <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="529">
-              <caret line="349" column="20" lean-forward="true" selection-start-line="349" selection-start-column="20" selection-end-line="349" selection-end-column="20" />
+            <state relative-caret-position="408">
+              <caret line="62" column="5" lean-forward="true" selection-start-line="62" selection-start-column="5" selection-end-line="62" selection-end-column="5" />
               <folding>
+                <element signature="method#Controller#0;class#Controller#0" expanded="false" />
+                <element signature="method#initialize#0;class#Controller#0" expanded="false" />
+                <element signature="method#StartServices#0;class#Controller#0" expanded="false" />
+                <element signature="method#StopServices#0;class#Controller#0" expanded="false" />
+                <element signature="method#AddService#0;class#Controller#0" expanded="false" />
+                <element signature="method#EditService#0;class#Controller#0" expanded="false" />
                 <element signature="method#RemoveService#0;class#Controller#0" expanded="false" />
-                <marker date="1511146481501" expanded="true" signature="8225:8272" ph="UPDATE servi... " />
-                <marker date="1511146481501" expanded="true" signature="8617:8665" ph="UPDATE servi... " />
-                <marker date="1511146481501" expanded="true" signature="11865:11933" ph="SELECT name sqlite_master" />
-                <marker date="1511146481501" expanded="true" signature="12081:12426" ph="CREATE TABLE... service" />
-                <marker date="1511146481501" expanded="true" signature="12558:12579" ph="SELECT * FRO... service" />
-                <marker date="1511146481501" expanded="true" signature="13372:13647" ph="INSERT INTO service... " />
-                <marker date="1511146481501" expanded="true" signature="14606:14637" ph="SELECT * FRO... service" />
-                <marker date="1511146481501" expanded="true" signature="14801:14859" ph="UPDATE servi... " />
-                <marker date="1511146481501" expanded="true" signature="14801:15025" ph="UPDATE servi... " />
-                <marker date="1511146481501" expanded="true" signature="14801:15035" ph="UPDATE servi... " />
-                <marker date="1511146481501" expanded="true" signature="14801:15036" ph="UPDATE servi... " />
-                <marker date="1511146481501" expanded="true" signature="16061:16091" ph="DELETE FROM " />
+                <element signature="method#EnableService#0;class#Controller#0" expanded="false" />
+                <element signature="method#DisableService#0;class#Controller#0" expanded="false" />
+                <element signature="method#ShowErrors#0;class#Controller#0" expanded="false" />
+                <element signature="method#tableRowSelect#0;class#Controller#0" expanded="false" />
+                <element signature="method#loadTable#0;class#Controller#0" expanded="false" />
+                <element signature="method#storeNewService#0;class#Controller#0" expanded="false" />
+                <element signature="method#readService#0;class#Controller#0" expanded="false" />
+                <element signature="method#updateService#0;class#Controller#0" expanded="false" />
+                <element signature="method#deleteService#0;class#Controller#0" expanded="false" />
+                <element signature="method#alert#0;class#Controller#0" expanded="false" />
+                <marker date="1511158893071" expanded="true" signature="9495:9542" ph="UPDATE servi... " />
+                <marker date="1511158893071" expanded="true" signature="10426:10474" ph="UPDATE servi... " />
+                <marker date="1511158893071" expanded="true" signature="12288:12356" ph="SELECT name sqlite_master" />
+                <marker date="1511158893071" expanded="true" signature="12509:12854" ph="CREATE TABLE... service" />
+                <marker date="1511158893071" expanded="true" signature="12998:13019" ph="SELECT * FRO... service" />
+                <marker date="1511158893071" expanded="true" signature="14511:14794" ph="INSERT INTO service... " />
+                <marker date="1511158893071" expanded="true" signature="16379:16410" ph="SELECT * FRO... service" />
+                <marker date="1511158893071" expanded="true" signature="18188:18431" ph="UPDATE servi... " />
+                <marker date="1511158893071" expanded="true" signature="19960:19990" ph="DELETE FROM " />
               </folding>
             </state>
           </provider>
@@ -59,8 +67,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="14" column="32" lean-forward="false" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="32" />
+            <state relative-caret-position="120">
+              <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -69,7 +77,7 @@
       <file leaf-file-name="NewServiceController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/NewServiceController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
+            <state relative-caret-position="120">
               <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
               <folding />
             </state>
@@ -113,6 +121,13 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
   <component name="PhpServers">
     <servers />
   </component>
@@ -139,9 +154,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -202,7 +217,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -337,14 +352,16 @@
       <workItem from="1511080432886" duration="8921000" />
       <workItem from="1511095655920" duration="10232000" />
       <workItem from="1511138964256" duration="7521000" />
+      <workItem from="1511150030509" duration="9389000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26759000" />
+    <option name="totallyTimeSpent" value="36148000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -355,20 +372,20 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296355" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32730263" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3277027" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20546874" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20877458" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995495" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -387,6 +404,73 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="11" lean-forward="false" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="14" column="32" lean-forward="false" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/NewServiceController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1088">
+          <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/ServiceTableData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4709">
+          <caret line="277" column="0" lean-forward="true" selection-start-line="277" selection-start-column="0" selection-end-line="277" selection-end-column="0" />
+          <folding>
+            <element signature="method#Controller#0;class#Controller#0" expanded="false" />
+            <element signature="method#initialize#0;class#Controller#0" expanded="false" />
+            <element signature="method#StartServices#0;class#Controller#0" expanded="false" />
+            <element signature="method#StopServices#0;class#Controller#0" expanded="false" />
+            <element signature="method#AddService#0;class#Controller#0" expanded="false" />
+            <element signature="method#EditService#0;class#Controller#0" expanded="false" />
+            <element signature="method#RemoveService#0;class#Controller#0" expanded="false" />
+            <element signature="method#EnableService#0;class#Controller#0" expanded="false" />
+            <element signature="method#DisableService#0;class#Controller#0" expanded="false" />
+            <element signature="method#ShowErrors#0;class#Controller#0" expanded="false" />
+            <element signature="method#tableRowSelect#0;class#Controller#0" expanded="false" />
+            <element signature="method#loadTable#0;class#Controller#0" expanded="false" />
+            <element signature="method#storeNewService#0;class#Controller#0" expanded="false" />
+            <element signature="method#readService#0;class#Controller#0" expanded="false" />
+            <element signature="method#updateService#0;class#Controller#0" expanded="false" />
+            <element signature="method#deleteService#0;class#Controller#0" expanded="false" />
+            <element signature="method#alert#0;class#Controller#0" expanded="false" />
+            <marker date="1511158893071" expanded="true" signature="9495:9542" ph="UPDATE servi... " />
+            <marker date="1511158893071" expanded="true" signature="10426:10474" ph="UPDATE servi... " />
+            <marker date="1511158893071" expanded="true" signature="12288:12356" ph="SELECT name sqlite_master" />
+            <marker date="1511158893071" expanded="true" signature="12509:12854" ph="CREATE TABLE... service" />
+            <marker date="1511158893071" expanded="true" signature="12998:13019" ph="SELECT * FRO... service" />
+            <marker date="1511158893071" expanded="true" signature="14511:14794" ph="INSERT INTO service... " />
+            <marker date="1511158893071" expanded="true" signature="16379:16410" ph="SELECT * FRO... service" />
+            <marker date="1511158893071" expanded="true" signature="18188:18431" ph="UPDATE servi... " />
+            <marker date="1511158893071" expanded="true" signature="19960:19990" ph="DELETE FROM " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -424,19 +508,32 @@
         <state relative-caret-position="4505">
           <caret line="265" column="70" lean-forward="true" selection-start-line="265" selection-start-column="70" selection-end-line="265" selection-end-column="70" />
           <folding>
+            <element signature="method#Controller#0;class#Controller#0" expanded="false" />
+            <element signature="method#initialize#0;class#Controller#0" expanded="false" />
+            <element signature="method#StartServices#0;class#Controller#0" expanded="false" />
+            <element signature="method#StopServices#0;class#Controller#0" expanded="false" />
+            <element signature="method#AddService#0;class#Controller#0" expanded="false" />
+            <element signature="method#EditService#0;class#Controller#0" expanded="false" />
             <element signature="method#RemoveService#0;class#Controller#0" expanded="false" />
-            <marker date="1511146481501" expanded="true" signature="8225:8272" ph="UPDATE servi... " />
-            <marker date="1511146481501" expanded="true" signature="8617:8665" ph="UPDATE servi... " />
-            <marker date="1511146481501" expanded="true" signature="11865:11933" ph="SELECT name sqlite_master" />
-            <marker date="1511146481501" expanded="true" signature="12081:12426" ph="CREATE TABLE... service" />
-            <marker date="1511146481501" expanded="true" signature="12558:12579" ph="SELECT * FRO... service" />
-            <marker date="1511146481501" expanded="true" signature="13372:13647" ph="INSERT INTO service... " />
-            <marker date="1511146481501" expanded="true" signature="14606:14637" ph="SELECT * FRO... service" />
-            <marker date="1511146481501" expanded="true" signature="14801:14859" ph="UPDATE servi... " />
-            <marker date="1511146481501" expanded="true" signature="14801:15025" ph="UPDATE servi... " />
-            <marker date="1511146481501" expanded="true" signature="14801:15035" ph="UPDATE servi... " />
-            <marker date="1511146481501" expanded="true" signature="14801:15036" ph="UPDATE servi... " />
-            <marker date="1511146481501" expanded="true" signature="16061:16091" ph="DELETE FROM " />
+            <element signature="method#EnableService#0;class#Controller#0" expanded="false" />
+            <element signature="method#DisableService#0;class#Controller#0" expanded="false" />
+            <element signature="method#ShowErrors#0;class#Controller#0" expanded="false" />
+            <element signature="method#tableRowSelect#0;class#Controller#0" expanded="false" />
+            <element signature="method#loadTable#0;class#Controller#0" expanded="false" />
+            <element signature="method#storeNewService#0;class#Controller#0" expanded="false" />
+            <element signature="method#readService#0;class#Controller#0" expanded="false" />
+            <element signature="method#updateService#0;class#Controller#0" expanded="false" />
+            <element signature="method#deleteService#0;class#Controller#0" expanded="false" />
+            <element signature="method#alert#0;class#Controller#0" expanded="false" />
+            <marker date="1511158893071" expanded="true" signature="9495:9542" ph="UPDATE servi... " />
+            <marker date="1511158893071" expanded="true" signature="10426:10474" ph="UPDATE servi... " />
+            <marker date="1511158893071" expanded="true" signature="12288:12356" ph="SELECT name sqlite_master" />
+            <marker date="1511158893071" expanded="true" signature="12509:12854" ph="CREATE TABLE... service" />
+            <marker date="1511158893071" expanded="true" signature="12998:13019" ph="SELECT * FRO... service" />
+            <marker date="1511158893071" expanded="true" signature="14511:14794" ph="INSERT INTO service... " />
+            <marker date="1511158893071" expanded="true" signature="16379:16410" ph="SELECT * FRO... service" />
+            <marker date="1511158893071" expanded="true" signature="18188:18431" ph="UPDATE servi... " />
+            <marker date="1511158893071" expanded="true" signature="19960:19990" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
@@ -478,19 +575,32 @@
         <state relative-caret-position="425">
           <caret line="25" column="9" lean-forward="true" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
           <folding>
+            <element signature="method#Controller#0;class#Controller#0" expanded="false" />
+            <element signature="method#initialize#0;class#Controller#0" expanded="false" />
+            <element signature="method#StartServices#0;class#Controller#0" expanded="false" />
+            <element signature="method#StopServices#0;class#Controller#0" expanded="false" />
+            <element signature="method#AddService#0;class#Controller#0" expanded="false" />
+            <element signature="method#EditService#0;class#Controller#0" expanded="false" />
             <element signature="method#RemoveService#0;class#Controller#0" expanded="false" />
-            <marker date="1511146481501" expanded="true" signature="8225:8272" ph="UPDATE servi... " />
-            <marker date="1511146481501" expanded="true" signature="8617:8665" ph="UPDATE servi... " />
-            <marker date="1511146481501" expanded="true" signature="11865:11933" ph="SELECT name sqlite_master" />
-            <marker date="1511146481501" expanded="true" signature="12081:12426" ph="CREATE TABLE... service" />
-            <marker date="1511146481501" expanded="true" signature="12558:12579" ph="SELECT * FRO... service" />
-            <marker date="1511146481501" expanded="true" signature="13372:13647" ph="INSERT INTO service... " />
-            <marker date="1511146481501" expanded="true" signature="14606:14637" ph="SELECT * FRO... service" />
-            <marker date="1511146481501" expanded="true" signature="14801:14859" ph="UPDATE servi... " />
-            <marker date="1511146481501" expanded="true" signature="14801:15025" ph="UPDATE servi... " />
-            <marker date="1511146481501" expanded="true" signature="14801:15035" ph="UPDATE servi... " />
-            <marker date="1511146481501" expanded="true" signature="14801:15036" ph="UPDATE servi... " />
-            <marker date="1511146481501" expanded="true" signature="16061:16091" ph="DELETE FROM " />
+            <element signature="method#EnableService#0;class#Controller#0" expanded="false" />
+            <element signature="method#DisableService#0;class#Controller#0" expanded="false" />
+            <element signature="method#ShowErrors#0;class#Controller#0" expanded="false" />
+            <element signature="method#tableRowSelect#0;class#Controller#0" expanded="false" />
+            <element signature="method#loadTable#0;class#Controller#0" expanded="false" />
+            <element signature="method#storeNewService#0;class#Controller#0" expanded="false" />
+            <element signature="method#readService#0;class#Controller#0" expanded="false" />
+            <element signature="method#updateService#0;class#Controller#0" expanded="false" />
+            <element signature="method#deleteService#0;class#Controller#0" expanded="false" />
+            <element signature="method#alert#0;class#Controller#0" expanded="false" />
+            <marker date="1511158893071" expanded="true" signature="9495:9542" ph="UPDATE servi... " />
+            <marker date="1511158893071" expanded="true" signature="10426:10474" ph="UPDATE servi... " />
+            <marker date="1511158893071" expanded="true" signature="12288:12356" ph="SELECT name sqlite_master" />
+            <marker date="1511158893071" expanded="true" signature="12509:12854" ph="CREATE TABLE... service" />
+            <marker date="1511158893071" expanded="true" signature="12998:13019" ph="SELECT * FRO... service" />
+            <marker date="1511158893071" expanded="true" signature="14511:14794" ph="INSERT INTO service... " />
+            <marker date="1511158893071" expanded="true" signature="16379:16410" ph="SELECT * FRO... service" />
+            <marker date="1511158893071" expanded="true" signature="18188:18431" ph="UPDATE servi... " />
+            <marker date="1511158893071" expanded="true" signature="19960:19990" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
@@ -515,13 +625,7 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Extra_code.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="67" lean-forward="true" selection-start-line="17" selection-start-column="67" selection-end-line="17" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Extra_code.txt" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/ServiceTableData.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -532,15 +636,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="14" column="32" lean-forward="false" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="32" />
+        <state relative-caret-position="120">
+          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/NewServiceController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
+        <state relative-caret-position="120">
           <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
           <folding />
         </state>
@@ -548,22 +652,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="349" column="20" lean-forward="true" selection-start-line="349" selection-start-column="20" selection-end-line="349" selection-end-column="20" />
+        <state relative-caret-position="408">
+          <caret line="62" column="5" lean-forward="true" selection-start-line="62" selection-start-column="5" selection-end-line="62" selection-end-column="5" />
           <folding>
+            <element signature="method#Controller#0;class#Controller#0" expanded="false" />
+            <element signature="method#initialize#0;class#Controller#0" expanded="false" />
+            <element signature="method#StartServices#0;class#Controller#0" expanded="false" />
+            <element signature="method#StopServices#0;class#Controller#0" expanded="false" />
+            <element signature="method#AddService#0;class#Controller#0" expanded="false" />
+            <element signature="method#EditService#0;class#Controller#0" expanded="false" />
             <element signature="method#RemoveService#0;class#Controller#0" expanded="false" />
-            <marker date="1511146481501" expanded="true" signature="8225:8272" ph="UPDATE servi... " />
-            <marker date="1511146481501" expanded="true" signature="8617:8665" ph="UPDATE servi... " />
-            <marker date="1511146481501" expanded="true" signature="11865:11933" ph="SELECT name sqlite_master" />
-            <marker date="1511146481501" expanded="true" signature="12081:12426" ph="CREATE TABLE... service" />
-            <marker date="1511146481501" expanded="true" signature="12558:12579" ph="SELECT * FRO... service" />
-            <marker date="1511146481501" expanded="true" signature="13372:13647" ph="INSERT INTO service... " />
-            <marker date="1511146481501" expanded="true" signature="14606:14637" ph="SELECT * FRO... service" />
-            <marker date="1511146481501" expanded="true" signature="14801:14859" ph="UPDATE servi... " />
-            <marker date="1511146481501" expanded="true" signature="14801:15025" ph="UPDATE servi... " />
-            <marker date="1511146481501" expanded="true" signature="14801:15035" ph="UPDATE servi... " />
-            <marker date="1511146481501" expanded="true" signature="14801:15036" ph="UPDATE servi... " />
-            <marker date="1511146481501" expanded="true" signature="16061:16091" ph="DELETE FROM " />
+            <element signature="method#EnableService#0;class#Controller#0" expanded="false" />
+            <element signature="method#DisableService#0;class#Controller#0" expanded="false" />
+            <element signature="method#ShowErrors#0;class#Controller#0" expanded="false" />
+            <element signature="method#tableRowSelect#0;class#Controller#0" expanded="false" />
+            <element signature="method#loadTable#0;class#Controller#0" expanded="false" />
+            <element signature="method#storeNewService#0;class#Controller#0" expanded="false" />
+            <element signature="method#readService#0;class#Controller#0" expanded="false" />
+            <element signature="method#updateService#0;class#Controller#0" expanded="false" />
+            <element signature="method#deleteService#0;class#Controller#0" expanded="false" />
+            <element signature="method#alert#0;class#Controller#0" expanded="false" />
+            <marker date="1511158893071" expanded="true" signature="9495:9542" ph="UPDATE servi... " />
+            <marker date="1511158893071" expanded="true" signature="10426:10474" ph="UPDATE servi... " />
+            <marker date="1511158893071" expanded="true" signature="12288:12356" ph="SELECT name sqlite_master" />
+            <marker date="1511158893071" expanded="true" signature="12509:12854" ph="CREATE TABLE... service" />
+            <marker date="1511158893071" expanded="true" signature="12998:13019" ph="SELECT * FRO... service" />
+            <marker date="1511158893071" expanded="true" signature="14511:14794" ph="INSERT INTO service... " />
+            <marker date="1511158893071" expanded="true" signature="16379:16410" ph="SELECT * FRO... service" />
+            <marker date="1511158893071" expanded="true" signature="18188:18431" ph="UPDATE servi... " />
+            <marker date="1511158893071" expanded="true" signature="19960:19990" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
