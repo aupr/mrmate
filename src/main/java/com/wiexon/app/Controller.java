@@ -3,6 +3,7 @@ package com.wiexon.app;
 import com.jfoenix.controls.JFXButton;
 import com.sun.jersey.api.container.httpserver.HttpServerFactory;
 import com.sun.net.httpserver.HttpServer;
+import com.wiexon.restServer.ServiceThread;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,14 +20,13 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Controller {
+
     private String dbUrl = null;
     private Stage primaryStage = null;
     private int selectedServiceId;
@@ -67,12 +67,26 @@ public class Controller {
 
     @FXML
     void StartServices(ActionEvent event) {
+        Connection con = null;
 
         System.out.println("Working Start service!");
 
         try {
             server = HttpServerFactory.create("http://localhost:8888/");
             server.start();
+
+
+            con = DriverManager.getConnection(dbUrl);
+            Statement state = con.createStatement();
+            ResultSet res = state.executeQuery("SELECT * FROM service");
+
+            while (res.next()) {
+                System.out.println(res.getString("serviceName")+" - "+res.getString("modeView"));
+
+                new ServiceThread(res.getString("serviceName"), stopButton);
+
+            }
+
             playButton.setDisable(true);
             stopButton.setDisable(false);
             addButton.setDisable(true);
@@ -81,6 +95,8 @@ public class Controller {
             checkButton.setDisable(true);
             crossButton.setDisable(true);
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
