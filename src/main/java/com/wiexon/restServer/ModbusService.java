@@ -1,16 +1,19 @@
 package com.wiexon.restServer;
 
+import com.wiexon.restServer.pojo.ModbusCoil;
+import com.wiexon.restServer.pojo.ModbusRegister;
+
 import java.util.List;
 
 public interface ModbusService {
     //public void connect();
-    public List ReadDiscreteInputs(int AddressOfFirstCoil, int NumberOfCoils);
-    public List ReadCoils(int AddressOfFirstCoil, int NumberOfCoils);
-    public Boolean WriteSingleCoil(int AddressOfCoil, boolean ValueToWrite);
-    //public boolean WriteMultipleCoils();
-    public List ReadInputRegisters(int AddressOfFirstRegisterToRead, int NumberOfRegistersToRead);
-    public List ReadMultipleHoldingRegisters(int AddressOfFirstRegisterToRead, int NumberOfRegistersToRead);
-    public Boolean WriteSingleHoldingRegister(int AddressOfHoldingRegisterToWrite, int NewValueOfTheHoldingRegister);
-    //public Boolean WriteMultipleHoldingRegisters();
+    public List<ModbusCoil> readDiscreteInputs(int addressOfFirstCoil, int numberOfCoils);
+    public List<ModbusCoil> readCoils(int addressOfFirstCoil, int numberOfCoils);
+    public Boolean writeSingleCoil(int addressOfCoil, boolean valueToWrite);
+    //public boolean writeMultipleCoils();
+    public List<ModbusRegister> readInputRegisters(int addressOfFirstRegisterToRead, int numberOfRegistersToRead);
+    public List<ModbusRegister> readMultipleHoldingRegisters(int addressOfFirstRegisterToRead, int numberOfRegistersToRead);
+    public Boolean writeSingleHoldingRegister(int addressOfHoldingRegisterToWrite, int newValueOfTheHoldingRegister);
+    //public Boolean writeMultipleHoldingRegisters();
 
 }

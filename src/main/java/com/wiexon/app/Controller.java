@@ -3,6 +3,7 @@ package com.wiexon.app;
 import com.jfoenix.controls.JFXButton;
 import com.sun.jersey.api.container.httpserver.HttpServerFactory;
 import com.sun.net.httpserver.HttpServer;
+import com.wiexon.restServer.Resource;
 import com.wiexon.restServer.ServiceThread;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -75,8 +76,12 @@ public class Controller {
             server = HttpServerFactory.create("http://localhost:8888/");
             server.start();
 
+            Map<String, String> amap = new HashMap<>();
+            amap.put("aval", "This is Aman");
+            new Resource().setModbusServiceMap(amap);
 
-            con = DriverManager.getConnection(dbUrl);
+
+            /*con = DriverManager.getConnection(dbUrl);
             Statement state = con.createStatement();
             ResultSet res = state.executeQuery("SELECT * FROM service");
 
@@ -85,7 +90,7 @@ public class Controller {
 
                 new ServiceThread(res.getString("serviceName"), stopButton);
 
-            }
+            }*/
 
             playButton.setDisable(true);
             stopButton.setDisable(false);
@@ -96,9 +101,9 @@ public class Controller {
             crossButton.setDisable(true);
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (SQLException e) {
+        } /*catch (SQLException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @FXML
