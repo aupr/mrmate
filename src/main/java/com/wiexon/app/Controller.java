@@ -3,10 +3,7 @@ package com.wiexon.app;
 import com.jfoenix.controls.JFXButton;
 import com.sun.jersey.api.container.httpserver.HttpServerFactory;
 import com.sun.net.httpserver.HttpServer;
-import com.wiexon.restServer.ModbusService;
-import com.wiexon.restServer.ModbusTcpService;
-import com.wiexon.restServer.Resource;
-import com.wiexon.restServer.ServiceThread;
+import com.wiexon.restServer.*;
 import com.wiexon.restServer.pojo.ModbusCoil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -81,13 +78,14 @@ public class Controller {
             server = HttpServerFactory.create("http://localhost:8888/");
             server.start();
 
-            /*Map<String, String> amap = new HashMap<>();
-            amap.put("aval", "This is Aman");
-            new Resource().setModbusServiceMap(amap);*/
+            /*Map<String, ModbusService> modbusServiceMap = new HashMap<>();
+            ModbusService modbusService = new ModbusTcpService("localhost", 502, 3000, 1000);
 
-            /*ModbusService modbusService = new ModbusTcpService();
-            modbusService.readMultipleHoldingRegisters(1,5);
-            List<ModbusCoil> lst = modbusService.readDiscreteInputs(3,10);
+            amap.put("av", modbusService);*/
+            new Resource().setModbusServiceMap(ModbusServiceMap.load());
+
+            //modbusService.readMultipleHoldingRegisters(1,5);
+            /*List<ModbusCoil> lst = modbusService.readDiscreteInputs(3,10);
             Iterator<ModbusCoil> it= lst.iterator();
 
             while (it.hasNext()) {

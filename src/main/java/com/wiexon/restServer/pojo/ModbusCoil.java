@@ -8,8 +8,8 @@ public class ModbusCoil {
     private int address;
     private boolean value;
     private String entity;
-    private int entitynumber;
-    private int entityaddress;
+    private int number;
+    private int offset;
 
     public int getFunction() {
         return function;
@@ -43,19 +43,19 @@ public class ModbusCoil {
         this.entity = entity;
     }
 
-    public int getEntitynumber() {
-        return entitynumber;
+    public int getNumber() {
+        return number;
     }
 
-    public void setEntitynumber(int entitynumber) {
-        this.entitynumber = entitynumber;
+    public void setNumber(int number) {
+        this.number = number;
     }
 
-    public int getEntityaddress() {
-        return entityaddress;
+    public int getOffset() {
+        return offset;
     }
 
-    public void setEntityaddress(int entityaddress) {
-        this.entityaddress = entityaddress;
+    public void setOffset(int offset) {
+        this.offset = offset;
     }
 }
