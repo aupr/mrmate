@@ -1,24 +1,27 @@
 package com.wiexon.restServer.pojo;
 
 public class ModbusRegister {
-    private int functioncode;
-    private int offset;
+    private int function;
+    private int address;
     private int value;
+    private String entity;
+    private int entitynumber;
+    private int entityaddress;
 
-    public int getFunctioncode() {
-        return functioncode;
+    public int getFunction() {
+        return function;
     }
 
-    public void setFunctioncode(int functioncode) {
-        this.functioncode = functioncode;
+    public void setFunction(int function) {
+        this.function = function;
     }
 
-    public int getOffset() {
-        return offset;
+    public int getAddress() {
+        return address;
     }
 
-    public void setOffset(int offset) {
-        this.offset = offset;
+    public void setAddress(int address) {
+        this.address = address;
     }
 
     public int getValue() {
@@ -27,5 +30,29 @@ public class ModbusRegister {
 
     public void setValue(int value) {
         this.value = value;
+    }
+
+    public String getEntity() {
+        return entity;
+    }
+
+    public void setEntity(String entity) {
+        this.entity = entity;
+    }
+
+    public int getEntitynumber() {
+        return entitynumber;
+    }
+
+    public void setEntitynumber(int entitynumber) {
+        this.entitynumber = entitynumber;
+    }
+
+    public int getEntityaddress() {
+        return entityaddress;
+    }
+
+    public void setEntityaddress(int entityaddress) {
+        this.entityaddress = entityaddress;
     }
 }

@@ -3,8 +3,11 @@ package com.wiexon.app;
 import com.jfoenix.controls.JFXButton;
 import com.sun.jersey.api.container.httpserver.HttpServerFactory;
 import com.sun.net.httpserver.HttpServer;
+import com.wiexon.restServer.ModbusService;
+import com.wiexon.restServer.ModbusTcpService;
 import com.wiexon.restServer.Resource;
 import com.wiexon.restServer.ServiceThread;
+import com.wiexon.restServer.pojo.ModbusCoil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,6 +27,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.*;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 public class Controller {
@@ -76,9 +81,19 @@ public class Controller {
             server = HttpServerFactory.create("http://localhost:8888/");
             server.start();
 
-            Map<String, String> amap = new HashMap<>();
+            /*Map<String, String> amap = new HashMap<>();
             amap.put("aval", "This is Aman");
-            new Resource().setModbusServiceMap(amap);
+            new Resource().setModbusServiceMap(amap);*/
+
+            /*ModbusService modbusService = new ModbusTcpService();
+            modbusService.readMultipleHoldingRegisters(1,5);
+            List<ModbusCoil> lst = modbusService.readDiscreteInputs(3,10);
+            Iterator<ModbusCoil> it= lst.iterator();
+
+            while (it.hasNext()) {
+                ModbusCoil mbc = it.next();
+                System.out.println(mbc.isValue());
+            }*/
 
 
             /*con = DriverManager.getConnection(dbUrl);

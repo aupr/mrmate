@@ -11,6 +11,7 @@ import net.wimpi.modbus.procimg.SimpleInputRegister;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ModbusTcpService implements ModbusService{
@@ -21,9 +22,9 @@ public class ModbusTcpService implements ModbusService{
     private int port;
 
     public ModbusTcpService() {
-        this.port = 80;
+        this.port = 502;
         try {
-            this.inetAddress = InetAddress.getByName("192.168.0.254");
+            this.inetAddress = InetAddress.getByName("192.168.0.92");
             this.connection = new TCPMasterConnection(inetAddress);
             this.connection.setPort(port);
             //this.connection.setTimeout(10);
@@ -45,8 +46,23 @@ public class ModbusTcpService implements ModbusService{
         try {
             transaction.execute();
             ReadInputDiscretesResponse response = (ReadInputDiscretesResponse) transaction.getResponse();
-            //Todo Resolve response and return
 
+            int offsetCount = addressOfFirstCoil;
+            List<ModbusCoil> modbusCoilList = new ArrayList<>();
+
+            for (int i=0; i<numberOfCoils; i++) {
+                //todo make a new pojo for Map type and custorm indexing like modbus address with offset
+                ModbusCoil modbusCoil = new ModbusCoil();
+
+                modbusCoil.setFunction(response.getFunctionCode());
+                modbusCoil.setAddress(offsetCount);
+                modbusCoil.setValue(response.getDiscreteStatus(i));
+
+                modbusCoilList.add(modbusCoil);
+
+                offsetCount++;
+            }
+            return modbusCoilList;
         } catch (ModbusException e) {
             e.printStackTrace();
         }
@@ -63,6 +79,19 @@ public class ModbusTcpService implements ModbusService{
             transaction.execute();
             ReadCoilsResponse response = (ReadCoilsResponse) transaction.getResponse();
             //Todo Resolve response and return
+            //System.out.println("Bit coil: "+response.getCoils().toString());
+            //System.out.println(response.getBitCount()+"status: "+response.getCoilStatus(0)+response.getCoilStatus(7));
+
+            int offsetCount = addressOfFirstCoil;
+            List<ModbusCoil> modbusCoilList = new ArrayList<>();
+
+            for (int i=0; i<numberOfCoils; i++) {
+                ModbusCoil modbusCoil = new ModbusCoil();
+
+                modbusCoil.setFunction(2);
+
+                offsetCount++;
+            }
 
         } catch (ModbusException e) {
             e.printStackTrace();
@@ -118,6 +147,9 @@ public class ModbusTcpService implements ModbusService{
             transaction.execute();
             ReadMultipleRegistersResponse response = (ReadMultipleRegistersResponse) transaction.getResponse();
             //Todo Resolve response and return
+            for (int i = 0; i<response.getWordCount(); i++) {
+                System.out.println("word: "+response.getRegisterValue(i));
+            }
 
         } catch (ModbusException e) {
             e.printStackTrace();
