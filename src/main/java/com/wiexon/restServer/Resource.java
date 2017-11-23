@@ -6,10 +6,7 @@ import javafx.scene.control.Button;
 import net.wimpi.modbus.ModbusException;
 import org.omg.CORBA.OBJ_ADAPTER;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.awt.*;
@@ -24,18 +21,33 @@ public class Resource {
 
    // private static int count = 0;
 
-    public void setModbusServiceMap(Map<String, ModbusService> modbusServiceMap) {
+    /*public void setModbusServiceMap(Map<String, ModbusService> modbusServiceMap) {
         this.modbusServiceMap = modbusServiceMap;
+    }*/
+
+    public static void setModbusServiceMap(Map<String, ModbusService> modbusServiceMap) {
+        Resource.modbusServiceMap = modbusServiceMap;
+    }
+
+    public static Map<String, ModbusService> getModbusServiceMap() {
+        return modbusServiceMap;
     }
 
     @GET
     @Path("/read/{serviceUri}/{type:[0-1]}/{reference}/{count}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public List<ModbusCoil> getModbusCoil(@PathParam("serviceUri") String serviceUri, @PathParam("type") String type, @PathParam("reference") int reference, @PathParam("count") int count) {
-/*        if (firstLoad){
-            modbusServiceMap = ModbusServiceMap.load();
-            this.firstLoad = false;
-        }*/
+        if (reference < 1) reference = 1;
+        else if (reference > 65536) reference = 65536;
+        reference = reference-1;
+
+        if (count < 1) count =1;
+        else if (count > 125) count = 125;
+
+        if (reference > 65411) {
+            int pcount = 65536-reference;
+            if (pcount < count) count = pcount;
+        }
 
         boolean fault = true;
         List list = null;
@@ -46,7 +58,7 @@ public class Resource {
             e.printStackTrace();
         } finally {
             if (fault) {
-                modbusServiceMap = ModbusServiceMap.load();
+                modbusServiceMap.put(serviceUri, ModbusServiceMap.update(serviceUri));
                 try {
                     list = executeModbusReadService(serviceUri, type, reference, count);
                 } catch (ModbusException e) {
@@ -61,10 +73,18 @@ public class Resource {
     @Path("/read/{serviceUri}/{type:[3-4]}/{reference}/{count}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public List<ModbusRegister> getModbusRegister(@PathParam("serviceUri") String serviceUri, @PathParam("type") String type, @PathParam("reference") int reference, @PathParam("count") int count) {
-/*        if (firstLoad){
-            modbusServiceMap = ModbusServiceMap.load();
-            this.firstLoad = false;
-        }*/
+
+        if (reference < 1) reference = 1;
+        else if (reference > 65536) reference = 65536;
+        reference = reference-1;
+
+        if (count < 1) count =1;
+        else if (count > 125) count = 125;
+
+        if (reference > 65411) {
+            int pcount = 65536-reference;
+            if (pcount < count) count = pcount;
+        }
 
         boolean fault = true;
         List list = null;
@@ -75,7 +95,7 @@ public class Resource {
             e.printStackTrace();
         } finally {
             if (fault) {
-                modbusServiceMap = ModbusServiceMap.load();
+                modbusServiceMap.put(serviceUri, ModbusServiceMap.update(serviceUri));
                 try {
                     list = executeModbusReadService(serviceUri, type, reference, count);
                 } catch (ModbusException e) {
@@ -84,6 +104,15 @@ public class Resource {
             }
         }
         return list;
+    }
+
+    @POST
+    @Path("/write")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String writeSingleCoil(String data) {
+
+        return data;
     }
 
     private List executeModbusReadService(String serviceUri, String type, int reference, int count) throws ModbusException {

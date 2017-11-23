@@ -18,18 +18,14 @@ public class ModbusTcpService implements ModbusService{
     private TCPMasterConnection connection = null;
 
     public ModbusTcpService(String host, int port, int connectionTimeout, int responseTimeout) throws Exception {
-
-        //try {
             this.connection = new TCPMasterConnection(InetAddress.getByName(host));
             this.connection.setPort(port);
             this.connection.setTimeout(connectionTimeout);
-            this.connection.connect();
-            //connection.close();
-        /*} catch (UnknownHostException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
+    }
+
+    @Override
+    public void close() {
+        this.connection.close();
     }
 
     @Override

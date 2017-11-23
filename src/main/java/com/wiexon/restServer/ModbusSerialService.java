@@ -11,6 +11,11 @@ public class ModbusSerialService implements ModbusService {
     }
 
     @Override
+    public void close() {
+
+    }
+
+    @Override
     public List<ModbusCoil> readDiscreteInputs(int addressOfFirstCoil, int numberOfCoils) throws ModbusException {
         return null;
     }

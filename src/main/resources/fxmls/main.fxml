@@ -19,12 +19,20 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
+              <MenuItem mnemonicParsing="false" text="Add New Service" />
+              <MenuItem mnemonicParsing="false" text="Start Services" />
+              <MenuItem mnemonicParsing="false" text="Stop Services" />
+              <MenuItem mnemonicParsing="false" text="Show Error List" />
+              <MenuItem mnemonicParsing="false" text="Settings" />
               <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem mnemonicParsing="false" text="Edit Service" />
+              <MenuItem mnemonicParsing="false" text="Enable Service" />
+              <MenuItem mnemonicParsing="false" text="Disable Service" />
+              <MenuItem mnemonicParsing="false" text="Delete Service" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

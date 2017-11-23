@@ -7,7 +7,7 @@ import net.wimpi.modbus.ModbusException;
 import java.util.List;
 
 public interface ModbusService {
-    //public void connect();
+    public void close();
     public List<ModbusCoil> readDiscreteInputs(int addressOfFirstCoil, int numberOfCoils) throws ModbusException;
     public List<ModbusCoil> readCoils(int addressOfFirstCoil, int numberOfCoils) throws ModbusException;
     public Boolean writeSingleCoil(int addressOfCoil, boolean valueToWrite) throws ModbusException;

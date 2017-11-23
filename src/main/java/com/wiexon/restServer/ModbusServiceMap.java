@@ -30,7 +30,6 @@ public class ModbusServiceMap {
                     } else if (res.getString("connectionType").equals("Serial Port")){
                         //todo for serial port modbus
                     }
-
                 }
             }
             return serviceMap;
@@ -46,6 +45,58 @@ public class ModbusServiceMap {
             }
             try {
                 state.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public static ModbusService update(String uri) {
+        Map<String, ModbusService> modbusServiceMap = Resource.getModbusServiceMap();
+        modbusServiceMap.get(uri).close();
+
+        Connection con = null;
+        PreparedStatement preps = null;
+        ResultSet res = null;
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+            con = DriverManager.getConnection("jdbc:sqlite:Base.db");
+            preps = con.prepareStatement("SELECT * FROM service WHERE uri=?");
+            preps.setString(1, uri);
+            res = preps.executeQuery();
+
+            if (res.next()) {
+                if (res.getString("modeView").equals("Enabled")){
+                    if (res.getString("connectionType").equals("Modbus TCP/IP")){
+                        try {
+                            return new ModbusTcpService(res.getString("host"), Integer.parseInt(res.getString("port")), res.getInt("connectionTimeout"), res.getInt("responseTimeout"));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else if (res.getString("connectionType").equals("Serial Port")){
+                        //todo for serial port modbus connection
+                    }
+                }
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                res.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                preps.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }

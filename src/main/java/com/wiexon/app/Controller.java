@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXButton;
 import com.sun.jersey.api.container.httpserver.HttpServerFactory;
 import com.sun.net.httpserver.HttpServer;
 import com.wiexon.restServer.*;
-import com.wiexon.restServer.pojo.ModbusCoil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,8 +23,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.*;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 public class Controller {
@@ -54,7 +51,7 @@ public class Controller {
 
     // Fxml method and other methods/////////////////////////////////////////////////////////////////////////////////////////
     @FXML
-    private void initialize() throws SQLException, ClassNotFoundException {
+    private void initialize() {
         // Table column property settings
         // serviceTable.setEditable(true);
         sl.setCellValueFactory(new PropertyValueFactory<ServiceTableData,String>("sl"));
@@ -70,40 +67,13 @@ public class Controller {
 
     @FXML
     void StartServices(ActionEvent event) {
-        Connection con = null;
-
         System.out.println("Working Start service!");
 
         try {
             server = HttpServerFactory.create("http://localhost:8888/");
             server.start();
 
-            /*Map<String, ModbusService> modbusServiceMap = new HashMap<>();
-            ModbusService modbusService = new ModbusTcpService("localhost", 502, 3000, 1000);
-
-            amap.put("av", modbusService);*/
-            new Resource().setModbusServiceMap(ModbusServiceMap.load());
-
-            //modbusService.readMultipleHoldingRegisters(1,5);
-            /*List<ModbusCoil> lst = modbusService.readDiscreteInputs(3,10);
-            Iterator<ModbusCoil> it= lst.iterator();
-
-            while (it.hasNext()) {
-                ModbusCoil mbc = it.next();
-                System.out.println(mbc.isValue());
-            }*/
-
-
-            /*con = DriverManager.getConnection(dbUrl);
-            Statement state = con.createStatement();
-            ResultSet res = state.executeQuery("SELECT * FROM service");
-
-            while (res.next()) {
-                System.out.println(res.getString("serviceName")+" - "+res.getString("modeView"));
-
-                new ServiceThread(res.getString("serviceName"), stopButton);
-
-            }*/
+            Resource.setModbusServiceMap(ModbusServiceMap.load());
 
             playButton.setDisable(true);
             stopButton.setDisable(false);
@@ -114,15 +84,20 @@ public class Controller {
             crossButton.setDisable(true);
         } catch (IOException e) {
             e.printStackTrace();
-        } /*catch (SQLException e) {
-            e.printStackTrace();
-        }*/
+        }
     }
 
     @FXML
     void StopServices(ActionEvent event) {
         System.out.println("Working Stop service!");
         server.stop(0);
+
+        Map<String, ModbusService> modbusServices = Resource.getModbusServiceMap();
+
+        for (ModbusService modbusService : modbusServices.values()) {
+            modbusService.close();
+        }
+
         playButton.setDisable(false);
         stopButton.setDisable(true);
         addButton.setDisable(false);
