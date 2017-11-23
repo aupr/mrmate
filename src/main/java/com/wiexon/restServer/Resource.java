@@ -140,14 +140,12 @@ public class Resource {
         else if (reference > 65536) reference = 65536;
         reference = reference-1;
 
-        BitVector bitVector = new BitVector(modbusBitList.size());
+        BitVector bitVector = new BitVector(modbusBitList.size()-1);
 
         for (int i=0; i<modbusBitList.size(); i++) {
             bitVector.setBit(i, modbusBitList.get(i).isValue());
         }
-
-        //todo debug the bit vector
-
+        
         boolean fault = true;
         ModbusStatus modbusStatus = null;
 
