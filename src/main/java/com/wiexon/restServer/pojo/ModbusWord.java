@@ -3,7 +3,7 @@ package com.wiexon.restServer.pojo;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class ModbusRegister {
+public class ModbusWord {
     private int function;
     private int address;
     private int value;
