@@ -6,7 +6,6 @@ import com.wiexon.restServer.pojo.ModbusWord;
 import net.wimpi.modbus.ModbusException;
 import net.wimpi.modbus.procimg.Register;
 import net.wimpi.modbus.procimg.SimpleInputRegister;
-import net.wimpi.modbus.procimg.SimpleRegister;
 import net.wimpi.modbus.util.BitVector;
 
 import javax.ws.rs.*;
@@ -26,10 +25,40 @@ public class Resource {
         return modbusServiceMap;
     }
 
+
     @GET
-    @Path("/read/{serviceUri}/{type:[0-1]}/{reference}/{count}")
+    @Path("/read/{serviceUri}/{unitId}/{type:[0-1]}/{reference}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public List<ModbusBit> getModbusCoil(@PathParam("serviceUri") String serviceUri, @PathParam("type") String type, @PathParam("reference") int reference, @PathParam("count") int count) {
+    public ModbusBit getModbusCoil(@PathParam("serviceUri") String serviceUri, @PathParam("unitId") int unitId, @PathParam("type") String type, @PathParam("reference") int reference) {
+        if (reference < 1) reference = 1;
+        else if (reference > 65536) reference = 65536;
+        reference = reference-1;
+
+        boolean fault = true;
+        ModbusBit modbusBit = null;
+        try {
+            modbusBit = readModbusBit(serviceUri, type, unitId, reference);
+            fault = false;
+        } catch (ModbusException e) {
+            e.printStackTrace();
+        } finally {
+            if (fault) {
+                modbusServiceMap.put(serviceUri, ModbusServiceMap.update(serviceUri));
+                try {
+                    modbusBit = readModbusBit(serviceUri, type, unitId, reference);
+                } catch (ModbusException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return modbusBit;
+    }
+
+
+    @GET
+    @Path("/read/{serviceUri}/{unitId}/{type:[0-1]}/{reference}/{count}")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public List<ModbusBit> getModbusCoils(@PathParam("serviceUri") String serviceUri, @PathParam("unitId") int unitId, @PathParam("type") String type, @PathParam("reference") int reference, @PathParam("count") int count) {
         if (reference < 1) reference = 1;
         else if (reference > 65536) reference = 65536;
         reference = reference-1;
@@ -43,9 +72,9 @@ public class Resource {
         }
 
         boolean fault = true;
-        List list = null;
+        List<ModbusBit> modbusBitList = null;
         try {
-            list = executeModbusReadService(serviceUri, type, reference, count);
+            modbusBitList = readModbusBits(serviceUri, type, unitId, reference, count);
             fault = false;
         } catch (ModbusException e) {
             e.printStackTrace();
@@ -53,19 +82,48 @@ public class Resource {
             if (fault) {
                 modbusServiceMap.put(serviceUri, ModbusServiceMap.update(serviceUri));
                 try {
-                    list = executeModbusReadService(serviceUri, type, reference, count);
+                    modbusBitList = readModbusBits(serviceUri, type, unitId, reference, count);
                 } catch (ModbusException e) {
                     e.printStackTrace();
                 }
             }
         }
-        return list;
+        return modbusBitList;
     }
 
     @GET
-    @Path("/read/{serviceUri}/{type:[3-4]}/{reference}/{count}")
+    @Path("/read/{serviceUri}/{unitId}/{type:[3-4]}/{reference}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public List<ModbusWord> getModbusRegister(@PathParam("serviceUri") String serviceUri, @PathParam("type") String type, @PathParam("reference") int reference, @PathParam("count") int count) {
+    public ModbusWord getModbusRegister(@PathParam("serviceUri") String serviceUri, @PathParam("unitId") int unitId, @PathParam("type") String type, @PathParam("reference") int reference) {
+
+        if (reference < 1) reference = 1;
+        else if (reference > 65536) reference = 65536;
+        reference = reference-1;
+
+        boolean fault = true;
+        ModbusWord modbusWord = null;
+        try {
+            modbusWord = readModbusWord(serviceUri, type, unitId, reference);
+            fault = false;
+        } catch (ModbusException e) {
+            e.printStackTrace();
+        } finally {
+            if (fault) {
+                modbusServiceMap.put(serviceUri, ModbusServiceMap.update(serviceUri));
+                try {
+                    modbusWord = readModbusWord(serviceUri, type, unitId, reference);
+                } catch (ModbusException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return modbusWord;
+    }
+
+    @GET
+    @Path("/read/{serviceUri}/{unitId}/{type:[3-4]}/{reference}/{count}")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public List<ModbusWord> getModbusRegisters(@PathParam("serviceUri") String serviceUri, @PathParam("unitId") int unitId, @PathParam("type") String type, @PathParam("reference") int reference, @PathParam("count") int count) {
 
         if (reference < 1) reference = 1;
         else if (reference > 65536) reference = 65536;
@@ -80,9 +138,9 @@ public class Resource {
         }
 
         boolean fault = true;
-        List list = null;
+        List<ModbusWord> modbusWordList = null;
         try {
-            list = executeModbusReadService(serviceUri, type, reference, count);
+            modbusWordList = readModbusWords(serviceUri, type, unitId, reference, count);
             fault = false;
         } catch (ModbusException e) {
             e.printStackTrace();
@@ -90,20 +148,20 @@ public class Resource {
             if (fault) {
                 modbusServiceMap.put(serviceUri, ModbusServiceMap.update(serviceUri));
                 try {
-                    list = executeModbusReadService(serviceUri, type, reference, count);
+                    modbusWordList = readModbusWords(serviceUri, type, unitId, reference, count);
                 } catch (ModbusException e) {
                     e.printStackTrace();
                 }
             }
         }
-        return list;
+        return modbusWordList;
     }
 
     @POST
-    @Path("/write/{serviceUri}/0/{reference}")
+    @Path("/write/{serviceUri}/{unitId}/0/{reference}")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public ModbusBit writeSingleCoil(ModbusBit data, @PathParam("serviceUri") String serviceUri, @PathParam("reference") int reference) {
+    public ModbusBit writeSingleCoil(ModbusBit data, @PathParam("serviceUri") String serviceUri, @PathParam("unitId") int unitId, @PathParam("reference") int reference) {
 
         if (reference < 1) reference = 1;
         else if (reference > 65536) reference = 65536;
@@ -113,7 +171,7 @@ public class Resource {
         ModbusBit modbusBit = null;
 
         try {
-            modbusBit = this.modbusServiceMap.get(serviceUri).writeSingleCoil(reference, data.isValue());
+            modbusBit = this.modbusServiceMap.get(serviceUri).writeSingleCoil(unitId, reference, data.isValue());
             fault = false;
         } catch (ModbusException e) {
             e.printStackTrace();
@@ -121,7 +179,7 @@ public class Resource {
             if (fault) {
                 try {
                     modbusServiceMap.put(serviceUri, ModbusServiceMap.update(serviceUri));
-                    modbusBit = this.modbusServiceMap.get(serviceUri).writeSingleCoil(reference, data.isValue());
+                    modbusBit = this.modbusServiceMap.get(serviceUri).writeSingleCoil(unitId, reference, data.isValue());
                 } catch (ModbusException e) {
                     e.printStackTrace();
                 }
@@ -131,10 +189,10 @@ public class Resource {
     }
 
     @POST
-    @Path("/write/{serviceUri}/0/{reference}/multi")
+    @Path("/write/{serviceUri}/{unitId}/0/{reference}/multi")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public ModbusStatus writeMultipleCoil(List<ModbusBit> modbusBitList, @PathParam("serviceUri") String serviceUri, @PathParam("reference") int reference) {
+    public ModbusStatus writeMultipleCoil(List<ModbusBit> modbusBitList, @PathParam("serviceUri") String serviceUri, @PathParam("unitId") int unitId, @PathParam("reference") int reference) {
 
         if (reference < 1) reference = 1;
         else if (reference > 65536) reference = 65536;
@@ -150,7 +208,7 @@ public class Resource {
         ModbusStatus modbusStatus = null;
 
         try {
-            modbusStatus = this.modbusServiceMap.get(serviceUri).writeMultipleCoils(reference, bitVector);
+            modbusStatus = this.modbusServiceMap.get(serviceUri).writeMultipleCoils(unitId, reference, bitVector);
             fault = false;
         } catch (ModbusException e) {
             e.printStackTrace();
@@ -158,7 +216,7 @@ public class Resource {
             if (fault) {
                 try {
                     modbusServiceMap.put(serviceUri, ModbusServiceMap.update(serviceUri));
-                    modbusStatus = this.modbusServiceMap.get(serviceUri).writeMultipleCoils(reference, bitVector);
+                    modbusStatus = this.modbusServiceMap.get(serviceUri).writeMultipleCoils(unitId, reference, bitVector);
                 } catch (ModbusException e) {
                     e.printStackTrace();
                 }
@@ -168,10 +226,10 @@ public class Resource {
     }
 
     @POST
-    @Path("/write/{serviceUri}/4/{reference}")
+    @Path("/write/{serviceUri}/{unitId}/4/{reference}")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public ModbusWord writeSingleRegister(ModbusWord data, @PathParam("serviceUri") String serviceUri, @PathParam("reference") int reference) {
+    public ModbusWord writeSingleRegister(ModbusWord data, @PathParam("serviceUri") String serviceUri, @PathParam("unitId") int unitId, @PathParam("reference") int reference) {
 
         System.out.println(data.getClass().getName());
 
@@ -183,7 +241,7 @@ public class Resource {
         ModbusWord modbusWord = null;
 
         try {
-            modbusWord = this.modbusServiceMap.get(serviceUri).writeSingleHoldingRegister(reference, data.getValue());
+            modbusWord = this.modbusServiceMap.get(serviceUri).writeSingleHoldingRegister(unitId, reference, data.getValue());
             fault = false;
         } catch (ModbusException e) {
             e.printStackTrace();
@@ -191,7 +249,7 @@ public class Resource {
             if (fault) {
                 try {
                     modbusServiceMap.put(serviceUri, ModbusServiceMap.update(serviceUri));
-                    modbusWord = this.modbusServiceMap.get(serviceUri).writeSingleHoldingRegister(reference, data.getValue());
+                    modbusWord = this.modbusServiceMap.get(serviceUri).writeSingleHoldingRegister(unitId, reference, data.getValue());
                 } catch (ModbusException e) {
                     e.printStackTrace();
                 }
@@ -201,10 +259,10 @@ public class Resource {
     }
 
     @POST
-    @Path("/write/{serviceUri}/4/{reference}/multi")
+    @Path("/write/{serviceUri}/{unitId}/4/{reference}/multi")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public ModbusStatus writeMultipleRegister(List<ModbusWord> modbusWordList, @PathParam("serviceUri") String serviceUri, @PathParam("reference") int reference) {
+    public ModbusStatus writeMultipleRegister(List<ModbusWord> modbusWordList, @PathParam("serviceUri") String serviceUri, @PathParam("unitId") int unitId, @PathParam("reference") int reference) {
 
         if (reference < 1) reference = 1;
         else if (reference > 65536) reference = 65536;
@@ -220,7 +278,7 @@ public class Resource {
         ModbusStatus modbusStatus = null;
 
         try {
-            modbusStatus = this.modbusServiceMap.get(serviceUri).writeMultipleHoldingRegisters(reference, registers);
+            modbusStatus = this.modbusServiceMap.get(serviceUri).writeMultipleHoldingRegisters(unitId, reference, registers);
             fault = false;
         } catch (ModbusException e) {
             e.printStackTrace();
@@ -228,7 +286,7 @@ public class Resource {
             if (fault) {
                 try {
                     modbusServiceMap.put(serviceUri, ModbusServiceMap.update(serviceUri));
-                    modbusStatus = this.modbusServiceMap.get(serviceUri).writeMultipleHoldingRegisters(reference, registers);
+                    modbusStatus = this.modbusServiceMap.get(serviceUri).writeMultipleHoldingRegisters(unitId, reference, registers);
                 } catch (ModbusException e) {
                     e.printStackTrace();
                 }
@@ -237,18 +295,44 @@ public class Resource {
         return modbusStatus;
     }
 
-    private List executeModbusReadService(String serviceUri, String type, int reference, int count) throws ModbusException {
-        List list = null;
+    private ModbusBit readModbusBit(String serviceUri, String type, int unitId, int reference) throws ModbusException {
+        ModbusBit modbusBit = null;
         if (type.equals("0")) {
-            list = this.modbusServiceMap.get(serviceUri).readCoils(reference, count);
+            modbusBit = this.modbusServiceMap.get(serviceUri).readCoil(unitId, reference);
         } else if (type.equals("1")) {
-            list = this.modbusServiceMap.get(serviceUri).readDiscreteInputs(reference, count);
-        } else if (type.equals("3")) {
-            list = this.modbusServiceMap.get(serviceUri).readInputRegisters(reference, count);
-        } else if (type.equals("4")) {
-            list = this.modbusServiceMap.get(serviceUri).readMultipleHoldingRegisters(reference, count);
+            modbusBit = this.modbusServiceMap.get(serviceUri).readDiscreteInput(unitId, reference);
         }
-        return list;
+        return modbusBit;
+    }
+
+    private List<ModbusBit> readModbusBits(String serviceUri, String type, int unitId, int reference, int count) throws ModbusException {
+        List<ModbusBit> modbusBitList = null;
+        if (type.equals("0")) {
+            modbusBitList = this.modbusServiceMap.get(serviceUri).readCoils(unitId, reference, count);
+        } else if (type.equals("1")) {
+            modbusBitList = this.modbusServiceMap.get(serviceUri).readDiscreteInputs(unitId, reference, count);
+        }
+        return modbusBitList;
+    }
+
+    private ModbusWord readModbusWord(String serviceUri, String type, int unitId, int reference) throws ModbusException {
+        ModbusWord modbusWord = null;
+        if (type.equals("3")) {
+            modbusWord = this.modbusServiceMap.get(serviceUri).readInputRegister(unitId, reference);
+        } else if (type.equals("4")) {
+            modbusWord = this.modbusServiceMap.get(serviceUri).readSingleHoldingRegister(unitId, reference);
+        }
+        return modbusWord;
+    }
+
+    private List<ModbusWord> readModbusWords(String serviceUri, String type, int unitId, int reference, int count) throws ModbusException {
+        List<ModbusWord> modbusWordList = null;
+        if (type.equals("3")) {
+            modbusWordList = this.modbusServiceMap.get(serviceUri).readInputRegisters(unitId, reference, count);
+        } else if (type.equals("4")) {
+            modbusWordList = this.modbusServiceMap.get(serviceUri).readMultipleHoldingRegisters(unitId, reference, count);
+        }
+        return modbusWordList;
     }
 
 }

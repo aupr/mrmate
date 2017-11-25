@@ -4,12 +4,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class ModbusBit {
+    private int unit;
     private int function;
     private int address;
     private boolean value;
     private String entity;
     private int number;
     private int offset;
+
+    public int getUnit() {
+        return unit;
+    }
+
+    public void setUnit(int unit) {
+        this.unit = unit;
+    }
 
     public int getFunction() {
         return function;

@@ -31,15 +31,43 @@ public class ModbusTcpService implements ModbusService{
     }
 
     @Override
-    public ModbusBit readDiscreteInput(int addressOfFirstCoil) throws ModbusException {
-        return null;
+    public ModbusBit readDiscreteInput(int unitId, int addressOfFirstCoil) throws ModbusException {
+
+        ModbusTCPTransaction transaction = new ModbusTCPTransaction(connection);
+
+        ReadInputDiscretesRequest request = new ReadInputDiscretesRequest(addressOfFirstCoil, 1);
+        request.setUnitID(unitId);
+
+        transaction.setRequest(request);
+
+        transaction.execute();
+        ReadInputDiscretesResponse response = (ReadInputDiscretesResponse) transaction.getResponse();
+
+        ModbusBit modbusBit = null;
+
+        if (response != null) {
+            modbusBit = new ModbusBit();
+
+            modbusBit.setUnit(request.getUnitID());
+            modbusBit.setFunction(response.getFunctionCode());
+            modbusBit.setAddress(addressOfFirstCoil);
+            modbusBit.setValue(response.getDiscreteStatus(0));
+            modbusBit.setEntity(String.format("1%05d",(addressOfFirstCoil+1)));
+            modbusBit.setNumber(1);
+            modbusBit.setOffset(addressOfFirstCoil+1);
+        }
+        return modbusBit;
     }
 
     @Override
-    public List<ModbusBit> readDiscreteInputs(int addressOfFirstCoil, int numberOfCoils) throws ModbusException {
+    public List<ModbusBit> readDiscreteInputs(int unitId, int addressOfFirstCoil, int numberOfCoils) throws ModbusException {
 
         ModbusTCPTransaction transaction = new ModbusTCPTransaction(connection);
-        transaction.setRequest(new ReadInputDiscretesRequest(addressOfFirstCoil, numberOfCoils));
+
+        ReadInputDiscretesRequest request = new ReadInputDiscretesRequest(addressOfFirstCoil, numberOfCoils);
+        request.setUnitID(unitId);
+
+        transaction.setRequest(request);
 
         transaction.execute();
         ReadInputDiscretesResponse response = (ReadInputDiscretesResponse) transaction.getResponse();
@@ -49,6 +77,7 @@ public class ModbusTcpService implements ModbusService{
         for (int i=0; i<numberOfCoils; i++) {
             ModbusBit modbusBit = new ModbusBit();
 
+            modbusBit.setUnit(response.getUnitID());
             modbusBit.setFunction(response.getFunctionCode());
             modbusBit.setAddress(addressOfFirstCoil+i);
             modbusBit.setValue(response.getDiscreteStatus(i));
@@ -62,15 +91,42 @@ public class ModbusTcpService implements ModbusService{
     }
 
     @Override
-    public ModbusBit readCoil(int addressOfFirstCoil) throws ModbusException {
-        return null;
+    public ModbusBit readCoil(int unitId, int addressOfFirstCoil) throws ModbusException {
+        ModbusTCPTransaction transaction = new ModbusTCPTransaction(connection);
+
+        ReadCoilsRequest request = new ReadCoilsRequest(addressOfFirstCoil, 1);
+        request.setUnitID(unitId);
+
+        transaction.setRequest(request);
+        transaction.execute();
+
+        ReadCoilsResponse response = (ReadCoilsResponse) transaction.getResponse();
+
+        ModbusBit modbusBit = null;
+
+        if (response != null) {
+            modbusBit = new ModbusBit();
+
+            modbusBit.setUnit(response.getUnitID());
+            modbusBit.setFunction(response.getFunctionCode());
+            modbusBit.setAddress(addressOfFirstCoil);
+            modbusBit.setValue(response.getCoilStatus(0));
+            modbusBit.setEntity(String.format("0%05d",(addressOfFirstCoil+1)));
+            modbusBit.setNumber(0);
+            modbusBit.setOffset(addressOfFirstCoil+1);
+        }
+        return modbusBit;
     }
 
     @Override
-    public List<ModbusBit> readCoils(int addressOfFirstCoil, int numberOfCoils) throws ModbusException {
+    public List<ModbusBit> readCoils(int unitId, int addressOfFirstCoil, int numberOfCoils) throws ModbusException {
 
         ModbusTCPTransaction transaction = new ModbusTCPTransaction(connection);
-        transaction.setRequest(new ReadCoilsRequest(addressOfFirstCoil, numberOfCoils));
+
+        ReadCoilsRequest request = new ReadCoilsRequest(addressOfFirstCoil, numberOfCoils);
+        request.setUnitID(unitId);
+
+        transaction.setRequest(request);
         transaction.execute();
 
         ReadCoilsResponse response = (ReadCoilsResponse) transaction.getResponse();
@@ -80,6 +136,7 @@ public class ModbusTcpService implements ModbusService{
         for (int i=0; i<numberOfCoils; i++) {
             ModbusBit modbusBit = new ModbusBit();
 
+            modbusBit.setUnit(response.getUnitID());
             modbusBit.setFunction(response.getFunctionCode());
             modbusBit.setAddress(addressOfFirstCoil+i);
             modbusBit.setValue(response.getCoilStatus(i));
@@ -93,16 +150,21 @@ public class ModbusTcpService implements ModbusService{
     }
 
     @Override
-    public ModbusBit writeSingleCoil(int addressOfCoil, boolean valueToWrite) throws ModbusException {
+    public ModbusBit writeSingleCoil(int unitId, int addressOfCoil, boolean valueToWrite) throws ModbusException {
 
         ModbusTCPTransaction transaction = new ModbusTCPTransaction(connection);
-        transaction.setRequest(new WriteCoilRequest(addressOfCoil, valueToWrite));
+
+        WriteCoilRequest request = new WriteCoilRequest(addressOfCoil, valueToWrite);
+        request.setUnitID(unitId);
+
+        transaction.setRequest(request);
 
         transaction.execute();
         WriteCoilResponse response = (WriteCoilResponse) transaction.getResponse();
 
         ModbusBit modbusBit = new ModbusBit();
 
+        modbusBit.setUnit(response.getUnitID());
         modbusBit.setFunction(response.getFunctionCode());
         modbusBit.setAddress(addressOfCoil);
         modbusBit.setValue(response.getCoil());
@@ -114,16 +176,21 @@ public class ModbusTcpService implements ModbusService{
     }
 
     @Override
-    public ModbusStatus writeMultipleCoils(int addressOfFirstCoil, BitVector bitVector) throws ModbusException {
+    public ModbusStatus writeMultipleCoils(int unitId, int addressOfFirstCoil, BitVector bitVector) throws ModbusException {
 
         ModbusTCPTransaction transaction = new ModbusTCPTransaction(connection);
-        transaction.setRequest(new WriteMultipleCoilsRequest(addressOfFirstCoil, bitVector));
+
+        WriteMultipleCoilsRequest request = new WriteMultipleCoilsRequest(addressOfFirstCoil, bitVector);
+        request.setUnitID(unitId);
+
+        transaction.setRequest(request);
 
         transaction.execute();
         WriteMultipleCoilsResponse response = (WriteMultipleCoilsResponse) transaction.getResponse();
 
         ModbusStatus modbusStatus = new ModbusStatus();
 
+        //todo add modbus status unitId
         if (response.getBitCount() > 0) modbusStatus.setStatus(true);
         else modbusStatus.setStatus(false);
 
@@ -131,15 +198,42 @@ public class ModbusTcpService implements ModbusService{
     }
 
     @Override
-    public ModbusWord readInputRegister(int addressOfFirstRegisterToRead) throws ModbusException {
-        return null;
-    }
+    public ModbusWord readInputRegister(int unitId, int addressOfFirstRegisterToRead) throws ModbusException {
+        ModbusTCPTransaction transaction = new ModbusTCPTransaction(connection);
 
+        ReadInputRegistersRequest request = new ReadInputRegistersRequest(addressOfFirstRegisterToRead, 1);
+        request.setUnitID(unitId);
+
+        transaction.setRequest(request);
+
+        transaction.execute();
+        ReadInputRegistersResponse response = (ReadInputRegistersResponse) transaction.getResponse();
+
+        ModbusWord modbusWord = null;
+
+        if (response != null){
+            modbusWord = new ModbusWord();
+
+            modbusWord.setUnit(response.getUnitID());
+            modbusWord.setFunction(response.getFunctionCode());
+            modbusWord.setAddress(addressOfFirstRegisterToRead);
+            modbusWord.setValue(response.getRegisterValue(0));
+            modbusWord.setEntity(String.format("3%05d", (addressOfFirstRegisterToRead+1)));
+            modbusWord.setNumber(3);
+            modbusWord.setOffset(addressOfFirstRegisterToRead+1);
+        }
+        return modbusWord;
+    }
+    // todo start from here unit setup
     @Override
-    public List<ModbusWord> readInputRegisters(int addressOfFirstRegisterToRead, int numberOfRegistersToRead) throws ModbusException {
+    public List<ModbusWord> readInputRegisters(int unitId, int addressOfFirstRegisterToRead, int numberOfRegistersToRead) throws ModbusException {
 
         ModbusTCPTransaction transaction = new ModbusTCPTransaction(connection);
-        transaction.setRequest(new ReadInputRegistersRequest(addressOfFirstRegisterToRead, numberOfRegistersToRead));
+
+        ReadInputRegistersRequest request = new ReadInputRegistersRequest(addressOfFirstRegisterToRead, numberOfRegistersToRead);
+        request.setUnitID(unitId);
+
+        transaction.setRequest(request);
 
         transaction.execute();
         ReadInputRegistersResponse response = (ReadInputRegistersResponse) transaction.getResponse();
@@ -149,6 +243,7 @@ public class ModbusTcpService implements ModbusService{
         for (int i=0; i<response.getWordCount(); i++){
             ModbusWord modbusWord = new ModbusWord();
 
+            modbusWord.setUnit(response.getUnitID());
             modbusWord.setFunction(response.getFunctionCode());
             modbusWord.setAddress(addressOfFirstRegisterToRead+i);
             modbusWord.setValue(response.getRegisterValue(i));
@@ -162,12 +257,30 @@ public class ModbusTcpService implements ModbusService{
     }
 
     @Override
-    public ModbusWord readMultipleHoldingRegister(int addressOfFirstRegisterToRead, int numberOfRegistersToRead) throws ModbusException {
-        return null;
+    public ModbusWord readSingleHoldingRegister(int unitId, int addressOfFirstRegisterToRead) throws ModbusException {
+        ModbusTCPTransaction transaction = new ModbusTCPTransaction(connection);
+        transaction.setRequest(new ReadMultipleRegistersRequest(addressOfFirstRegisterToRead, 1));
+
+        transaction.execute();
+        ReadMultipleRegistersResponse response = (ReadMultipleRegistersResponse) transaction.getResponse();
+
+        ModbusWord modbusWord = null;
+
+        if (response != null){
+            modbusWord = new ModbusWord();
+
+            modbusWord.setFunction(response.getFunctionCode());
+            modbusWord.setAddress(addressOfFirstRegisterToRead);
+            modbusWord.setValue(response.getRegisterValue(0));
+            modbusWord.setEntity(String.format("4%05d", (addressOfFirstRegisterToRead+1)));
+            modbusWord.setNumber(4);
+            modbusWord.setOffset(addressOfFirstRegisterToRead+1);
+        }
+        return modbusWord;
     }
 
     @Override
-    public List<ModbusWord> readMultipleHoldingRegisters(int addressOfFirstRegisterToRead, int numberOfRegistersToRead) throws ModbusException {
+    public List<ModbusWord> readMultipleHoldingRegisters(int unitId, int addressOfFirstRegisterToRead, int numberOfRegistersToRead) throws ModbusException {
 
         ModbusTCPTransaction transaction = new ModbusTCPTransaction(connection);
         transaction.setRequest(new ReadMultipleRegistersRequest(addressOfFirstRegisterToRead, numberOfRegistersToRead));
@@ -193,7 +306,7 @@ public class ModbusTcpService implements ModbusService{
     }
 
     @Override
-    public ModbusWord writeSingleHoldingRegister(int addressOfHoldingRegisterToWrite, int newValueOfTheHoldingRegister) throws ModbusException {
+    public ModbusWord writeSingleHoldingRegister(int unitId, int addressOfHoldingRegisterToWrite, int newValueOfTheHoldingRegister) throws ModbusException {
 
         ModbusTCPTransaction transaction = new ModbusTCPTransaction(connection);
         transaction.setRequest(new WriteSingleRegisterRequest(addressOfHoldingRegisterToWrite, new SimpleInputRegister(newValueOfTheHoldingRegister)));
@@ -214,7 +327,7 @@ public class ModbusTcpService implements ModbusService{
     }
 
     @Override
-    public ModbusStatus writeMultipleHoldingRegisters(int addressOfFirstRegisterToWrite, Register[] registers) throws ModbusException {
+    public ModbusStatus writeMultipleHoldingRegisters(int unitId, int addressOfFirstRegisterToWrite, Register[] registers) throws ModbusException {
         ModbusTCPTransaction transaction = new ModbusTCPTransaction(connection);
         transaction.setRequest(new WriteMultipleRegistersRequest(addressOfFirstRegisterToWrite, registers));
 

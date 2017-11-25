@@ -4,12 +4,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class ModbusWord {
+    private int unit;
     private int function;
     private int address;
     private int value;
     private String entity;
     private int number;
     private int offset;
+
+    public int getUnit() {
+        return unit;
+    }
+
+    public void setUnit(int unit) {
+        this.unit = unit;
+    }
 
     public int getFunction() {
         return function;

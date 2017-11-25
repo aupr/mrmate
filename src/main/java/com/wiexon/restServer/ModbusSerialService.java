@@ -13,69 +13,68 @@ public class ModbusSerialService implements ModbusService {
     public ModbusSerialService() {
     }
 
-
     @Override
     public void close() {
 
     }
 
     @Override
-    public ModbusBit readDiscreteInput(int addressOfFirstCoil) throws ModbusException {
+    public ModbusBit readDiscreteInput(int unitId, int addressOfFirstCoil) throws ModbusException {
         return null;
     }
 
     @Override
-    public List<ModbusBit> readDiscreteInputs(int addressOfFirstCoil, int numberOfCoils) throws ModbusException {
+    public List<ModbusBit> readDiscreteInputs(int unitId, int addressOfFirstCoil, int numberOfCoils) throws ModbusException {
         return null;
     }
 
     @Override
-    public ModbusBit readCoil(int addressOfFirstCoil) throws ModbusException {
+    public ModbusBit readCoil(int unitId, int addressOfFirstCoil) throws ModbusException {
         return null;
     }
 
     @Override
-    public List<ModbusBit> readCoils(int addressOfFirstCoil, int numberOfCoils) throws ModbusException {
+    public List<ModbusBit> readCoils(int unitId, int addressOfFirstCoil, int numberOfCoils) throws ModbusException {
         return null;
     }
 
     @Override
-    public ModbusBit writeSingleCoil(int addressOfCoil, boolean valueToWrite) throws ModbusException {
+    public ModbusBit writeSingleCoil(int unitId, int addressOfCoil, boolean valueToWrite) throws ModbusException {
         return null;
     }
 
     @Override
-    public ModbusStatus writeMultipleCoils(int addressOfFirstCoil, BitVector bitVector) throws ModbusException {
+    public ModbusStatus writeMultipleCoils(int unitId, int addressOfFirstCoil, BitVector bitVector) throws ModbusException {
         return null;
     }
 
     @Override
-    public ModbusWord readInputRegister(int addressOfFirstRegisterToRead) throws ModbusException {
+    public ModbusWord readInputRegister(int unitId, int addressOfFirstRegisterToRead) throws ModbusException {
         return null;
     }
 
     @Override
-    public List<ModbusWord> readInputRegisters(int addressOfFirstRegisterToRead, int numberOfRegistersToRead) throws ModbusException {
+    public List<ModbusWord> readInputRegisters(int unitId, int addressOfFirstRegisterToRead, int numberOfRegistersToRead) throws ModbusException {
         return null;
     }
 
     @Override
-    public ModbusWord readMultipleHoldingRegister(int addressOfFirstRegisterToRead, int numberOfRegistersToRead) throws ModbusException {
+    public ModbusWord readSingleHoldingRegister(int unitId, int addressOfFirstRegisterToRead) throws ModbusException {
         return null;
     }
 
     @Override
-    public List<ModbusWord> readMultipleHoldingRegisters(int addressOfFirstRegisterToRead, int numberOfRegistersToRead) throws ModbusException {
+    public List<ModbusWord> readMultipleHoldingRegisters(int unitId, int addressOfFirstRegisterToRead, int numberOfRegistersToRead) throws ModbusException {
         return null;
     }
 
     @Override
-    public ModbusWord writeSingleHoldingRegister(int addressOfHoldingRegisterToWrite, int newValueOfTheHoldingRegister) throws ModbusException {
+    public ModbusWord writeSingleHoldingRegister(int unitId, int addressOfHoldingRegisterToWrite, int newValueOfTheHoldingRegister) throws ModbusException {
         return null;
     }
 
     @Override
-    public ModbusStatus writeMultipleHoldingRegisters(int addressOfFirstRegisterToWrite, Register[] registers) throws ModbusException {
+    public ModbusStatus writeMultipleHoldingRegisters(int unitId, int addressOfFirstRegisterToWrite, Register[] registers) throws ModbusException {
         return null;
     }
 }
