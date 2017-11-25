@@ -1,5 +1,6 @@
 package com.wiexon.restServer;
 
+import com.sun.jersey.spi.container.ResourceFilters;
 import com.wiexon.restServer.pojo.ModbusBit;
 import com.wiexon.restServer.pojo.ModbusStatus;
 import com.wiexon.restServer.pojo.ModbusWord;
@@ -9,7 +10,10 @@ import net.wimpi.modbus.procimg.SimpleInputRegister;
 import net.wimpi.modbus.util.BitVector;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.xml.ws.ResponseWrapper;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +33,7 @@ public class Resource {
     @GET
     @Path("/read/{serviceUri}/{unitId}/{type:[0-1]}/{reference}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public ModbusBit getModbusCoil(@PathParam("serviceUri") String serviceUri, @PathParam("unitId") int unitId, @PathParam("type") String type, @PathParam("reference") int reference) {
+    public Response getModbusCoil(@PathParam("serviceUri") String serviceUri, @PathParam("unitId") int unitId, @PathParam("type") String type, @PathParam("reference") int reference) {
         if (reference < 1) reference = 1;
         else if (reference > 65536) reference = 65536;
         reference = reference-1;
@@ -51,14 +55,17 @@ public class Resource {
                 }
             }
         }
-        return modbusBit;
+        return Response.ok()
+                .entity(modbusBit)
+                .header("Access-Control-Allow-Origin", "*")
+                .build();
     }
 
 
     @GET
     @Path("/read/{serviceUri}/{unitId}/{type:[0-1]}/{reference}/{count}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public List<ModbusBit> getModbusCoils(@PathParam("serviceUri") String serviceUri, @PathParam("unitId") int unitId, @PathParam("type") String type, @PathParam("reference") int reference, @PathParam("count") int count) {
+    public Response getModbusCoils(@PathParam("serviceUri") String serviceUri, @PathParam("unitId") int unitId, @PathParam("type") String type, @PathParam("reference") int reference, @PathParam("count") int count) {
         if (reference < 1) reference = 1;
         else if (reference > 65536) reference = 65536;
         reference = reference-1;
@@ -88,13 +95,19 @@ public class Resource {
                 }
             }
         }
-        return modbusBitList;
+
+        GenericEntity<List<ModbusBit>> entity = new GenericEntity<List<ModbusBit>>(modbusBitList) {};
+
+        return Response.ok()
+                .entity(entity)
+                .header("Access-Control-Allow-Origin", "*")
+                .build();
     }
 
     @GET
     @Path("/read/{serviceUri}/{unitId}/{type:[3-4]}/{reference}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public ModbusWord getModbusRegister(@PathParam("serviceUri") String serviceUri, @PathParam("unitId") int unitId, @PathParam("type") String type, @PathParam("reference") int reference) {
+    public Response getModbusRegister(@PathParam("serviceUri") String serviceUri, @PathParam("unitId") int unitId, @PathParam("type") String type, @PathParam("reference") int reference) {
 
         if (reference < 1) reference = 1;
         else if (reference > 65536) reference = 65536;
@@ -117,13 +130,16 @@ public class Resource {
                 }
             }
         }
-        return modbusWord;
+        return Response.ok()
+                .entity(modbusWord)
+                .header("Access-Control-Allow-Origin", "*")
+                .build();
     }
 
     @GET
     @Path("/read/{serviceUri}/{unitId}/{type:[3-4]}/{reference}/{count}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public List<ModbusWord> getModbusRegisters(@PathParam("serviceUri") String serviceUri, @PathParam("unitId") int unitId, @PathParam("type") String type, @PathParam("reference") int reference, @PathParam("count") int count) {
+    public Response getModbusRegisters(@PathParam("serviceUri") String serviceUri, @PathParam("unitId") int unitId, @PathParam("type") String type, @PathParam("reference") int reference, @PathParam("count") int count) {
 
         if (reference < 1) reference = 1;
         else if (reference > 65536) reference = 65536;
@@ -154,14 +170,21 @@ public class Resource {
                 }
             }
         }
-        return modbusWordList;
+
+        GenericEntity<List<ModbusWord>> entity = new GenericEntity<List<ModbusWord>>(modbusWordList) {};
+
+        return Response.ok()
+                .entity(entity)
+                .header("Access-Control-Allow-Origin", "*")
+                .build();
     }
+
 
     @POST
     @Path("/write/{serviceUri}/{unitId}/0/{reference}")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public ModbusBit writeSingleCoil(ModbusBit data, @PathParam("serviceUri") String serviceUri, @PathParam("unitId") int unitId, @PathParam("reference") int reference) {
+    public Response writeSingleCoil(ModbusBit data, @PathParam("serviceUri") String serviceUri, @PathParam("unitId") int unitId, @PathParam("reference") int reference) {
 
         if (reference < 1) reference = 1;
         else if (reference > 65536) reference = 65536;
@@ -185,18 +208,45 @@ public class Resource {
                 }
             }
         }
-        return modbusBit;
+        return Response.ok()
+                .entity(modbusBit)
+                .header("Access-Control-Allow-Origin", "*")
+                .build();
     }
 
     @POST
     @Path("/write/{serviceUri}/{unitId}/0/{reference}/multi")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public ModbusStatus writeMultipleCoil(List<ModbusBit> modbusBitList, @PathParam("serviceUri") String serviceUri, @PathParam("unitId") int unitId, @PathParam("reference") int reference) {
+    public Response writeMultipleCoil(List<ModbusBit> modbusBitList, @PathParam("serviceUri") String serviceUri, @PathParam("unitId") int unitId, @PathParam("reference") int reference) {
 
         if (reference < 1) reference = 1;
         else if (reference > 65536) reference = 65536;
         reference = reference-1;
+
+        // To bypass single bit write in multiple operation
+        // Extra read operation for next bit status
+        if (modbusBitList.size() < 2) {
+            boolean fault = true;
+            ModbusBit modbusBit = null;
+            try {
+                modbusBit = readModbusBit(serviceUri, "0", unitId, reference+1);
+                fault = false;
+            } catch (ModbusException e) {
+                e.printStackTrace();
+            } finally {
+                if (fault) {
+                    modbusServiceMap.put(serviceUri, ModbusServiceMap.update(serviceUri));
+                    try {
+                        modbusBit = readModbusBit(serviceUri, "0", unitId, reference+1);
+                    } catch (ModbusException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            modbusBitList.add(modbusBit);
+        }
 
         BitVector bitVector = new BitVector(modbusBitList.size()-1);
 
@@ -222,14 +272,17 @@ public class Resource {
                 }
             }
         }
-        return modbusStatus;
+        return Response.ok()
+                .entity(modbusStatus)
+                .header("Access-Control-Allow-Origin", "*")
+                .build();
     }
 
     @POST
     @Path("/write/{serviceUri}/{unitId}/4/{reference}")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public ModbusWord writeSingleRegister(ModbusWord data, @PathParam("serviceUri") String serviceUri, @PathParam("unitId") int unitId, @PathParam("reference") int reference) {
+    public Response writeSingleRegister(ModbusWord data, @PathParam("serviceUri") String serviceUri, @PathParam("unitId") int unitId, @PathParam("reference") int reference) {
 
         System.out.println(data.getClass().getName());
 
@@ -255,14 +308,17 @@ public class Resource {
                 }
             }
         }
-        return modbusWord;
+        return Response.ok()
+                .entity(modbusWord)
+                .header("Access-Control-Allow-Origin", "*")
+                .build();
     }
 
     @POST
     @Path("/write/{serviceUri}/{unitId}/4/{reference}/multi")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public ModbusStatus writeMultipleRegister(List<ModbusWord> modbusWordList, @PathParam("serviceUri") String serviceUri, @PathParam("unitId") int unitId, @PathParam("reference") int reference) {
+    public Response writeMultipleRegister(List<ModbusWord> modbusWordList, @PathParam("serviceUri") String serviceUri, @PathParam("unitId") int unitId, @PathParam("reference") int reference) {
 
         if (reference < 1) reference = 1;
         else if (reference > 65536) reference = 65536;
@@ -292,7 +348,10 @@ public class Resource {
                 }
             }
         }
-        return modbusStatus;
+        return Response.ok()
+                .entity(modbusStatus)
+                .header("Access-Control-Allow-Origin", "*")
+                .build();
     }
 
     private ModbusBit readModbusBit(String serviceUri, String type, int unitId, int reference) throws ModbusException {
