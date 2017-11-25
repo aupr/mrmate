@@ -1,5 +1,6 @@
 package com.wiexon.restServer;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +29,12 @@ public class ModbusServiceMap {
                             e.printStackTrace();
                         }
                     } else if (res.getString("connectionType").equals("Serial Port")){
-                        //todo for serial port modbus
+                        //todo for serial port modbus with db config
+                        try {
+                            serviceMap.put(res.getString("uri"), new ModbusSerialService());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
@@ -59,7 +65,11 @@ public class ModbusServiceMap {
 
     public static ModbusService update(String uri) {
         Map<String, ModbusService> modbusServiceMap = Resource.getModbusServiceMap();
-        modbusServiceMap.get(uri).close();
+        try {
+            modbusServiceMap.get(uri).close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         Connection con = null;
         PreparedStatement preps = null;

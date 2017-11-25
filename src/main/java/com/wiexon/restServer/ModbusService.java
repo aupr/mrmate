@@ -7,10 +7,11 @@ import net.wimpi.modbus.ModbusException;
 import net.wimpi.modbus.procimg.Register;
 import net.wimpi.modbus.util.BitVector;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface ModbusService {
-    public void close();
+    public void close() throws IOException;
     public ModbusBit readDiscreteInput(int unitId, int addressOfFirstCoil) throws ModbusException;
     public List<ModbusBit> readDiscreteInputs(int unitId, int addressOfFirstCoil, int numberOfCoils) throws ModbusException;
     public ModbusBit readCoil(int unitId, int addressOfFirstCoil) throws ModbusException;

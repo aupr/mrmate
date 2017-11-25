@@ -5,7 +5,6 @@ import com.sun.jersey.api.container.httpserver.HttpServerFactory;
 import com.sun.jersey.api.core.ResourceConfig;
 import com.sun.net.httpserver.HttpServer;
 import com.wiexon.restServer.*;
-import com.wiexon.restServer.control.CORSFilter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -97,7 +96,14 @@ public class Controller {
         Map<String, ModbusService> modbusServices = Resource.getModbusServiceMap();
 
         for (ModbusService modbusService : modbusServices.values()) {
-            modbusService.close();
+            try {
+                modbusService.close();
+
+                //todo getting null pointer exception fix it
+            } catch (IOException e) {
+                System.out.println("Got connection close exception");
+                e.printStackTrace();
+            }
         }
 
         playButton.setDisable(false);

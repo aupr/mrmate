@@ -11,6 +11,7 @@ import net.wimpi.modbus.procimg.Register;
 import net.wimpi.modbus.procimg.SimpleInputRegister;
 import net.wimpi.modbus.util.BitVector;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public class ModbusTcpService implements ModbusService{
     }
 
     @Override
-    public void close() {
+    public void close() throws IOException {
         this.connection.close();
     }
 
