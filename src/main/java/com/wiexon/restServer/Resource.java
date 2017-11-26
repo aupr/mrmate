@@ -1,6 +1,5 @@
 package com.wiexon.restServer;
 
-import com.sun.jersey.spi.container.ResourceFilters;
 import com.wiexon.restServer.pojo.ModbusBit;
 import com.wiexon.restServer.pojo.ModbusStatus;
 import com.wiexon.restServer.pojo.ModbusWord;
@@ -13,7 +12,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.xml.ws.ResponseWrapper;
 import java.util.List;
 import java.util.Map;
 
@@ -55,10 +53,7 @@ public class Resource {
                 }
             }
         }
-        return Response.ok()
-                .entity(modbusBit)
-                .header("Access-Control-Allow-Origin", "*")
-                .build();
+        return doResponse(modbusBit);
     }
 
 
@@ -98,10 +93,7 @@ public class Resource {
 
         GenericEntity<List<ModbusBit>> entity = new GenericEntity<List<ModbusBit>>(modbusBitList) {};
 
-        return Response.ok()
-                .entity(entity)
-                .header("Access-Control-Allow-Origin", "*")
-                .build();
+        return doResponse(entity);
     }
 
     @GET
@@ -130,10 +122,7 @@ public class Resource {
                 }
             }
         }
-        return Response.ok()
-                .entity(modbusWord)
-                .header("Access-Control-Allow-Origin", "*")
-                .build();
+        return doResponse(modbusWord);
     }
 
     @GET
@@ -173,10 +162,7 @@ public class Resource {
 
         GenericEntity<List<ModbusWord>> entity = new GenericEntity<List<ModbusWord>>(modbusWordList) {};
 
-        return Response.ok()
-                .entity(entity)
-                .header("Access-Control-Allow-Origin", "*")
-                .build();
+        return doResponse(entity);
     }
 
 
@@ -208,10 +194,7 @@ public class Resource {
                 }
             }
         }
-        return Response.ok()
-                .entity(modbusBit)
-                .header("Access-Control-Allow-Origin", "*")
-                .build();
+        return doResponse(modbusBit);
     }
 
     @POST
@@ -223,6 +206,20 @@ public class Resource {
         if (reference < 1) reference = 1;
         else if (reference > 65536) reference = 65536;
         reference = reference-1;
+
+        // fix the list limit according to the reference and address limit
+        int modbusBitListSize = modbusBitList.size();
+        int limit = 60;
+        int remainingAddress = 65537 - reference;
+
+        if (modbusBitListSize > limit) {
+            modbusBitList.subList(limit, modbusBitListSize).clear();
+        }
+
+        modbusBitListSize = modbusBitList.size();
+        if (modbusBitListSize > remainingAddress) {
+            modbusBitList.subList(remainingAddress, modbusBitListSize).clear();
+        }
 
         // To bypass single bit write in multiple operation
         // Extra read operation for next bit status
@@ -272,10 +269,7 @@ public class Resource {
                 }
             }
         }
-        return Response.ok()
-                .entity(modbusStatus)
-                .header("Access-Control-Allow-Origin", "*")
-                .build();
+        return doResponse(modbusStatus);
     }
 
     @POST
@@ -283,8 +277,6 @@ public class Resource {
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response writeSingleRegister(ModbusWord data, @PathParam("serviceUri") String serviceUri, @PathParam("unitId") int unitId, @PathParam("reference") int reference) {
-
-        System.out.println(data.getClass().getName());
 
         if (reference < 1) reference = 1;
         else if (reference > 65536) reference = 65536;
@@ -308,10 +300,7 @@ public class Resource {
                 }
             }
         }
-        return Response.ok()
-                .entity(modbusWord)
-                .header("Access-Control-Allow-Origin", "*")
-                .build();
+        return doResponse(modbusWord);
     }
 
     @POST
@@ -323,6 +312,21 @@ public class Resource {
         if (reference < 1) reference = 1;
         else if (reference > 65536) reference = 65536;
         reference = reference-1;
+
+        //fix the list limit according to the reference and address limit
+        int modbusWordListSize = modbusWordList.size();
+        int limit = 60;
+        int remainingAddress = 65537 - reference;
+
+        if (modbusWordListSize > limit) {
+            modbusWordList.subList(limit, modbusWordListSize).clear();
+        }
+
+        modbusWordListSize = modbusWordList.size();
+        if (modbusWordListSize > remainingAddress) {
+            modbusWordList.subList(remainingAddress, modbusWordListSize).clear();
+        }
+        // End fixing
 
         Register[] registers = new SimpleInputRegister[modbusWordList.size()];
 
@@ -348,10 +352,7 @@ public class Resource {
                 }
             }
         }
-        return Response.ok()
-                .entity(modbusStatus)
-                .header("Access-Control-Allow-Origin", "*")
-                .build();
+        return doResponse(modbusStatus);
     }
 
     private ModbusBit readModbusBit(String serviceUri, String type, int unitId, int reference) throws ModbusException {
@@ -392,6 +393,13 @@ public class Resource {
             modbusWordList = this.modbusServiceMap.get(serviceUri).readMultipleHoldingRegisters(unitId, reference, count);
         }
         return modbusWordList;
+    }
+
+    private Response doResponse(Object obj) {
+        return Response.ok()
+                .entity(obj)
+                .header("Access-Control-Allow-Origin", "*")
+                .build();
     }
 
 }

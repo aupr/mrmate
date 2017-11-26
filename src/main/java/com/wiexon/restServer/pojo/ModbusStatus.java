@@ -8,6 +8,10 @@ public class ModbusStatus {
     private int function;
     private boolean status;
     private int number;
+    private int count;
+    private String entity;
+    private int address;
+    private int offset;
 
     public int getUnit() {
         return unit;
@@ -39,5 +43,37 @@ public class ModbusStatus {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public String getEntity() {
+        return entity;
+    }
+
+    public void setEntity(String entity) {
+        this.entity = entity;
+    }
+
+    public int getAddress() {
+        return address;
+    }
+
+    public void setAddress(int address) {
+        this.address = address;
+    }
+
+    public int getOffset() {
+        return offset;
+    }
+
+    public void setOffset(int offset) {
+        this.offset = offset;
     }
 }

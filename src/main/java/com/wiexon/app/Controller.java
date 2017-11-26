@@ -98,10 +98,10 @@ public class Controller {
         for (ModbusService modbusService : modbusServices.values()) {
             try {
                 modbusService.close();
-
-                //todo getting null pointer exception fix it
             } catch (IOException e) {
                 System.out.println("Got connection close exception");
+                e.printStackTrace();
+            } catch (NullPointerException e) {
                 e.printStackTrace();
             }
         }

@@ -29,9 +29,26 @@ public class ModbusServiceMap {
                             e.printStackTrace();
                         }
                     } else if (res.getString("connectionType").equals("Serial Port")){
-                        //todo for serial port modbus with db config
+                        int selfUnit = 1;
+                        String comPort = res.getString("comport");
+                        String baudRateString = res.getString("baudRate");
+                        String[] baudRateSplitted = baudRateString.split("\\s+");
+                        int baudRate = Integer.parseInt(baudRateSplitted[0]);
+                        String dataBitsString = res.getString("dataBits");
+                        String[] dataBitsSplitted = dataBitsString.split("\\s+");
+                        int dataBits = Integer.parseInt(dataBitsSplitted[0]);
+                        String parityString = res.getString("parityBits");
+                        String[] paritySplitted = parityString.split("\\s+");
+                        String parity = paritySplitted[0].toLowerCase();
+                        String stopBitsString = res.getString("stopBits");
+                        String[] stopBitsSplitted = stopBitsString.split("\\s+");
+                        int stopBits = Integer.parseInt(stopBitsSplitted[0]);
+                        String encodingString = res.getString("mode");
+                        String[] encodingSplitted = encodingString.split("\\s+");
+                        String encoding = encodingSplitted[0].toLowerCase();
+
                         try {
-                            serviceMap.put(res.getString("uri"), new ModbusSerialService());
+                            serviceMap.put(res.getString("uri"), new ModbusSerialService(selfUnit,comPort,baudRate,dataBits,parity,stopBits,encoding));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -91,7 +108,30 @@ public class ModbusServiceMap {
                             e.printStackTrace();
                         }
                     } else if (res.getString("connectionType").equals("Serial Port")){
-                        //todo for serial port modbus connection
+
+                        int selfUnit = 1;
+                        String comPort = res.getString("comport");
+                        String baudRateString = res.getString("baudRate");
+                        String[] baudRateSplitted = baudRateString.split("\\s+");
+                        int baudRate = Integer.parseInt(baudRateSplitted[0]);
+                        String dataBitsString = res.getString("dataBits");
+                        String[] dataBitsSplitted = dataBitsString.split("\\s+");
+                        int dataBits = Integer.parseInt(dataBitsSplitted[0]);
+                        String parityString = res.getString("parityBits");
+                        String[] paritySplitted = parityString.split("\\s+");
+                        String parity = paritySplitted[0].toLowerCase();
+                        String stopBitsString = res.getString("stopBits");
+                        String[] stopBitsSplitted = stopBitsString.split("\\s+");
+                        int stopBits = Integer.parseInt(stopBitsSplitted[0]);
+                        String encodingString = res.getString("mode");
+                        String[] encodingSplitted = encodingString.split("\\s+");
+                        String encoding = encodingSplitted[0].toLowerCase();
+
+                        try {
+                            return new ModbusSerialService(selfUnit,comPort,baudRate,dataBits,parity,stopBits,encoding);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }

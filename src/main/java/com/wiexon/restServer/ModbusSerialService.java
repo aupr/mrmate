@@ -21,17 +21,18 @@ public class ModbusSerialService implements ModbusService {
 
     private SerialConnection connection = null;
 
-    public ModbusSerialService() throws Exception {
+    public ModbusSerialService(int selfUnit ,String comPort, int baudRate, int dataBits, String parity, int stopBits, String encoding) throws Exception {
+
         //ModbusCoupler.createModbusCoupler(null);
-        ModbusCoupler.getReference().setUnitID(1);
+        ModbusCoupler.getReference().setUnitID(selfUnit);
 
         SerialParameters params = new SerialParameters();
-        params.setPortName("COM4");
-        params.setBaudRate(9600);
-        params.setDatabits(8);
-        params.setParity("even");
-        params.setStopbits(1);
-        params.setEncoding("rtu");
+        params.setPortName(comPort);
+        params.setBaudRate(baudRate);
+        params.setDatabits(dataBits);
+        params.setParity(parity);
+        params.setStopbits(stopBits);
+        params.setEncoding(encoding);
         params.setEcho(false);
 
         connection = new SerialConnection(params);
@@ -208,6 +209,10 @@ public class ModbusSerialService implements ModbusService {
         modbusStatus.setUnit(response.getUnitID());
         modbusStatus.setFunction(response.getFunctionCode());
         modbusStatus.setNumber(0);
+        modbusStatus.setCount(response.getBitCount()+1);
+        modbusStatus.setEntity(String.format("0%05d", (addressOfFirstCoil+1)));
+        modbusStatus.setAddress(addressOfFirstCoil);
+        modbusStatus.setOffset(addressOfFirstCoil+1);
 
         if (response.getBitCount() > 0) modbusStatus.setStatus(true);
         else modbusStatus.setStatus(false);
@@ -379,6 +384,10 @@ public class ModbusSerialService implements ModbusService {
         modbusStatus.setUnit(response.getUnitID());
         modbusStatus.setFunction(response.getFunctionCode());
         modbusStatus.setNumber(4);
+        modbusStatus.setCount(response.getWordCount());
+        modbusStatus.setEntity(String.format("4%05d", (addressOfFirstRegisterToWrite+1)));
+        modbusStatus.setAddress(addressOfFirstRegisterToWrite);
+        modbusStatus.setOffset(addressOfFirstRegisterToWrite+1);
 
         if (response.getWordCount() == registers.length) modbusStatus.setStatus(true);
         else modbusStatus.setStatus(false);

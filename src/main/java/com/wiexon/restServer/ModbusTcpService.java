@@ -194,6 +194,10 @@ public class ModbusTcpService implements ModbusService{
         modbusStatus.setUnit(response.getUnitID());
         modbusStatus.setFunction(response.getFunctionCode());
         modbusStatus.setNumber(0);
+        modbusStatus.setCount(response.getBitCount()+1);
+        modbusStatus.setEntity(String.format("0%05d", (addressOfFirstCoil+1)));
+        modbusStatus.setAddress(addressOfFirstCoil);
+        modbusStatus.setOffset(addressOfFirstCoil+1);
 
         if (response.getBitCount() > 0) modbusStatus.setStatus(true);
         else modbusStatus.setStatus(false);
@@ -362,6 +366,10 @@ public class ModbusTcpService implements ModbusService{
         modbusStatus.setUnit(response.getUnitID());
         modbusStatus.setFunction(response.getFunctionCode());
         modbusStatus.setNumber(4);
+        modbusStatus.setCount(response.getWordCount());
+        modbusStatus.setEntity(String.format("4%05d", (addressOfFirstRegisterToWrite+1)));
+        modbusStatus.setAddress(addressOfFirstRegisterToWrite);
+        modbusStatus.setOffset(addressOfFirstRegisterToWrite+1);
 
         if (response.getWordCount() == registers.length) modbusStatus.setStatus(true);
         else modbusStatus.setStatus(false);
