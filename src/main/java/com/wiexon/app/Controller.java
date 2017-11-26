@@ -2,7 +2,6 @@ package com.wiexon.app;
 
 import com.jfoenix.controls.JFXButton;
 import com.sun.jersey.api.container.httpserver.HttpServerFactory;
-import com.sun.jersey.api.core.ResourceConfig;
 import com.sun.net.httpserver.HttpServer;
 import com.wiexon.restServer.*;
 import javafx.collections.FXCollections;
@@ -27,7 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Controller {
-
+    //ObservableList<ServiceTableData> tableDataList = FXCollections.observableArrayList();
     private String dbUrl = null;
     private Stage primaryStage = null;
     private int selectedServiceId;
@@ -35,7 +34,7 @@ public class Controller {
 
     // JFX Fields
     @FXML
-    private JFXButton playButton, stopButton, addButton, editButton, subButton, checkButton, crossButton;
+    private JFXButton playButton, stopButton, addButton, editButton, subButton, checkButton, crossButton, errorButton;
     @FXML
     private TableView<ServiceTableData> serviceTable;
     @FXML
@@ -63,6 +62,8 @@ public class Controller {
         mode.setCellValueFactory(new PropertyValueFactory<ServiceTableData, String>("mode"));
         status.setCellValueFactory(new PropertyValueFactory<ServiceTableData, String>("status"));
 
+
+        errorButton.setDisable(false);
         loadTable();
     }
 
@@ -71,7 +72,7 @@ public class Controller {
         System.out.println("Working Start service!");
 
         try {
-            server = HttpServerFactory.create("http://localhost:8888/");
+            server = HttpServerFactory.create("http://127.0.0.1:1983/");
             server.start();
 
             Resource.setModbusServiceMap(ModbusServiceMap.load());
@@ -83,6 +84,7 @@ public class Controller {
             subButton.setDisable(true);
             checkButton.setDisable(true);
             crossButton.setDisable(true);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -127,7 +129,7 @@ public class Controller {
 
         Parent root = fxmlLoader.load();
 
-        newService.setTitle("Add New Service Form!");
+        newService.setTitle("Add New Service!");
         //newService.initOwner(primaryStage);
         newService.setResizable(false);
         newService.initModality(Modality.APPLICATION_MODAL);
@@ -158,6 +160,8 @@ public class Controller {
                 loadTable();
             }
         });
+        newService.setX(primaryStage.getX()+120);
+        newService.setY(primaryStage.getY()+50);
         newService.showAndWait();
     }
 
@@ -172,7 +176,7 @@ public class Controller {
         Parent editRoot = fxmlLoader.load();
 
         editService.setScene(new Scene(editRoot));
-        editService.setTitle("Edit service!");
+        editService.setTitle("Edit Service!");
         editService.setResizable(false);
         editService.initModality(Modality.APPLICATION_MODAL);
 
@@ -219,7 +223,8 @@ public class Controller {
                 loadTable();
             }
         });
-
+        editService.setX(primaryStage.getX()+120);
+        editService.setY(primaryStage.getY()+50);
         editService.showAndWait();
     }
 
@@ -288,7 +293,8 @@ public class Controller {
 
     @FXML
     void ShowErrors(ActionEvent event) {
-
+        //tableDataList.get(1).setPid("10");
+        ServiceTable.getTableDataList().get(0).setPid("500");
     }
 
     @FXML
@@ -314,57 +320,17 @@ public class Controller {
     }
 
     private void loadTable() {
-        Connection con = null;
-        Statement state = null;
-        ResultSet rs = null;
-        ObservableList<ServiceTableData> tableDataList = FXCollections.observableArrayList();
-
-        try {
-            con = DriverManager.getConnection(dbUrl);
-            state = con.createStatement();
-            rs = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='service'");
-
-            if (!rs.next()) {
-                System.out.println("Service Table not exists! Creating New table...");
-                state.execute("CREATE TABLE service(id INTEGER PRIMARY KEY, serviceName VARCHAR(20), uri VARCHAR(20), connectionType VARCHAR(30), responseTimeout INT, host VARCHAR(30), port VARCHAR(10), connectionTimeout INT, comport VARCHAR(10), baudRate VARCHAR(30), dataBits VARCHAR(30), parityBits VARCHAR(30), stopBits VARCHAR(30), mode VARCHAR(20), modeView VARCHAR(20))");
-            } else {
-                System.out.println("Table exists fetching data!");
-                ResultSet res = state.executeQuery("SELECT * FROM service");
-                int i=0;
-                while (res.next()) {
-                    i++;
-                    tableDataList.add(new ServiceTableData(res.getInt("id"), i, res.getString("serviceName"), res.getString("uri"), 1010, res.getString("connectionType"), res.getString("modeView"), "ok"));
-                }
-                if (i>=20){
-                    addButton.setDisable(true);
-                } else {
-                    addButton.setDisable(false);
-                }
-                serviceTable.setItems(tableDataList);
-                editButton.setDisable(true);
-                subButton.setDisable(true);
-                checkButton.setDisable(true);
-                crossButton.setDisable(true);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                rs.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            try {
-                state.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            try {
-                con.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        int i = ServiceTable.load(serviceTable);
+        if (i>=20){
+            addButton.setDisable(true);
+        } else {
+            addButton.setDisable(false);
         }
+
+        editButton.setDisable(true);
+        subButton.setDisable(true);
+        checkButton.setDisable(true);
+        crossButton.setDisable(true);
     }
 
     private void storeNewService(Map<String, String> data) {
@@ -527,6 +493,9 @@ public class Controller {
 
     private boolean alert(String msg) {
         Alert alert = new Alert(Alert.AlertType.NONE, msg, ButtonType.YES, ButtonType.NO);
+        alert.setTitle("Need Confirmation!");
+        alert.setX(primaryStage.getX()+200);
+        alert.setY(primaryStage.getY()+150);
         alert.showAndWait();
         if (alert.getResult() == ButtonType.YES) {
             return true;
