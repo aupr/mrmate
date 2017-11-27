@@ -2,19 +2,19 @@ package com.wiexon.app;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TableView;
 
 import java.sql.*;
 
 public class ServiceTable {
-    private static ObservableList<ServiceTableData> tableDataList = null;
+    private static ObservableList<ServiceTableData> dataList = FXCollections.observableArrayList();
 
-    public static ObservableList<ServiceTableData> getTableDataList() {
-        return tableDataList;
+    public static ObservableList<ServiceTableData> getDataList() {
+        return dataList;
     }
 
-    public static int load(TableView tableView) {
-        tableDataList = FXCollections.observableArrayList();
+    public static int loadDataList() {
+        dataList.subList(0, dataList.size()).clear();
+        //dataList =
         try {
             Class.forName("org.sqlite.JDBC");
             String dbUrl = "jdbc:sqlite:Base.db";
@@ -39,9 +39,10 @@ public class ServiceTable {
                     int i=0;
                     while (res.next()) {
                         i++;
-                        tableDataList.add(new ServiceTableData(res.getInt("id"), i, res.getString("serviceName"), res.getString("uri"), 1010, res.getString("connectionType"), res.getString("modeView"), "ok"));
+                        dataList.add(new ServiceTableData(res.getInt("id"), i, res.getString("serviceName"), res.getString("uri"), res.getString("connectionType"), res.getString("modeView"), "Stopped"));
                     }
-                    tableView.setItems(tableDataList);
+                    //tableView.setItems(tableDataList);
+
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

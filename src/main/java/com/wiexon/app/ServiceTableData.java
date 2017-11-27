@@ -8,17 +8,17 @@ public class ServiceTableData {
     private final SimpleIntegerProperty sl;
     private final SimpleStringProperty term;
     private final SimpleStringProperty uri;
-    private final SimpleStringProperty pid;
+    //private final SimpleStringProperty pid;
     private final SimpleStringProperty connection;
     private final SimpleStringProperty mode;
     private final SimpleStringProperty status;
 
-    public ServiceTableData(Integer id, Integer sl, String term, String uri, Integer pid, String connection, String mode, String status) {
+    public ServiceTableData(Integer id, Integer sl, String term, String uri, String connection, String mode, String status) {
         this.id = new SimpleIntegerProperty(id);
         this.sl = new SimpleIntegerProperty(sl);
         this.term = new SimpleStringProperty(term);
         this.uri = new SimpleStringProperty(uri);
-        this.pid = new SimpleStringProperty(pid.toString());
+        //this.pid = new SimpleStringProperty(pid.toString());
         this.connection = new SimpleStringProperty(connection);
         this.mode = new SimpleStringProperty(mode);
         this.status = new SimpleStringProperty(status);
@@ -72,7 +72,7 @@ public class ServiceTableData {
         this.uri.set(uri);
     }
 
-    public String getPid() {
+    /*public String getPid() {
         return pid.get();
     }
 
@@ -82,7 +82,7 @@ public class ServiceTableData {
 
     public void setPid(String pid) {
         this.pid.set(pid);
-    }
+    }*/
 
     public String getConnection() {
         return connection.get();

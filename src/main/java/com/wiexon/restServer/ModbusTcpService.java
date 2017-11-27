@@ -24,6 +24,7 @@ public class ModbusTcpService implements ModbusService{
             this.connection = new TCPMasterConnection(InetAddress.getByName(host));
             this.connection.setPort(port);
             this.connection.setTimeout(connectionTimeout);
+            this.connection.connect();
     }
 
     @Override

@@ -38,7 +38,7 @@ public class Controller {
     @FXML
     private TableView<ServiceTableData> serviceTable;
     @FXML
-    private TableColumn sl, term, uri, pid, connection, mode, status;
+    private TableColumn sl, term, uri, connection, mode, status;
     @FXML
     private Text hostNameView, portNameView;
 
@@ -57,7 +57,6 @@ public class Controller {
         sl.setCellValueFactory(new PropertyValueFactory<ServiceTableData,String>("sl"));
         term.setCellValueFactory(new PropertyValueFactory<ServiceTableData, String>("term"));
         uri.setCellValueFactory(new PropertyValueFactory<ServiceTableData, String>("uri"));
-        pid.setCellValueFactory(new PropertyValueFactory<ServiceTableData, String>("pid"));
         connection.setCellValueFactory(new PropertyValueFactory<ServiceTableData, String>("connection"));
         mode.setCellValueFactory(new PropertyValueFactory<ServiceTableData, String>("mode"));
         status.setCellValueFactory(new PropertyValueFactory<ServiceTableData, String>("status"));
@@ -107,6 +106,8 @@ public class Controller {
                 e.printStackTrace();
             }
         }
+
+        loadTable();
 
         playButton.setDisable(false);
         stopButton.setDisable(true);
@@ -293,8 +294,29 @@ public class Controller {
 
     @FXML
     void ShowErrors(ActionEvent event) {
-        //tableDataList.get(1).setPid("10");
-        ServiceTable.getTableDataList().get(0).setPid("500");
+
+        LogTable.getDataList().add(new LogTableData("first Messate"));
+
+        try {
+            Stage logStage = new Stage();
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmls/log.fxml"));
+            LogController logController = new LogController(LogTable.getDataList());
+            fxmlLoader.setController(logController);
+
+            Parent root = fxmlLoader.load();
+
+            logStage.setTitle("System Log!");
+            logStage.setResizable(false);
+            logStage.initModality(Modality.APPLICATION_MODAL);
+            logStage.setScene(new Scene(root));
+
+            logStage.setX(primaryStage.getX()+50);
+            logStage.setY(primaryStage.getY()+50);
+            logStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -320,7 +342,9 @@ public class Controller {
     }
 
     private void loadTable() {
-        int i = ServiceTable.load(serviceTable);
+        serviceTable.setItems(ServiceTable.getDataList());
+        int i = ServiceTable.loadDataList();
+
         if (i>=20){
             addButton.setDisable(true);
         } else {
