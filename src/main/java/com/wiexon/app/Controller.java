@@ -12,6 +12,7 @@ import com.wiexon.app.service.ServiceTableData;
 import com.wiexon.app.settings.SettingsController;
 import com.wiexon.app.settings.SettingsHolder;
 import com.wiexon.restServer.*;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,6 +35,7 @@ public class Controller {
     private Stage primaryStage = null;
     private int selectedServiceId;
     HttpServer server = null;
+    private boolean multiClickFilter = true;
 
     // JFX Menu fields
     @FXML
@@ -82,22 +84,38 @@ public class Controller {
 
     @FXML
     void StartServices(ActionEvent event) {
-        System.out.println("Start Button Clicked!");
-        LogTable.getDataList().add(new LogTableData("Attempt to start server!"));
-        statusView.setText("Status: Starting");
-        try {
-            server = HttpServerFactory.create("http://127.0.0.1:"+SettingsHolder.getPort()+"/");
-            server.start();
 
-            Resource.setModbusServiceMap(ModbusServiceMap.load());
-            buttonDisplayControler("start");
+        Task task = new Task() {
+            @Override
+            protected Object call() throws Exception {
+                System.out.println("Start Button Clicked!");
+                LogTable.getDataList().add(new LogTableData("Attempt to start server!"));
+                statusView.setText("Status: Starting");
 
-            statusView.setText("Status: Running");
-            LogTable.getDataList().add(new LogTableData("Server started"));
-        } catch (IOException e) {
-            statusView.setText("Status: Error");
-            LogTable.getDataList().add(new LogTableData("Failed to start server! Assigned port is using by another application."));
-            e.printStackTrace();
+                try {
+                    server = HttpServerFactory.create("http://127.0.0.1:"+SettingsHolder.getPort()+"/");
+                    server.start();
+
+                    Resource.setModbusServiceMap(ModbusServiceMap.load());
+                    buttonDisplayControler("start");
+
+                    statusView.setText("Status: Running");
+
+                    LogTable.getDataList().add(new LogTableData("Server started"));
+
+
+                } catch (IOException e) {
+                    multiClickFilter = true;
+                    statusView.setText("Status: Error");
+                    LogTable.getDataList().add(new LogTableData("Failed to start server! Assigned port is using by another application."));
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        };
+        if (multiClickFilter) {
+            new Thread(task).start();
+            multiClickFilter = false;
         }
     }
 
@@ -124,6 +142,7 @@ public class Controller {
 
         buttonDisplayControler("stop");
         LogTable.getDataList().add(new LogTableData("Service stopped successfully!"));
+        multiClickFilter = true;
     }
 
     @FXML

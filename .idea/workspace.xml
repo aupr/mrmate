@@ -2,29 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="81c52183-e47a-4c03-a4fe-e4db2ba474b1" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/wiexon/app/LogController.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/wiexon/app/LogTable.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/wiexon/app/LogTableData.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/wiexon/app/NewServiceController.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/wiexon/app/ServiceTable.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/wiexon/app/ServiceTableData.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/wiexon/restServer/ServiceThread.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/wiexon/app/LogController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/wiexon/app/LogTable.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/wiexon/app/LogTableData.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/wiexon/app/NewServiceController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/wiexon/app/ServiceTable.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/wiexon/app/ServiceTableData.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/wiexon/restServer/ServiceThread.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/wiexon/tray/TrayCom.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/wiexon/tray/TrayComBool.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/wiexon/tray/TraySync.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/wiexon/tray/TrayCom.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/wiexon/tray/TrayComBool.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/wiexon/tray/TraySync.class" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Base.db" afterPath="$PROJECT_DIR$/Base.db" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/wiexon/app/Controller.class" afterPath="$PROJECT_DIR$/target/classes/com/wiexon/app/Controller.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/wiexon/app/Main.class" afterPath="$PROJECT_DIR$/target/classes/com/wiexon/app/Main.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/wiexon/app/Controller.java" afterPath="$PROJECT_DIR$/src/main/java/com/wiexon/app/Controller.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/wiexon/app/Main.java" afterPath="$PROJECT_DIR$/src/main/java/com/wiexon/app/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/wiexon/restServer/ModbusServiceMap.java" afterPath="$PROJECT_DIR$/src/main/java/com/wiexon/restServer/ModbusServiceMap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxmls/log.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxmls/log.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxmls/main.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxmls/main.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/fxmls/main.fxml" afterPath="$PROJECT_DIR$/target/classes/fxmls/main.fxml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,36 +28,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-              <folding>
-                <element signature="e#1109#1110#0" expanded="true" />
-                <element signature="e#1137#1138#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TrayCom.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/tray/TrayCom.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-              <folding>
-                <element signature="e#166#167#0" expanded="true" />
-                <element signature="e#201#202#0" expanded="true" />
-                <element signature="e#263#264#0" expanded="true" />
-                <element signature="e#314#315#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TraySync.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/tray/TraySync.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-890">
-              <caret line="3" column="20" lean-forward="true" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+            <state relative-caret-position="17">
+              <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -76,16 +37,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TrayComBool.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/tray/TrayComBool.java">
+      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="5" lean-forward="true" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
+            <state relative-caret-position="629">
+              <caret line="144" column="32" lean-forward="false" selection-start-line="144" selection-start-column="32" selection-end-line="144" selection-end-column="32" />
               <folding>
-                <element signature="e#142#143#0" expanded="true" />
-                <element signature="e#175#176#0" expanded="true" />
-                <element signature="e#235#236#0" expanded="true" />
-                <element signature="e#286#287#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#3331#4463#0" expanded="true" />
+                <element signature="e#4462#4463#0" expanded="true" />
+                <marker date="1511884848462" expanded="true" signature="12236:12283" ph="UPDATE servi... " />
+                <marker date="1511884848462" expanded="true" signature="13167:13215" ph="UPDATE servi... " />
+                <marker date="1511884848462" expanded="true" signature="17659:17942" ph="INSERT INTO service... " />
+                <marker date="1511884848462" expanded="true" signature="19527:19558" ph="SELECT * FRO... service" />
+                <marker date="1511884848462" expanded="true" signature="21336:21579" ph="UPDATE servi... " />
+                <marker date="1511884848462" expanded="true" signature="23108:23138" ph="DELETE FROM " />
               </folding>
             </state>
           </provider>
@@ -94,26 +60,9 @@
       <file leaf-file-name="Extra_code.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Extra_code.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-374">
-              <caret line="14" column="42" lean-forward="true" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
+            <state relative-caret-position="17">
+              <caret line="14" column="42" lean-forward="false" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/Controller.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="77" column="50" lean-forward="true" selection-start-line="77" selection-start-column="50" selection-end-line="77" selection-end-column="50" />
-              <folding>
-                <marker date="1511862782288" expanded="true" signature="11675:11722" ph="UPDATE servi... " />
-                <marker date="1511862782288" expanded="true" signature="12606:12654" ph="UPDATE servi... " />
-                <marker date="1511862782288" expanded="true" signature="17098:17381" ph="INSERT INTO service... " />
-                <marker date="1511862782288" expanded="true" signature="18966:18997" ph="SELECT * FRO... service" />
-                <marker date="1511862782288" expanded="true" signature="20775:21018" ph="UPDATE servi... " />
-                <marker date="1511862782288" expanded="true" signature="22547:22577" ph="DELETE FROM " />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -183,11 +132,12 @@
         <option value="$PROJECT_DIR$/src/main/java/com/wiexon/app/log/LogTableData.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wiexon/app/log/LogController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wiexon/restServer/ModbusServiceMap.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/wiexon/app/Controller.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wiexon/tray/TrayCom.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wiexon/tray/TrayComBool.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/wiexon/app/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wiexon/tray/TraySync.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/wiexon/app/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/wiexon/restServer/ServiceStarter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/wiexon/app/Controller.java" />
       </list>
     </option>
   </component>
@@ -247,10 +197,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -347,15 +293,6 @@
               <item name="mrmate" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="wiexon" type="462c0819:PsiDirectoryNode" />
-              <item name="tray" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mrmate" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mrmate" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -382,6 +319,10 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -542,11 +483,12 @@
       <workItem from="1511756141442" duration="19928000" />
       <workItem from="1511831254835" duration="2398000" />
       <workItem from="1511840314127" duration="22498000" />
+      <workItem from="1511876825738" duration="6642000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="239205000" />
+    <option name="totallyTimeSpent" value="245847000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -558,7 +500,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3536184" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -570,11 +512,11 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296355" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2598684" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25925925" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2246596" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22815534" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -610,13 +552,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/target/classes/images/new.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -687,14 +622,14 @@
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/lang/Thread.java" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/fxmls/main.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
           <caret line="28" column="17" lean-forward="true" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
       </provider>
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/de/bluebiz/modbus-javacomm/1.6/modbus-javacomm-1.6.jar!/net/wimpi/modbus/util/BitVector.class">
@@ -812,142 +747,35 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="21" lean-forward="true" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/service/ServiceTableData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="13" column="46" lean-forward="true" selection-start-line="13" selection-start-column="46" selection-end-line="13" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/service/ServiceTableData.java" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/fxmls/log.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="16" column="14" lean-forward="true" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/fxmls/settings.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="30" lean-forward="true" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/settings/SettingsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="34" column="72" lean-forward="true" selection-start-line="34" selection-start-column="72" selection-end-line="34" selection-end-column="72" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/service/NewServiceController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="77" column="30" lean-forward="true" selection-start-line="77" selection-start-column="30" selection-end-line="77" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/service/ServiceTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1037">
-          <caret line="69" column="17" lean-forward="true" selection-start-line="69" selection-start-column="17" selection-end-line="69" selection-end-column="17" />
-          <folding>
-            <marker date="1511843360043" expanded="true" signature="861:929" ph="SELECT name sqlite_master" />
-            <marker date="1511843360043" expanded="true" signature="1094:1439" ph="CREATE TABLE... service" />
-            <marker date="1511843360043" expanded="true" signature="1595:1616" ph="SELECT * FRO... service" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/settings/SettingsHolder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1513">
-          <caret line="89" column="0" lean-forward="true" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
-          <folding>
-            <element signature="e#272#273#0" expanded="true" />
-            <element signature="e#299#300#0" expanded="true" />
-            <element signature="e#349#350#0" expanded="true" />
-            <element signature="e#388#389#0" expanded="true" />
-            <element signature="e#434#435#0" expanded="true" />
-            <element signature="e#469#470#0" expanded="true" />
-            <element signature="e#514#515#0" expanded="true" />
-            <element signature="e#548#549#0" expanded="true" />
-            <marker date="1511852292394" expanded="true" signature="971:1040" ph="SELECT name sqlite_master" />
-            <marker date="1511852292394" expanded="true" signature="1206:1294" ph="CREATE TABLE... settings" />
-            <marker date="1511852292394" expanded="true" signature="1333:1376" ph="INSERT INTO settings... " />
-            <marker date="1511852292394" expanded="true" signature="1527:1549" ph="SELECT * FRO... settings" />
-            <marker date="1511852292394" expanded="true" signature="3230:3255" ph="UPDATE setti... " />
-            <marker date="1511852292394" expanded="true" signature="3230:3282" ph="UPDATE setti... " />
-            <marker date="1511852292394" expanded="true" signature="3230:3318" ph="UPDATE setti... " />
-            <marker date="1511852292394" expanded="true" signature="3230:3349" ph="UPDATE setti... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/lang/String.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="2887" column="5" lean-forward="true" selection-start-line="2887" selection-start-column="5" selection-end-line="2887" selection-end-column="5" />
-          <caret line="2886" column="20" lean-forward="true" selection-start-line="2886" selection-start-column="20" selection-end-line="2886" selection-end-column="20" />
-          <folding>
-            <element signature="e#113343#113344#0" expanded="false" />
-            <element signature="e#113370#113371#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/log/LogTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="10" column="5" lean-forward="true" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
-          <folding>
-            <element signature="e#295#296#0" expanded="false" />
-            <element signature="e#326#327#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/log/LogTableData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="17" column="90" lean-forward="false" selection-start-line="17" selection-start-column="90" selection-end-line="17" selection-end-column="90" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/log/LogController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/fxmls/settings.fxml" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/settings/SettingsController.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/service/NewServiceController.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/service/ServiceTable.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/settings/SettingsHolder.java" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/lang/String.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/log/LogTable.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/log/LogTableData.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/log/LogController.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/restServer/ModbusServiceMap.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1666">
           <caret line="152" column="157" lean-forward="false" selection-start-line="152" selection-start-column="157" selection-end-line="152" selection-end-column="157" />
-          <folding>
-            <marker date="1511862055608" expanded="true" signature="712:733" ph="SELECT * FRO... service" />
-            <marker date="1511862055608" expanded="true" signature="5224:5257" ph="SELECT * FRO... service" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -956,72 +784,70 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/Controller.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/tray/TrayComBool.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="77" column="50" lean-forward="true" selection-start-line="77" selection-start-column="50" selection-end-line="77" selection-end-column="50" />
-          <folding>
-            <marker date="1511862782288" expanded="true" signature="11675:11722" ph="UPDATE servi... " />
-            <marker date="1511862782288" expanded="true" signature="12606:12654" ph="UPDATE servi... " />
-            <marker date="1511862782288" expanded="true" signature="17098:17381" ph="INSERT INTO service... " />
-            <marker date="1511862782288" expanded="true" signature="18966:18997" ph="SELECT * FRO... service" />
-            <marker date="1511862782288" expanded="true" signature="20775:21018" ph="UPDATE servi... " />
-            <marker date="1511862782288" expanded="true" signature="22547:22577" ph="DELETE FROM " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Extra_code.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-374">
-          <caret line="14" column="42" lean-forward="true" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
+        <state relative-caret-position="34">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/tray/TrayCom.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding>
-            <element signature="e#166#167#0" expanded="true" />
-            <element signature="e#201#202#0" expanded="true" />
-            <element signature="e#263#264#0" expanded="true" />
-            <element signature="e#314#315#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/tray/TrayComBool.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="5" lean-forward="true" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
-          <folding>
-            <element signature="e#142#143#0" expanded="true" />
-            <element signature="e#175#176#0" expanded="true" />
-            <element signature="e#235#236#0" expanded="true" />
-            <element signature="e#286#287#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding>
-            <element signature="e#1109#1110#0" expanded="true" />
-            <element signature="e#1137#1138#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="85">
+          <caret line="5" column="37" lean-forward="false" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="37" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/tray/TraySync.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-890">
-          <caret line="3" column="20" lean-forward="true" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+        <state relative-caret-position="204">
+          <caret line="13" column="16" lean-forward="true" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Extra_code.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="14" column="42" lean-forward="false" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/restServer/ServiceStarter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="23" lean-forward="true" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="144" column="32" lean-forward="false" selection-start-line="144" selection-start-column="32" selection-end-line="144" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3331#4463#0" expanded="true" />
+            <element signature="e#4462#4463#0" expanded="true" />
+            <marker date="1511884848462" expanded="true" signature="12236:12283" ph="UPDATE servi... " />
+            <marker date="1511884848462" expanded="true" signature="13167:13215" ph="UPDATE servi... " />
+            <marker date="1511884848462" expanded="true" signature="17659:17942" ph="INSERT INTO service... " />
+            <marker date="1511884848462" expanded="true" signature="19527:19558" ph="SELECT * FRO... service" />
+            <marker date="1511884848462" expanded="true" signature="21336:21579" ph="UPDATE servi... " />
+            <marker date="1511884848462" expanded="true" signature="23108:23138" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>

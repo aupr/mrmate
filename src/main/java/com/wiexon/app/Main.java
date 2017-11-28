@@ -1,8 +1,5 @@
 package com.wiexon.app;
 
-import com.wiexon.tray.TrayCom;
-import com.wiexon.tray.TrayComBool;
-import com.wiexon.tray.TraySync;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -31,10 +28,61 @@ public class Main extends Application {
 
         primaryStage.show();
 
-        TrayCom.setPrimaryStage(primaryStage);
-        new TraySync().start();
+        //TrayCom.setPrimaryStage(primaryStage);
+        //new TraySync().start();
 
+        /////////////////////////////////////////////////////////////////////////////////
+        //Check the SystemTray is supported
+        if (!SystemTray.isSupported()) {
+            System.out.println("SystemTray is not supported");
+            return;
+        }
+        final PopupMenu popup = new PopupMenu();
+        URL url = System.class.getResource("/images/new.png");
 
+        Image image = Toolkit.getDefaultToolkit().getImage(url);
+
+        final TrayIcon trayIcon = new TrayIcon(image);
+        final SystemTray tray = SystemTray.getSystemTray();
+
+        // Create a pop-up menu components
+        MenuItem aboutItem = new MenuItem("About");
+
+        aboutItem.addActionListener(e -> {
+            System.out.println("tray working");
+            Platform.runLater(() -> primaryStage.show());
+        });
+
+        CheckboxMenuItem cb1 = new CheckboxMenuItem("Set auto size");
+        CheckboxMenuItem cb2 = new CheckboxMenuItem("Set tooltip");
+        Menu displayMenu = new Menu("Display");
+        MenuItem errorItem = new MenuItem("Error");
+        MenuItem warningItem = new MenuItem("Warning");
+        MenuItem infoItem = new MenuItem("Info");
+        MenuItem noneItem = new MenuItem("None");
+        MenuItem exitItem = new MenuItem("Exit");
+
+        //Add components to pop-up menu
+        popup.add(aboutItem);
+        popup.addSeparator();
+        popup.add(cb1);
+        popup.add(cb2);
+        popup.addSeparator();
+        popup.add(displayMenu);
+        displayMenu.add(errorItem);
+        displayMenu.add(warningItem);
+        displayMenu.add(infoItem);
+        displayMenu.add(noneItem);
+        popup.add(exitItem);
+
+        trayIcon.setPopupMenu(popup);
+
+        try {
+            tray.add(trayIcon);
+        } catch (AWTException e) {
+            System.out.println("TrayIcon could not be added.");
+        }
+        /////////////////////////////////////////////////////////////////////////////////
 
 
     }
