@@ -20,24 +20,24 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Add New Service" />
+              <MenuItem fx:id="menuAddNew" mnemonicParsing="false" onAction="#AddService" text="Add New Service" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem mnemonicParsing="false" text="Start Services" />
-              <MenuItem mnemonicParsing="false" text="Stop Services" />
+              <MenuItem fx:id="menuStart" mnemonicParsing="false" onAction="#StartServices" text="Start Services" />
+              <MenuItem fx:id="menuStop" mnemonicParsing="false" onAction="#StopServices" text="Stop Services" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem mnemonicParsing="false" text="Show Error List" />
-              <MenuItem mnemonicParsing="false" text="Settings" />
+              <MenuItem fx:id="menuErrorShow" mnemonicParsing="false" onAction="#ShowErrors" text="Show System Log" />
+              <MenuItem fx:id="menuSettings" mnemonicParsing="false" onAction="#appSettings" text="Settings" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem fx:id="menuClose" mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem mnemonicParsing="false" text="Enable Service" />
-              <MenuItem mnemonicParsing="false" text="Disable Service" />
+              <MenuItem fx:id="menuEnable" mnemonicParsing="false" onAction="#EnableService" text="Enable Service" />
+              <MenuItem fx:id="menuDisable" mnemonicParsing="false" onAction="#DisableService" text="Disable Service" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem mnemonicParsing="false" text="Edit Service" />
-              <MenuItem mnemonicParsing="false" text="Delete Service" />
+              <MenuItem fx:id="menuEdit" mnemonicParsing="false" onAction="#EditService" text="Edit Service" />
+              <MenuItem fx:id="menuDelete" mnemonicParsing="false" onAction="#RemoveService" text="Delete Service" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -57,8 +57,8 @@
             <TableColumn fx:id="status" prefWidth="92.0" text="Status" />
         </columns>
       </TableView>
-      <Text fx:id="portNameView" layoutX="193.0" layoutY="491.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Port: 8085" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="200.0" />
-      <Text fx:id="hostNameView" layoutX="61.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Host: localhost" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="50.0" />
+      <Text fx:id="portNameView" layoutX="193.0" layoutY="491.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Port: " AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="200.0" />
+      <Text fx:id="hostNameView" layoutX="30.0" layoutY="491.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Host: 127.0.0.1 / localhost" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="30.0" />
       <HBox layoutX="6.0" layoutY="25.0" prefHeight="47.0" prefWidth="449.0" AnchorPane.leftAnchor="6.0" AnchorPane.topAnchor="25.0">
          <children>
             <JFXButton fx:id="playButton" alignment="CENTER" contentDisplay="CENTER" onAction="#StartServices" style="-fx-background-color: #fff; -fx-border-radius: 0;" text=" " textFill="#00960a" HBox.hgrow="ALWAYS">
@@ -142,7 +142,7 @@
       </HBox>
       <HBox alignment="TOP_RIGHT" layoutX="496.0" layoutY="25.0" prefHeight="47.0" prefWidth="100.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="25.0">
          <children>
-            <JFXButton fx:id="errorButton" alignment="CENTER" contentDisplay="CENTER" disable="true" onAction="#ShowErrors" style="-fx-background-color: #fff;" text=" " textFill="#ffe100">
+            <JFXButton fx:id="errorButton" alignment="CENTER" contentDisplay="CENTER" onAction="#ShowErrors" style="-fx-background-color: #fff;" text=" " textFill="#ffe100">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -155,5 +155,6 @@
             </JFXButton>
          </children>
       </HBox>
+      <Text fx:id="statusView" layoutX="553.0" layoutY="491.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status: Stopped" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="500.0" />
    </children>
 </AnchorPane>

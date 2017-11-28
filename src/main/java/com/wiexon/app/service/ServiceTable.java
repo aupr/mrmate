@@ -1,4 +1,4 @@
-package com.wiexon.app;
+package com.wiexon.app.service;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

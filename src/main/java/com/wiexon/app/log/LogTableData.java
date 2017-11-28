@@ -1,7 +1,11 @@
-package com.wiexon.app;
+package com.wiexon.app.log;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+
+import java.security.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class LogTableData {
     private static int trackLogId = 0;
@@ -11,7 +15,7 @@ public class LogTableData {
 
     public LogTableData(String logMessage) {
         this.logId = new SimpleIntegerProperty(++trackLogId);
-        this.logTnD = new SimpleStringProperty("time");
+        this.logTnD = new SimpleStringProperty(new SimpleDateFormat("dd MMM yyyy h:mm:ss a").format(new Date()));
         this.logMessage = new SimpleStringProperty(logMessage);
     }
 

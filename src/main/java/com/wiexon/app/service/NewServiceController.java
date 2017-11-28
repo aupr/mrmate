@@ -1,4 +1,4 @@
-package com.wiexon.app;
+package com.wiexon.app.service;
 
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;

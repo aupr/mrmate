@@ -4,14 +4,13 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="358.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TableView fx:id="logTable" layoutX="14.0" layoutY="14.0" prefHeight="342.0" prefWidth="582.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
         <columns>
-          <TableColumn fx:id="sl" prefWidth="34.0" text="SL" />
-            <TableColumn fx:id="dnt" minWidth="0.0" prefWidth="116.0" text="Date &amp; Time" />
-          <TableColumn fx:id="message" minWidth="0.0" prefWidth="473.0" text="Log Message!" />
+          <TableColumn fx:id="sl" prefWidth="52.0" text="SL" />
+            <TableColumn fx:id="dnt" minWidth="0.0" prefWidth="154.0" text="Date &amp; Time" />
+          <TableColumn fx:id="message" minWidth="0.0" prefWidth="417.0" text="Log Message!" />
         </columns>
       </TableView>
    </children>

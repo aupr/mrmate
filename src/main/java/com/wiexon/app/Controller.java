@@ -3,18 +3,21 @@ package com.wiexon.app;
 import com.jfoenix.controls.JFXButton;
 import com.sun.jersey.api.container.httpserver.HttpServerFactory;
 import com.sun.net.httpserver.HttpServer;
+import com.wiexon.app.log.LogController;
+import com.wiexon.app.log.LogTable;
+import com.wiexon.app.log.LogTableData;
+import com.wiexon.app.service.NewServiceController;
+import com.wiexon.app.service.ServiceTable;
+import com.wiexon.app.service.ServiceTableData;
+import com.wiexon.app.settings.SettingsController;
+import com.wiexon.app.settings.SettingsHolder;
 import com.wiexon.restServer.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -32,6 +35,10 @@ public class Controller {
     private int selectedServiceId;
     HttpServer server = null;
 
+    // JFX Menu fields
+    @FXML
+    private MenuItem menuAddNew, menuStart, menuStop, menuErrorShow, menuSettings, menuClose, menuEnable, menuDisable, menuEdit, menuDelete;
+
     // JFX Fields
     @FXML
     private JFXButton playButton, stopButton, addButton, editButton, subButton, checkButton, crossButton, errorButton;
@@ -40,7 +47,7 @@ public class Controller {
     @FXML
     private TableColumn sl, term, uri, connection, mode, status;
     @FXML
-    private Text hostNameView, portNameView;
+    private Text hostNameView, portNameView, statusView;
 
     // Constructor Method
     public Controller(Stage primaryStage) throws ClassNotFoundException {
@@ -62,21 +69,34 @@ public class Controller {
         status.setCellValueFactory(new PropertyValueFactory<ServiceTableData, String>("status"));
 
 
-        errorButton.setDisable(false);
+        //errorButton.setDisable(false);
+        SettingsHolder.loadSettings();
         loadTable();
+        portNameView.setText("Port: "+SettingsHolder.getPort());
+        LogTable.getDataList().add(new LogTableData("Application started!"));
+
+        if (SettingsHolder.isAutoStartService()) {
+            StartServices(new ActionEvent());
+        }
     }
 
     @FXML
     void StartServices(ActionEvent event) {
         System.out.println("Start Button Clicked!");
+        LogTable.getDataList().add(new LogTableData("Attempt to start server!"));
+        statusView.setText("Status: Starting");
         try {
-            server = HttpServerFactory.create("http://127.0.0.1:1983/");
+            server = HttpServerFactory.create("http://127.0.0.1:"+SettingsHolder.getPort()+"/");
             server.start();
 
             Resource.setModbusServiceMap(ModbusServiceMap.load());
-
             buttonDisplayControler("start");
+
+            statusView.setText("Status: Running");
+            LogTable.getDataList().add(new LogTableData("Server started"));
         } catch (IOException e) {
+            statusView.setText("Status: Error");
+            LogTable.getDataList().add(new LogTableData("Failed to start server! Assigned port is using by another application."));
             e.printStackTrace();
         }
     }
@@ -84,8 +104,9 @@ public class Controller {
     @FXML
     void StopServices(ActionEvent event) {
         System.out.println("Working Stop service!");
+        LogTable.getDataList().add(new LogTableData("Attempt to stop services!"));
         server.stop(0);
-
+        statusView.setText("Status: Stopped");
         Map<String, ModbusService> modbusServices = Resource.getModbusServiceMap();
 
         for (ModbusService modbusService : modbusServices.values()) {
@@ -102,6 +123,7 @@ public class Controller {
         loadTable();
 
         buttonDisplayControler("stop");
+        LogTable.getDataList().add(new LogTableData("Service stopped successfully!"));
     }
 
     @FXML
@@ -145,6 +167,7 @@ public class Controller {
 
                 storeNewService(serviceDataMap);
                 loadTable();
+                LogTable.getDataList().add(new LogTableData("A new service has added to the service list!"));
             }
         });
         newService.setX(primaryStage.getX()+120);
@@ -208,6 +231,7 @@ public class Controller {
                 updateService(serviceDataMap, selectedServiceId);
 
                 loadTable();
+                LogTable.getDataList().add(new LogTableData("A service has been updated!"));
             }
         });
         editService.setX(primaryStage.getX()+120);
@@ -281,7 +305,7 @@ public class Controller {
     @FXML
     void ShowErrors(ActionEvent event) {
 
-        LogTable.getDataList().add(new LogTableData("first Messate"));
+        //LogTable.getDataList().add(new LogTableData("first Messate"));
 
         try {
             Stage logStage = new Stage();
@@ -322,6 +346,44 @@ public class Controller {
                 }
             }
         }
+    }
+
+    @FXML
+    private void appSettings() {
+        //
+        //System.out.println(SettingsHolder.getPort()+" "+SettingsHolder.isAutoStartService()+" "+SettingsHolder.isAutoMinimize()+" "+SettingsHolder.isExitOnClose());
+
+        try {
+            Stage settingsStage = new Stage();
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmls/settings.fxml"));
+            SettingsController settingsController = new SettingsController();
+            fxmlLoader.setController(settingsController);
+
+            Parent root = fxmlLoader.load();
+
+            settingsStage.setTitle("Settings!");
+            settingsStage.setResizable(false);
+            settingsStage.initModality(Modality.APPLICATION_MODAL);
+            settingsStage.setScene(new Scene(root));
+
+            settingsStage.setX(primaryStage.getX()+220);
+            settingsStage.setY(primaryStage.getY()+90);
+            settingsStage.setOnHidden(event -> {
+                System.out.println("Settings Hidden");
+                if (settingsController.isMake) {
+                    System.out.println("updating");
+                    SettingsHolder.updateSettings(Integer.parseInt(settingsController.settingsPort.getText()), settingsController.settingsAutoStartService.isSelected(),settingsController.settingsAutoMinimize.isSelected(),settingsController.settingsExitOnClose.isSelected());
+                    portNameView.setText("Port: "+SettingsHolder.getPort());
+                    LogTable.getDataList().add(new LogTableData("Application settings has changed!"));
+                }
+            });
+
+            settingsStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void loadTable() {
@@ -477,6 +539,7 @@ public class Controller {
                 preps = con.prepareStatement("DELETE FROM service WHERE id=?");
                 preps.setInt(1, serviceId);
                 preps.execute();
+                LogTable.getDataList().add(new LogTableData("A service has been deleted!"));
             } catch (SQLException e) {
                 e.printStackTrace();
             } finally {
@@ -554,5 +617,17 @@ public class Controller {
                 break;
             default:
         }
+
+        // for menu button
+        menuStart.setDisable(playButton.isDisable());
+        menuStop.setDisable(stopButton.isDisable());
+        menuAddNew.setDisable(addButton.isDisable());
+        menuEdit.setDisable(editButton.isDisable());
+        menuDelete.setDisable(subButton.isDisable());
+        menuEnable.setDisable(checkButton.isDisable());
+        menuDisable.setDisable(crossButton.isDisable());
+
+        menuSettings.setDisable(playButton.isDisable());
+
     }
 }

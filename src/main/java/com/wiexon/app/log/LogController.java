@@ -1,4 +1,4 @@
-package com.wiexon.app;
+package com.wiexon.app.log;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,7 +25,10 @@ public class LogController {
         dnt.setCellValueFactory(new PropertyValueFactory<LogTableData, String>("logTnD"));
         message.setCellValueFactory(new PropertyValueFactory<LogTableData, String>("logMessage"));
 
+        sl.setSortType(TableColumn.SortType.DESCENDING);
+
         logTable.setItems(dataList);
+        logTable.getSortOrder().add(sl);
     }
 
 }
