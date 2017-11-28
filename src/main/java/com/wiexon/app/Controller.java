@@ -68,22 +68,14 @@ public class Controller {
 
     @FXML
     void StartServices(ActionEvent event) {
-        System.out.println("Working Start service!");
-
+        System.out.println("Start Button Clicked!");
         try {
             server = HttpServerFactory.create("http://127.0.0.1:1983/");
             server.start();
 
             Resource.setModbusServiceMap(ModbusServiceMap.load());
 
-            playButton.setDisable(true);
-            stopButton.setDisable(false);
-            addButton.setDisable(true);
-            editButton.setDisable(true);
-            subButton.setDisable(true);
-            checkButton.setDisable(true);
-            crossButton.setDisable(true);
-
+            buttonDisplayControler("start");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -109,13 +101,7 @@ public class Controller {
 
         loadTable();
 
-        playButton.setDisable(false);
-        stopButton.setDisable(true);
-        addButton.setDisable(false);
-        editButton.setDisable(true);
-        subButton.setDisable(true);
-        checkButton.setDisable(true);
-        crossButton.setDisable(true);
+        buttonDisplayControler("stop");
     }
 
     @FXML
@@ -328,14 +314,11 @@ public class Controller {
             this.selectedServiceId = serviceTable.getSelectionModel().getSelectedItem().getId();
 
             if (!playButton.isDisable()) {
-                editButton.setDisable(false);
-                subButton.setDisable(false);
+                buttonDisplayControler("rowSelect");
                 if (serviceTable.getSelectionModel().getSelectedItem().getMode().equals("Enabled")) {
-                    checkButton.setDisable(true);
-                    crossButton.setDisable(false);
+                    buttonDisplayControler("rowEnabled");
                 } else {
-                    checkButton.setDisable(false);
-                    crossButton.setDisable(true);
+                    buttonDisplayControler("rowDisabled");
                 }
             }
         }
@@ -346,15 +329,12 @@ public class Controller {
         int i = ServiceTable.loadDataList();
 
         if (i>=20){
-            addButton.setDisable(true);
-        } else {
-            addButton.setDisable(false);
-        }
+            buttonDisplayControler("addFalse");
 
-        editButton.setDisable(true);
-        subButton.setDisable(true);
-        checkButton.setDisable(true);
-        crossButton.setDisable(true);
+        } else {
+            buttonDisplayControler("addTrue");
+        }
+        buttonDisplayControler("loadTable");
     }
 
     private void storeNewService(Map<String, String> data) {
@@ -525,6 +505,54 @@ public class Controller {
             return true;
         } else {
             return false;
+        }
+    }
+
+    private void buttonDisplayControler(String mode) {
+        switch (mode) {
+            case "start":
+                playButton.setDisable(true);
+                stopButton.setDisable(false);
+                addButton.setDisable(true);
+                editButton.setDisable(true);
+                subButton.setDisable(true);
+                checkButton.setDisable(true);
+                crossButton.setDisable(true);
+                break;
+            case "stop":
+                playButton.setDisable(false);
+                stopButton.setDisable(true);
+                addButton.setDisable(false);
+                editButton.setDisable(true);
+                subButton.setDisable(true);
+                checkButton.setDisable(true);
+                crossButton.setDisable(true);
+                break;
+            case  "addTrue":
+                addButton.setDisable(false);
+                break;
+            case "addFalse":
+                addButton.setDisable(true);
+                break;
+            case "loadTable":
+                editButton.setDisable(true);
+                subButton.setDisable(true);
+                checkButton.setDisable(true);
+                crossButton.setDisable(true);
+                break;
+            case "rowSelect":
+                editButton.setDisable(false);
+                subButton.setDisable(false);
+                break;
+            case "rowEnabled":
+                checkButton.setDisable(true);
+                crossButton.setDisable(false);
+                break;
+            case "rowDisabled":
+                checkButton.setDisable(false);
+                crossButton.setDisable(true);
+                break;
+            default:
         }
     }
 }
