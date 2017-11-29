@@ -155,7 +155,7 @@ public class Controller {
         Stage newService = new Stage();
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmls/newService.fxml"));
-        NewServiceController nsc = new NewServiceController();
+        NewServiceController nsc = new NewServiceController(false);
         fxmlLoader.setController(nsc);
 
         Parent root = fxmlLoader.load();
@@ -203,7 +203,8 @@ public class Controller {
         Stage editService = new Stage();
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmls/newService.fxml"));
-        NewServiceController serviceController = new NewServiceController();
+        NewServiceController serviceController = new NewServiceController(true);
+
         fxmlLoader.setController(serviceController);
         Parent editRoot = fxmlLoader.load();
 
@@ -227,8 +228,6 @@ public class Controller {
             serviceController.parityBit.setValue(resmap.get("parityBits"));
             serviceController.stopBit.setValue(resmap.get("stopBits"));
             serviceController.encoding.setValue(resmap.get("mode"));
-
-            serviceController.serviceURI.setDisable(true);
 
             serviceController.okButton.setText("Save Service");
         }

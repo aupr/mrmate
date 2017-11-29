@@ -19,6 +19,7 @@ import jssc.SerialPortList;
 
 public class NewServiceController {
     public boolean isMake = false;
+    private boolean isEditing;
 
     // Modbus Common fx fields
     String[] connectionTypeArray = new String[]{"Serial Port", "Modbus TCP/IP"};
@@ -57,6 +58,10 @@ public class NewServiceController {
     // modbus TCP/IP fx fields
     @FXML
     public JFXTextField ipAddress, portNumber, connectionTimeout;
+
+    public NewServiceController(boolean isEditing) {
+        this.isEditing = isEditing;
+    }
 
     @FXML
     void makeService(ActionEvent event) {
@@ -133,7 +138,9 @@ public class NewServiceController {
         serviceNameValidator.setMessage("Enter a valid Name!");
         serviceName.getValidators().add(serviceNameValidator);
 
-        if (serviceURI.isDisable()) {
+        if (isEditing) {
+            serviceURI.setDisable(true);
+        } else  {
             UriNameValidator uriNameValidator = new UriNameValidator();
             uriNameValidator.setMessage("Enter a valid URI name!");
             serviceURI.getValidators().add(uriNameValidator);

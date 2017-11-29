@@ -2,23 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="81c52183-e47a-4c03-a4fe-e4db2ba474b1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/wiexon/app/JFValidator/TimeoutValidator.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/wiexon/app/JFValidator/UriCopyValidator.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/wiexon/app/JFValidator/UriNameValidator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Base.db" afterPath="$PROJECT_DIR$/Base.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/wiexon/app/JFValidator/ValidationLogic.class" afterPath="$PROJECT_DIR$/target/classes/com/wiexon/app/JFValidator/ValidationLogic.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/wiexon/app/service/NewServiceController.class" afterPath="$PROJECT_DIR$/target/classes/com/wiexon/app/service/NewServiceController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/wiexon/app/settings/SettingsController.class" afterPath="$PROJECT_DIR$/target/classes/com/wiexon/app/settings/SettingsController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/wiexon/app/Controller.java" afterPath="$PROJECT_DIR$/src/main/java/com/wiexon/app/Controller.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/wiexon/app/JFValidator/HostPortValidator.java" afterPath="$PROJECT_DIR$/src/main/java/com/wiexon/app/JFValidator/HostPortValidator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/wiexon/app/JFValidator/ValidationLogic.java" afterPath="$PROJECT_DIR$/src/main/java/com/wiexon/app/JFValidator/ValidationLogic.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/wiexon/app/service/NewServiceController.java" afterPath="$PROJECT_DIR$/src/main/java/com/wiexon/app/service/NewServiceController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/wiexon/app/settings/SettingsController.java" afterPath="$PROJECT_DIR$/src/main/java/com/wiexon/app/settings/SettingsController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxmls/newService.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxmls/newService.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxmls/settings.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxmls/settings.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/fxmls/newService.fxml" afterPath="$PROJECT_DIR$/target/classes/fxmls/newService.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/fxmls/settings.fxml" afterPath="$PROJECT_DIR$/target/classes/fxmls/settings.fxml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,19 +16,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="230" column="56" lean-forward="false" selection-start-line="230" selection-start-column="56" selection-end-line="230" selection-end-column="56" />
+            <state relative-caret-position="241">
+              <caret line="207" column="52" lean-forward="true" selection-start-line="207" selection-start-column="52" selection-end-line="207" selection-end-column="52" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1511972162133" expanded="true" signature="12387:12434" ph="UPDATE servi... " />
-                <marker date="1511972162133" expanded="true" signature="13318:13366" ph="UPDATE servi... " />
-                <marker date="1511972162133" expanded="true" signature="17915:18198" ph="INSERT INTO service... " />
-                <marker date="1511972162133" expanded="true" signature="19783:19814" ph="SELECT * FRO... service" />
-                <marker date="1511972162133" expanded="true" signature="21592:21835" ph="UPDATE servi... " />
-                <marker date="1511972162133" expanded="true" signature="23364:23394" ph="DELETE FROM " />
+                <marker date="1511973619413" expanded="true" signature="12337:12384" ph="UPDATE servi... " />
+                <marker date="1511973619413" expanded="true" signature="13268:13316" ph="UPDATE servi... " />
+                <marker date="1511973619413" expanded="true" signature="17865:18148" ph="INSERT INTO service... " />
+                <marker date="1511973619413" expanded="true" signature="19733:19764" ph="SELECT * FRO... service" />
+                <marker date="1511973619413" expanded="true" signature="21542:21785" ph="UPDATE servi... " />
+                <marker date="1511973619413" expanded="true" signature="23314:23344" ph="DELETE FROM " />
               </folding>
             </state>
           </provider>
@@ -51,7 +37,7 @@
       <file leaf-file-name="ValidationLogic.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/JFValidator/ValidationLogic.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
+            <state relative-caret-position="1275">
               <caret line="77" column="29" lean-forward="false" selection-start-line="77" selection-start-column="29" selection-end-line="77" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -64,8 +50,8 @@
       <file leaf-file-name="TimeoutValidator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/JFValidator/TimeoutValidator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="28" column="37" lean-forward="true" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
+            <state relative-caret-position="425">
+              <caret line="28" column="37" lean-forward="false" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -74,7 +60,7 @@
       <file leaf-file-name="UriCopyValidator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/JFValidator/UriCopyValidator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="318">
+            <state relative-caret-position="374">
               <caret line="25" column="13" lean-forward="false" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
               <folding />
             </state>
@@ -84,8 +70,8 @@
       <file leaf-file-name="UriNameValidator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/JFValidator/UriNameValidator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="27" column="16" lean-forward="true" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
+            <state relative-caret-position="408">
+              <caret line="27" column="16" lean-forward="false" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -106,8 +92,8 @@
       <file leaf-file-name="ServiceNameValidator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/JFValidator/ServiceNameValidator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <state relative-caret-position="289">
+              <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -115,12 +101,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NewServiceController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="NewServiceController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/service/NewServiceController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="135" column="12" lean-forward="true" selection-start-line="135" selection-start-column="12" selection-end-line="135" selection-end-column="12" />
-              <folding />
+            <state relative-caret-position="1785">
+              <caret line="150" column="0" lean-forward="true" selection-start-line="150" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
+              <folding>
+                <element signature="e#2693#2694#0" expanded="true" />
+                <element signature="e#2735#2736#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -128,8 +117,8 @@
       <file leaf-file-name="SettingsController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/settings/SettingsController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="22" column="43" lean-forward="true" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
+            <state relative-caret-position="289">
+              <caret line="22" column="43" lean-forward="false" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -211,8 +200,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/wiexon/app/JFValidator/TimeoutValidator.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wiexon/app/JFValidator/UriCopyValidator.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wiexon/app/JFValidator/ValidationLogic.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/wiexon/app/Controller.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wiexon/app/service/NewServiceController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/wiexon/app/Controller.java" />
       </list>
     </option>
   </component>
@@ -272,7 +261,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -405,9 +393,10 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -574,11 +563,12 @@
       <workItem from="1511876825738" duration="6642000" />
       <workItem from="1511925780303" duration="18400000" />
       <workItem from="1511958279216" duration="8138000" />
+      <workItem from="1511972798599" duration="897000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="272385000" />
+    <option name="totallyTimeSpent" value="273282000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -606,7 +596,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25566342" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25970873" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -658,14 +648,14 @@
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/lang/Thread.java" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/fxmls/main.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
           <caret line="28" column="17" lean-forward="true" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
       </provider>
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/de/bluebiz/modbus-javacomm/1.6/modbus-javacomm-1.6.jar!/net/wimpi/modbus/util/BitVector.class">
@@ -782,14 +772,14 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/restServer/ServiceThread.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/service/ServiceTableData.java" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/fxmls/log.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="16" column="14" lean-forward="true" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/fxmls/settings.fxml" />
@@ -860,31 +850,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/settings/SettingsController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="22" column="43" lean-forward="true" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
+        <state relative-caret-position="289">
+          <caret line="22" column="43" lean-forward="false" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/JFValidator/UriNameValidator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="27" column="16" lean-forward="true" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
+        <state relative-caret-position="408">
+          <caret line="27" column="16" lean-forward="false" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/JFValidator/TimeoutValidator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="28" column="37" lean-forward="true" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
+        <state relative-caret-position="425">
+          <caret line="28" column="37" lean-forward="false" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/JFValidator/UriCopyValidator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
+        <state relative-caret-position="374">
           <caret line="25" column="13" lean-forward="false" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
           <folding />
         </state>
@@ -892,7 +882,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/JFValidator/ValidationLogic.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
+        <state relative-caret-position="1275">
           <caret line="77" column="29" lean-forward="false" selection-start-line="77" selection-start-column="29" selection-end-line="77" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -901,26 +891,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="230" column="56" lean-forward="false" selection-start-line="230" selection-start-column="56" selection-end-line="230" selection-end-column="56" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1511972162133" expanded="true" signature="12387:12434" ph="UPDATE servi... " />
-            <marker date="1511972162133" expanded="true" signature="13318:13366" ph="UPDATE servi... " />
-            <marker date="1511972162133" expanded="true" signature="17915:18198" ph="INSERT INTO service... " />
-            <marker date="1511972162133" expanded="true" signature="19783:19814" ph="SELECT * FRO... service" />
-            <marker date="1511972162133" expanded="true" signature="21592:21835" ph="UPDATE servi... " />
-            <marker date="1511972162133" expanded="true" signature="23364:23394" ph="DELETE FROM " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/JFValidator/ServiceNameValidator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state relative-caret-position="289">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -929,9 +903,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/service/NewServiceController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="135" column="12" lean-forward="true" selection-start-line="135" selection-start-column="12" selection-end-line="135" selection-end-column="12" />
-          <folding />
+        <state relative-caret-position="1785">
+          <caret line="150" column="0" lean-forward="true" selection-start-line="150" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
+          <folding>
+            <element signature="e#2693#2694#0" expanded="true" />
+            <element signature="e#2735#2736#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/wiexon/app/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="241">
+          <caret line="207" column="52" lean-forward="true" selection-start-line="207" selection-start-column="52" selection-end-line="207" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1511973619413" expanded="true" signature="12337:12384" ph="UPDATE servi... " />
+            <marker date="1511973619413" expanded="true" signature="13268:13316" ph="UPDATE servi... " />
+            <marker date="1511973619413" expanded="true" signature="17865:18148" ph="INSERT INTO service... " />
+            <marker date="1511973619413" expanded="true" signature="19733:19764" ph="SELECT * FRO... service" />
+            <marker date="1511973619413" expanded="true" signature="21542:21785" ph="UPDATE servi... " />
+            <marker date="1511973619413" expanded="true" signature="23314:23344" ph="DELETE FROM " />
+          </folding>
         </state>
       </provider>
     </entry>
