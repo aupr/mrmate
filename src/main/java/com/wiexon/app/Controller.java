@@ -228,9 +228,9 @@ public class Controller {
             serviceController.stopBit.setValue(resmap.get("stopBits"));
             serviceController.encoding.setValue(resmap.get("mode"));
 
-            serviceController.okButton.setText("Save Service");
+            serviceController.serviceURI.setDisable(true);
 
-            serviceController.setEditMode(true);
+            serviceController.okButton.setText("Save Service");
         }
 
         editService.setOnHidden(e->{

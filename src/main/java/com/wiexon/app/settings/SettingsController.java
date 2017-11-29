@@ -2,6 +2,7 @@ package com.wiexon.app.settings;
 
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
+import com.wiexon.app.JFValidator.HostPortValidator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -23,8 +24,10 @@ public class SettingsController {
 
     @FXML
     void saveAndHide(ActionEvent event) {
-        this.isMake = true;
-        ((Node)(event.getSource())).getScene().getWindow().hide();
+        if (settingsPort.validate()) {
+            this.isMake = true;
+            ((Node)(event.getSource())).getScene().getWindow().hide();
+        }
     }
 
     @FXML
@@ -35,6 +38,8 @@ public class SettingsController {
         settingsExitOnClose.setSelected(SettingsHolder.isExitOnClose());
 
         // validation code start
-
+        HostPortValidator hostPortValidator = new HostPortValidator();
+        hostPortValidator.setMessage("Please enter a valid host port!");
+        settingsPort.getValidators().add(hostPortValidator);
     }
 }

@@ -6,8 +6,8 @@ import javafx.beans.DefaultProperty;
 import javafx.scene.control.TextInputControl;
 
 @DefaultProperty("icon")
-public class HostPortValidator extends ValidatorBase {
-    public HostPortValidator() {
+public class UriNameValidator extends ValidatorBase {
+    public UriNameValidator() {
     }
 
     protected void eval() {
@@ -23,7 +23,7 @@ public class HostPortValidator extends ValidatorBase {
 
     private void evalTextInputField() {
         TextInputControl textField = (TextInputControl)this.srcControl.get();
-        if (ValidationLogic.isValidHostPort(textField.getText())) {
+        if (ValidationLogic.isValidUri(textField.getText())) {
             this.hasErrors.set(false);
         } else {
             this.hasErrors.set(true);

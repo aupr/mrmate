@@ -2,7 +2,7 @@ package com.wiexon.app.service;
 
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
-import com.wiexon.app.JFValidator.IpAddressValidator;
+import com.wiexon.app.JFValidator.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,14 +10,15 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Text;
 import jssc.SerialPortList;
 
 public class NewServiceController {
     public boolean isMake = false;
-
-    private boolean editMode = false;
 
     // Modbus Common fx fields
     String[] connectionTypeArray = new String[]{"Serial Port", "Modbus TCP/IP"};
@@ -50,30 +51,36 @@ public class NewServiceController {
     private VBox serialPortVbox, modbusTcpIpVbox;
     @FXML
     public ChoiceBox comPortNumber, baudRate, dataBits, parityBit, stopBit, encoding;
+    @FXML
+    private Text noComportText;
 
     // modbus TCP/IP fx fields
     @FXML
     public JFXTextField ipAddress, portNumber, connectionTimeout;
 
-    public boolean isEditMode() {
-        return editMode;
-    }
-
-    public void setEditMode(boolean editMode) {
-        this.editMode = editMode;
-    }
-
     @FXML
     void makeService(ActionEvent event) {
-        IpAddressValidator ipAddressValidator = new IpAddressValidator();
+        /*IpAddressValidator ipAddressValidator = new IpAddressValidator();
 
         serviceName.getValidators().add(ipAddressValidator);
-        ipAddressValidator.setMessage("Enter IPV4 address!");
+        ipAddressValidator.setMessage("Enter IPV4 address!");*/
 
-        serviceName.validate();
+        //serviceName.validate();
         //serviceName.va
+        boolean preValidation = false;
+        if (connectionType.getValue().toString().equals("Serial Port")) {
+            if (comPortArray.length > 0) {
+                preValidation = true;
+            } else {
+                noComportText.setVisible(true);
+            }
+        } else if (connectionType.getValue().toString().equals("Modbus TCP/IP")) {
+            noComportText.setVisible(false);
+            preValidation = true;
 
-        if (false) {
+        }
+
+        if (preValidation && serviceName.validate() && serviceURI.validate() && connectionTimeout.validate() && responseTimuout.validate() && ipAddress.validate() && portNumber.validate()) {
             this.isMake = true;
             ((Node)(event.getSource())).getScene().getWindow().hide();
         }
@@ -82,7 +89,7 @@ public class NewServiceController {
     @FXML
     private void initialize(){
         System.out.println("init ok");
-
+        noComportText.setVisible(false);
         // Connection Type choice list and control there view
         connectionType.setValue(connectionTypeArray[0]);
         connectionType.setItems(connectionTypeList);
@@ -121,6 +128,32 @@ public class NewServiceController {
         encoding.setItems(encodingList);
 
         // validation start
+
+        ServiceNameValidator serviceNameValidator = new ServiceNameValidator();
+        serviceNameValidator.setMessage("Enter a valid Name!");
+        serviceName.getValidators().add(serviceNameValidator);
+
+        if (serviceURI.isDisable()) {
+            UriNameValidator uriNameValidator = new UriNameValidator();
+            uriNameValidator.setMessage("Enter a valid URI name!");
+            serviceURI.getValidators().add(uriNameValidator);
+            UriCopyValidator uriCopyValidator = new UriCopyValidator();
+            uriCopyValidator.setMessage("This one exists! Try another.");
+            serviceURI.getValidators().add(uriCopyValidator);
+        }
+
+        TimeoutValidator timeoutValidator = new TimeoutValidator();
+        timeoutValidator.setMessage("Enter a valid time!");
+        responseTimuout.getValidators().add(timeoutValidator);
+        connectionTimeout.getValidators().add(timeoutValidator);
+
+        IpAddressValidator ipAddressValidator = new IpAddressValidator();
+        ipAddressValidator.setMessage("Enter a valid IPV4 address!");
+        ipAddress.getValidators().add(ipAddressValidator);
+
+        HostPortValidator hostPortValidator = new HostPortValidator();
+        hostPortValidator.setMessage("Enter a valid port number");
+        portNumber.getValidators().add(hostPortValidator);
 
     }
 }

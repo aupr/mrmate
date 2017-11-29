@@ -7,6 +7,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="494.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -19,12 +20,12 @@
             </JFXTextField>
             <JFXTextField fx:id="serviceURI" labelFloat="true" prefHeight="26.0" prefWidth="163.0" promptText="URI">
                <VBox.margin>
-                  <Insets top="30.0" />
+                  <Insets top="40.0" />
                </VBox.margin>
             </JFXTextField>
             <ChoiceBox fx:id="connectionType" prefHeight="25.0" prefWidth="177.0">
                <VBox.margin>
-                  <Insets top="30.0" />
+                  <Insets top="40.0" />
                </VBox.margin>
             </ChoiceBox>
             <JFXTextField fx:id="responseTimuout" labelFloat="true" promptText="Response Timeout" text="1000">
@@ -68,7 +69,7 @@
             </ChoiceBox>
          </children>
       </VBox>
-      <VBox fx:id="modbusTcpIpVbox" layoutX="276.0" layoutY="48.0" prefHeight="236.0" prefWidth="183.0" visible="false">
+      <VBox fx:id="modbusTcpIpVbox" layoutX="276.0" layoutY="48.0" prefHeight="274.0" prefWidth="183.0" visible="false">
          <children>
             <JFXTextField fx:id="ipAddress" labelFloat="true" promptText="Host / IP Address" text="127.0.0.1">
                <VBox.margin>
@@ -77,12 +78,12 @@
             </JFXTextField>
             <JFXTextField fx:id="portNumber" labelFloat="true" promptText="Port" text="502">
                <VBox.margin>
-                  <Insets top="30.0" />
+                  <Insets top="40.0" />
                </VBox.margin>
             </JFXTextField>
             <JFXTextField fx:id="connectionTimeout" labelFloat="true" promptText="Connection Timeout" text="3000">
                <VBox.margin>
-                  <Insets top="30.0" />
+                  <Insets top="40.0" />
                </VBox.margin>
             </JFXTextField>
          </children>
@@ -92,5 +93,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <Text fx:id="noComportText" fill="RED" layoutX="49.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comm Port is not available!" />
    </children>
 </AnchorPane>

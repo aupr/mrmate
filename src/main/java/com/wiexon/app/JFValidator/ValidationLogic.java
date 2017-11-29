@@ -36,8 +36,22 @@ public class ValidationLogic {
         return matcher.matches();
     }
 
-    public static boolean isValidHostPort () {
-        return false;
+    public static boolean isValidHostPort (String hostPort) {
+        boolean status = false;
+        if (isValidInteger(hostPort)) {
+            int hp = Integer.parseInt(hostPort);
+            if (hp >= 0 && hp <= 65535) status = true;
+        }
+        return status;
+    }
+
+    public static boolean isValidTime (String time) {
+        boolean status = false;
+        if (isValidInteger(time)) {
+            int tm = Integer.parseInt(time);
+            if (tm >= 10 && tm <= 60000) status = true;
+        }
+        return status;
     }
 
     public static boolean isValidUri (String uri) {
