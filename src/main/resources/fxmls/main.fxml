@@ -28,7 +28,7 @@
               <MenuItem fx:id="menuErrorShow" mnemonicParsing="false" onAction="#ShowErrors" text="Show System Log" />
               <MenuItem fx:id="menuSettings" mnemonicParsing="false" onAction="#appSettings" text="Settings" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem fx:id="menuClose" mnemonicParsing="false" text="Close" />
+              <MenuItem fx:id="menuClose" mnemonicParsing="false" onAction="#menuCloseFunction" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">

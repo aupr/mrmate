@@ -23,11 +23,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
+
 
 public class Controller {
     //ObservableList<ServiceTableData> tableDataList = FXCollections.observableArrayList();
@@ -73,6 +75,7 @@ public class Controller {
 
         //errorButton.setDisable(false);
         SettingsHolder.loadSettings();
+        //System.out.println("System settings loaded!");
         loadTable();
         portNameView.setText("Port: "+SettingsHolder.getPort());
         LogTable.getDataList().add(new LogTableData("Application started!"));
@@ -226,6 +229,8 @@ public class Controller {
             serviceController.encoding.setValue(resmap.get("mode"));
 
             serviceController.okButton.setText("Save Service");
+
+            serviceController.setEditMode(true);
         }
 
         editService.setOnHidden(e->{
@@ -324,8 +329,6 @@ public class Controller {
     @FXML
     void ShowErrors(ActionEvent event) {
 
-        //LogTable.getDataList().add(new LogTableData("first Messate"));
-
         try {
             Stage logStage = new Stage();
 
@@ -346,6 +349,13 @@ public class Controller {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void menuCloseFunction() {
+        primaryStage.fireEvent(
+                new WindowEvent(primaryStage, WindowEvent.WINDOW_CLOSE_REQUEST)
+        );
     }
 
     @FXML

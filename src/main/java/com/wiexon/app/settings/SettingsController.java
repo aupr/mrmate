@@ -33,5 +33,8 @@ public class SettingsController {
         settingsAutoStartService.setSelected(SettingsHolder.isAutoStartService());
         settingsAutoMinimize.setSelected(SettingsHolder.isAutoMinimize());
         settingsExitOnClose.setSelected(SettingsHolder.isExitOnClose());
+
+        // validation code start
+
     }
 }

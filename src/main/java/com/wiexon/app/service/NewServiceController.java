@@ -1,6 +1,8 @@
 package com.wiexon.app.service;
 
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.RequiredFieldValidator;
+import com.wiexon.app.JFValidator.IpAddressValidator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,10 +11,13 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
 import jssc.SerialPortList;
 
 public class NewServiceController {
     public boolean isMake = false;
+
+    private boolean editMode = false;
 
     // Modbus Common fx fields
     String[] connectionTypeArray = new String[]{"Serial Port", "Modbus TCP/IP"};
@@ -42,37 +47,37 @@ public class NewServiceController {
     String[] encodingArray = new String[]{"RTU Mode", "ASCII Mode"};
     ObservableList<String> encodingList = FXCollections.observableArrayList(encodingArray);
     @FXML
-    private VBox serialPortVbox;
+    private VBox serialPortVbox, modbusTcpIpVbox;
     @FXML
-    public ChoiceBox comPortNumber;
-    @FXML
-    public ChoiceBox baudRate;
-    @FXML
-    public ChoiceBox dataBits;
-    @FXML
-    public ChoiceBox parityBit;
-    @FXML
-    public ChoiceBox stopBit;
-    @FXML
-    public ChoiceBox encoding;
+    public ChoiceBox comPortNumber, baudRate, dataBits, parityBit, stopBit, encoding;
 
     // modbus TCP/IP fx fields
     @FXML
-    private VBox modbusTcpIpVbox;
-    @FXML
-    public JFXTextField ipAddress;
-    @FXML
-    public JFXTextField portNumber;
-    @FXML
-    public JFXTextField connectionTimeout;
+    public JFXTextField ipAddress, portNumber, connectionTimeout;
 
+    public boolean isEditMode() {
+        return editMode;
+    }
+
+    public void setEditMode(boolean editMode) {
+        this.editMode = editMode;
+    }
 
     @FXML
     void makeService(ActionEvent event) {
-        this.isMake = true;
-        ((Node)(event.getSource())).getScene().getWindow().hide();
-    }
+        IpAddressValidator ipAddressValidator = new IpAddressValidator();
 
+        serviceName.getValidators().add(ipAddressValidator);
+        ipAddressValidator.setMessage("Enter IPV4 address!");
+
+        serviceName.validate();
+        //serviceName.va
+
+        if (false) {
+            this.isMake = true;
+            ((Node)(event.getSource())).getScene().getWindow().hide();
+        }
+    }
 
     @FXML
     private void initialize(){
@@ -114,5 +119,8 @@ public class NewServiceController {
         // Encoding mode selection
         encoding.setValue(encodingArray[0]);
         encoding.setItems(encodingList);
+
+        // validation start
+
     }
 }
