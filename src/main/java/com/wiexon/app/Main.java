@@ -22,6 +22,7 @@ public class Main extends Application {
         primaryStage.setTitle("Modbus REST Mate");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
+        primaryStage.getIcons().add(new javafx.scene.image.Image("/images/mrmate_32.png"));
 
         Platform.setImplicitExit(false);
 
@@ -43,7 +44,7 @@ public class Main extends Application {
             return;
         }
         final PopupMenu popup = new PopupMenu();
-        URL url = System.class.getResource("/images/new.png");
+        URL url = System.class.getResource("/images/mrmate_16.png");
 
         Image image = Toolkit.getDefaultToolkit().getImage(url);
 

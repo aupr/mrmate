@@ -31,7 +31,7 @@ public class ModbusServiceMap {
                 if (res.getString("modeView").equals("Enabled")){
                     try {
                         ServiceTable.getDataList().get(i).setStatus("Connecting");
-                        LogTable.getDataList().add(new LogTableData("SL "+i+" is trying to connect!"));
+                        LogTable.getDataList().add(new LogTableData("SL "+(i+1)+" is trying to connect!"));
                         if (res.getString("connectionType").equals("Modbus TCP/IP")){
                             trackTableRow.put(res.getString("uri"), i);
                             // try to dump modbus tcp/ip service object
@@ -60,10 +60,10 @@ public class ModbusServiceMap {
                             serviceMap.put(res.getString("uri"), new ModbusSerialService(selfUnit,comPort,baudRate,dataBits,parity,stopBits,encoding));
                         }
                         ServiceTable.getDataList().get(i).setStatus("Connected");
-                        LogTable.getDataList().add(new LogTableData("SL "+i+" has connected!"));
+                        LogTable.getDataList().add(new LogTableData("SL "+(i+1)+" has connected!"));
                     } catch (Exception e) {
                         ServiceTable.getDataList().get(i).setStatus("Error");
-                        LogTable.getDataList().add(new LogTableData("SL "+i+" got an error! The communication port may not be available!"));
+                        LogTable.getDataList().add(new LogTableData("SL "+(i+1)+" got an error! The communication port may not be available!"));
                         e.printStackTrace();
                     }
                 }
@@ -119,7 +119,7 @@ public class ModbusServiceMap {
                 if (res.getString("modeView").equals("Enabled")){
                     try {
                         ServiceTable.getDataList().get(trackTableRow.get(uri)).setStatus("Connecting");
-                        LogTable.getDataList().add(new LogTableData("SL "+trackTableRow.get(uri)+" is trying to connect!"));
+                        LogTable.getDataList().add(new LogTableData("SL "+(trackTableRow.get(uri)+1)+" is trying to connect!"));
                         if (res.getString("connectionType").equals("Modbus TCP/IP")){
                             // returning the new object
                             modbusService = new ModbusTcpService(res.getString("host"), Integer.parseInt(res.getString("port")), res.getInt("connectionTimeout"), res.getInt("responseTimeout"));
@@ -147,10 +147,10 @@ public class ModbusServiceMap {
                             modbusService = new ModbusSerialService(selfUnit,comPort,baudRate,dataBits,parity,stopBits,encoding);
                         }
                         ServiceTable.getDataList().get(trackTableRow.get(uri)).setStatus("Connected");
-                        LogTable.getDataList().add(new LogTableData("SL "+trackTableRow.get(uri)+" has connected!"));
+                        LogTable.getDataList().add(new LogTableData("SL "+(trackTableRow.get(uri)+1)+" has connected!"));
                     } catch (Exception e) {
                         ServiceTable.getDataList().get(trackTableRow.get(uri)).setStatus("Error");
-                        LogTable.getDataList().add(new LogTableData("SL "+trackTableRow.get(uri)+" got an error! The communication port may not be available!"));
+                        LogTable.getDataList().add(new LogTableData("SL "+(trackTableRow.get(uri)+1)+" got an error! The communication port may not be available!"));
                         e.printStackTrace();
                     }
 

@@ -99,14 +99,11 @@ public class Controller {
                     server = HttpServerFactory.create("http://127.0.0.1:"+SettingsHolder.getPort()+"/");
                     server.start();
 
-                    Resource.setModbusServiceMap(ModbusServiceMap.load());
                     buttonDisplayControler("start");
-
                     statusView.setText("Status: Running");
-
                     LogTable.getDataList().add(new LogTableData("Server started"));
 
-
+                    Resource.setModbusServiceMap(ModbusServiceMap.load());
                 } catch (IOException e) {
                     multiClickFilter = true;
                     statusView.setText("Status: Error");
