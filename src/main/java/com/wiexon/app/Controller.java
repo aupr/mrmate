@@ -21,6 +21,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -342,6 +344,56 @@ public class Controller {
             logStage.setX(primaryStage.getX()+50);
             logStage.setY(primaryStage.getY()+50);
             logStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void about(ActionEvent event) {
+        System.out.println("about clicked");
+        try {
+            Stage aboutStage = new Stage();
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmls/about.fxml"));
+            AboutController aboutController = new AboutController();
+            fxmlLoader.setController(aboutController);
+
+            Parent root = fxmlLoader.load();
+
+            aboutStage.setTitle("About!");
+            aboutStage.setResizable(false);
+            aboutStage.initModality(Modality.APPLICATION_MODAL);
+            aboutStage.setScene(new Scene(root));
+
+            aboutStage.setX(primaryStage.getX()+75);
+            aboutStage.setY(primaryStage.getY()+50);
+            aboutStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void communication(ActionEvent event) {
+        System.out.println("clicked communication");
+        try {
+            Stage communicationStage = new Stage();
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmls/communication.fxml"));
+            CommunicationController communicationController = new CommunicationController();
+            fxmlLoader.setController(communicationController);
+
+            Parent root = fxmlLoader.load();
+
+            communicationStage.setTitle("Communication!");
+            communicationStage.setResizable(false);
+            communicationStage.initModality(Modality.APPLICATION_MODAL);
+            communicationStage.setScene(new Scene(root));
+
+            communicationStage.setX(primaryStage.getX()+75);
+            communicationStage.setY(primaryStage.getY()+50);
+            communicationStage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }
