@@ -19,6 +19,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebEngine;
@@ -27,7 +28,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -377,6 +381,15 @@ public class Controller {
     @FXML
     void communication(ActionEvent event) {
         System.out.println("clicked communication");
+
+        /*try {
+            Desktop.getDesktop().browse(new URL("http://ariexon.com").toURI());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }*/
+
         try {
             Stage communicationStage = new Stage();
 

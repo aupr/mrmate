@@ -16,7 +16,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Text>
-      <Text layoutX="38.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wildcard CORS header response for hassle free development">
+      <Text layoutX="38.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CORS header response with wildcard for hassle free development">
          <font>
             <Font size="14.0" />
          </font>
