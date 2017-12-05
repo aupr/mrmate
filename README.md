@@ -1,5 +1,5 @@
 # mrmate
-Modbus REST Mate (mrmate) is a software to establish a Modbus (TCP, RTU, ASCII) communication over RESTful service
+Modbus REST Mate (mrmate) is a software to establish Modbus (TCP, RTU, ASCII) communication over RESTful service
 
 
 #### Key Features:
@@ -33,6 +33,7 @@ HTTP GET Method
 - Read Multiple Holding Registers <br />
 `http://{host address}:{port}/mrmate/read/{uri name}/{unit id}/4/{offset}/{count}`
 
+Example to Read 10 Holding Registers: `http://localhost:505/mrmate/read/uriname/1/4/1/10` 
 
 #### Write Data
 HTTP POST Method
@@ -98,4 +99,74 @@ XML Tags: `<modbusRegisters>`, `<modbusRegister>`, `<value>`
     ..................
     ..................
 </modbusRegisters>
+```
+
+#### POST Data Pattern for JSON Format
+- For Single Coil <br />
+```
+{
+    "value": <Boolean value>
+}
+```
+- For Multiple Coil <br />
+```
+[
+    {"value":<Boolean value>},
+    {"value":<Boolean value>},
+    {"value":<Boolean value>},
+    .........................
+    .........................
+]
+```
+
+
+- For Single Register <br />
+```
+{
+    "value": <16 Bit Integer Value>
+}
+```
+- For Multiple Registers <br />
+```
+[
+    {"value": <16 Bit Integer Value>},
+    {"value": <16 Bit Integer Value>},
+    {"value": <16 Bit Integer Value>},
+    ...............................
+    ...............................
+]
+```
+
+Example to Write 5 Holding Registers: <br />
+Uri: `http://localhost:505/mrmate/write/uriname/1/4/1/multi`
+Body Data XML:
+```
+<modbusRegisters>
+    <modbusRegister>
+        <value>111</value>
+    </modbusRegister>
+    <modbusRegister>
+        <value>222</value>
+    </modbusRegister>
+    <modbusRegister>
+        <value>333</value>
+    </modbusRegister>
+    <modbusRegister>
+        <value>444</value>
+    </modbusRegister>
+    <modbusRegister>
+        <value>444</value>
+    </modbusRegister>
+</modbusRegisters>
+```
+
+Body Data JSON:
+```
+[
+    {"value": 111},
+    {"value": 222},
+    {"value": 333},
+    {"value": 444},
+    {"value": 555}
+]
 ```
