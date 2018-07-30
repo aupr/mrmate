@@ -51,15 +51,16 @@
       <TableView fx:id="serviceTable" layoutX="6.0" layoutY="78.0" onMouseClicked="#tableRowSelect" prefHeight="395.0" prefWidth="690.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="78.0">
         <columns>
           <TableColumn fx:id="sl" prefWidth="39.0" text="SL" />
-          <TableColumn fx:id="term" prefWidth="169.0" text="Term" />
-            <TableColumn fx:id="uri" prefWidth="164.0" text="URI" />
-            <TableColumn fx:id="connection" prefWidth="152.0" text="Connection" />
-            <TableColumn fx:id="mode" prefWidth="97.0" text="Mode" />
-            <TableColumn fx:id="status" prefWidth="92.0" text="Status" />
+          <TableColumn fx:id="term" prefWidth="160.0" text="Term" />
+            <TableColumn fx:id="uri" prefWidth="156.0" text="URI" />
+            <TableColumn fx:id="connection" prefWidth="103.0" text="Connection" />
+            <TableColumn fx:id="address" prefWidth="134.0" text="Address" />
+            <TableColumn fx:id="mode" minWidth="0.0" prefWidth="72.0" text="Mode" />
+            <TableColumn fx:id="status" prefWidth="73.0" text="Status" />
         </columns>
       </TableView>
-      <Text fx:id="portNameView" layoutX="193.0" layoutY="491.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Port: " AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="200.0" />
-      <Text fx:id="hostNameView" layoutX="30.0" layoutY="491.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Host: 127.0.0.1 / localhost" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="30.0" />
+      <Text fx:id="portNameView" layoutX="251.0" layoutY="491.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Port: " AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="251.0" />
+      <Text fx:id="hostNameView" layoutX="30.0" layoutY="491.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Host: 127.0.0.1  or  localhost" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="30.0" />
       <HBox layoutX="6.0" layoutY="25.0" prefHeight="47.0" prefWidth="449.0" AnchorPane.leftAnchor="6.0" AnchorPane.topAnchor="25.0">
          <children>
             <JFXButton fx:id="playButton" alignment="CENTER" contentDisplay="CENTER" onAction="#StartServices" style="-fx-background-color: #fff; -fx-border-radius: 0;" text=" " textFill="#00960a" HBox.hgrow="ALWAYS">

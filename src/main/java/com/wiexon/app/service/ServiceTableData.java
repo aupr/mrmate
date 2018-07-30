@@ -10,16 +10,18 @@ public class ServiceTableData {
     private final SimpleStringProperty uri;
     //private final SimpleStringProperty pid;
     private final SimpleStringProperty connection;
+    private final SimpleStringProperty address;
     private final SimpleStringProperty mode;
     private final SimpleStringProperty status;
 
-    public ServiceTableData(Integer id, Integer sl, String term, String uri, String connection, String mode, String status) {
+    public ServiceTableData(Integer id, Integer sl, String term, String uri, String connection, String address, String mode, String status) {
         this.id = new SimpleIntegerProperty(id);
         this.sl = new SimpleIntegerProperty(sl);
         this.term = new SimpleStringProperty(term);
         this.uri = new SimpleStringProperty(uri);
         //this.pid = new SimpleStringProperty(pid.toString());
         this.connection = new SimpleStringProperty(connection);
+        this.address = new SimpleStringProperty(address);
         this.mode = new SimpleStringProperty(mode);
         this.status = new SimpleStringProperty(status);
     }
@@ -94,6 +96,18 @@ public class ServiceTableData {
 
     public void setConnection(String connection) {
         this.connection.set(connection);
+    }
+
+    public String getAddress() {
+        return address.get();
+    }
+
+    public SimpleStringProperty addressProperty() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address.set(address);
     }
 
     public String getMode() {

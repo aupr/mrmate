@@ -55,7 +55,7 @@ public class Controller {
     @FXML
     private TableView<ServiceTableData> serviceTable;
     @FXML
-    private TableColumn sl, term, uri, connection, mode, status;
+    private TableColumn sl, term, uri, connection, address, mode, status;
     @FXML
     private Text hostNameView, portNameView, statusView;
 
@@ -75,6 +75,7 @@ public class Controller {
         term.setCellValueFactory(new PropertyValueFactory<ServiceTableData, String>("term"));
         uri.setCellValueFactory(new PropertyValueFactory<ServiceTableData, String>("uri"));
         connection.setCellValueFactory(new PropertyValueFactory<ServiceTableData, String>("connection"));
+        address.setCellValueFactory(new PropertyValueFactory<ServiceTableData, String>("address"));
         mode.setCellValueFactory(new PropertyValueFactory<ServiceTableData, String>("mode"));
         status.setCellValueFactory(new PropertyValueFactory<ServiceTableData, String>("status"));
 

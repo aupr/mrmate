@@ -1,5 +1,6 @@
 package com.wiexon.app.service;
 
+import com.sun.org.apache.xpath.internal.SourceTree;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -37,9 +38,15 @@ public class ServiceTable {
                     System.out.println("Table exists fetching data!");
                     ResultSet res = state.executeQuery("SELECT * FROM service");
                     int i=0;
+                    String address;
                     while (res.next()) {
                         i++;
-                        dataList.add(new ServiceTableData(res.getInt("id"), i, res.getString("serviceName"), res.getString("uri"), res.getString("connectionType"), res.getString("modeView"), "Stopped"));
+                        if (res.getString("connectionType").equals("Serial Port")){
+                            address = res.getString("comport");
+                        } else {
+                            address = res.getString("host") + ":" + res.getString("port");
+                        }
+                        dataList.add(new ServiceTableData(res.getInt("id"), i, res.getString("serviceName"), res.getString("uri"), res.getString("connectionType"), address, res.getString("modeView"), "Stopped"));
                     }
                     //tableView.setItems(tableDataList);
 

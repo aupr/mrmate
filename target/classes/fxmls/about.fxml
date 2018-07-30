@@ -11,27 +11,27 @@
             <Font name="Candara Bold" size="31.0" />
          </font>
       </Text>
-      <Text layoutX="86.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modbus access software over RESTful service">
+      <Text layoutX="86.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modbus access software over RESTful service">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Text>
-      <Text layoutX="38.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wildcard CORS header response for hassle free development">
+      <Text layoutX="38.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CORS header response with wildcard for hassle free development">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="38.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Consume and produce XML or JSON data format according to request header">
+      <Text layoutX="38.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Consume and produce XML or JSON data format according to request header">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="38.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Easy host port setup option">
+      <Text layoutX="38.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Easy host port setup option">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="39.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Automatic communication connection recovery">
+      <Text layoutX="39.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Automatic communication connection recovery">
          <font>
             <Font size="14.0" />
          </font>
