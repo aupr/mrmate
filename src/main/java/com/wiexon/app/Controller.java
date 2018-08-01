@@ -69,6 +69,40 @@ public class Controller {
     // Fxml method and other methods/////////////////////////////////////////////////////////////////////////////////////////
     @FXML
     private void initialize() {
+        // Button tooltip initialization
+        Tooltip playButtonTooltip = new Tooltip();
+        playButtonTooltip.setText("Start All Services");
+        playButton.setTooltip(playButtonTooltip);
+
+        Tooltip stopButtonTooltip = new Tooltip();
+        stopButtonTooltip.setText("Stop All Services");
+        stopButton.setTooltip(stopButtonTooltip);
+
+        Tooltip addButtonTooltip = new Tooltip();
+        addButtonTooltip.setText("Add New Service");
+        addButton.setTooltip(addButtonTooltip);
+
+        Tooltip editButtonTooltip = new Tooltip();
+        editButtonTooltip.setText("Edit Service");
+        editButton.setTooltip(editButtonTooltip);
+
+        Tooltip subButtonTooltip = new Tooltip();
+        subButtonTooltip.setText("Delete Service");
+        subButton.setTooltip(subButtonTooltip);
+
+        Tooltip checkButtonTooltip = new Tooltip();
+        checkButtonTooltip.setText("Enable Service");
+        checkButton.setTooltip(checkButtonTooltip);
+
+        Tooltip crossButtonTooltip = new Tooltip();
+        crossButtonTooltip.setText("Disable Service");
+        crossButton.setTooltip(crossButtonTooltip);
+
+        Tooltip errorButtonTooltip = new Tooltip();
+        errorButtonTooltip.setText("System Log!");
+        //errorButtonTooltip.set
+        errorButton.setTooltip(errorButtonTooltip);
+
         // Table column property settings
         // serviceTable.setEditable(true);
         sl.setCellValueFactory(new PropertyValueFactory<ServiceTableData,String>("sl"));
@@ -622,7 +656,7 @@ public class Controller {
     }
 
     private void deleteService(int serviceId) {
-        if (alert("Do you confirm to remove this service!")) {
+        if (alert("Do you confirm to remove this service?")) {
             Connection con = null;
             PreparedStatement preps = null;
             try {
@@ -651,7 +685,7 @@ public class Controller {
 
     private boolean alert(String msg) {
         Alert alert = new Alert(Alert.AlertType.NONE, msg, ButtonType.YES, ButtonType.NO);
-        alert.setTitle("Need Confirmation!");
+        alert.setTitle("Confirm?");
         alert.setX(primaryStage.getX()+200);
         alert.setY(primaryStage.getY()+150);
         alert.showAndWait();
