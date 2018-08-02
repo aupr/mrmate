@@ -10,6 +10,13 @@ public class ValidationLogic {
         return (value >= lowerLimit && value <= upperLimit);
     }
 
+    public static boolean isValidComPortAddress (String comPortName) {
+        String comPortPattern = "(COM(\\d|\\d{2}|\\d{3}))";
+        Pattern pattern = Pattern.compile(comPortPattern);
+        Matcher matcher = pattern.matcher(comPortName);
+        return matcher.matches();
+    }
+
     public static boolean isValidIpAddress (String ipAddress) {
         String IPADDRESS_PATTERN = "(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)";
 

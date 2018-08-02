@@ -217,7 +217,8 @@ public class Controller {
                 serviceDataMap.put("ipAddress", nsc.ipAddress.getText().toString());
                 serviceDataMap.put("portNumber", nsc.portNumber.getText().toString());
                 serviceDataMap.put("connectionTimeout", nsc.connectionTimeout.getText().toString());
-                serviceDataMap.put("comPortNumber", nsc.comPortNumber.getValue().toString());
+                //serviceDataMap.put("comPortNumber", nsc.comPortNumber.getValue().toString());
+                serviceDataMap.put("comPortNumber", nsc.comPortNumber.getText().toString());
                 serviceDataMap.put("baudRate", nsc.baudRate.getValue().toString());
                 serviceDataMap.put("dataBits", nsc.dataBits.getValue().toString());
                 serviceDataMap.put("parityBit", nsc.parityBit.getValue().toString());
@@ -260,7 +261,7 @@ public class Controller {
             serviceController.ipAddress.setText(resmap.get("host"));
             serviceController.portNumber.setText(resmap.get("port"));
             serviceController.connectionTimeout.setText(resmap.get("connectionTimeout"));
-            serviceController.comPortNumber.setValue(resmap.get("comport"));
+            serviceController.comPortNumber.setText(resmap.get("comport"));
             serviceController.baudRate.setValue(resmap.get("baudRate"));
             serviceController.dataBits.setValue(resmap.get("dataBits"));
             serviceController.parityBit.setValue(resmap.get("parityBits"));
@@ -282,7 +283,8 @@ public class Controller {
                 serviceDataMap.put("ipAddress", serviceController.ipAddress.getText().toString());
                 serviceDataMap.put("portNumber", serviceController.portNumber.getText().toString());
                 serviceDataMap.put("connectionTimeout", serviceController.connectionTimeout.getText().toString());
-                serviceDataMap.put("comPortNumber", serviceController.comPortNumber.getValue().toString());
+                //serviceDataMap.put("comPortNumber", serviceController.comPortNumber.getValue().toString());
+                serviceDataMap.put("comPortNumber", serviceController.comPortNumber.getText().toString());
                 serviceDataMap.put("baudRate", serviceController.baudRate.getValue().toString());
                 serviceDataMap.put("dataBits", serviceController.dataBits.getValue().toString());
                 serviceDataMap.put("parityBit", serviceController.parityBit.getValue().toString());

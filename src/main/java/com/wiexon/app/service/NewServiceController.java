@@ -34,10 +34,12 @@ public class NewServiceController {
     public JFXTextField responseTimuout;
     @FXML
     public Button okButton;
+    @FXML
+    public JFXTextField comPortNumber;
 
     // Modbus Serial port fx fields
-    String[] comPortArray = SerialPortList.getPortNames();
-    ObservableList<String> comPortList = FXCollections.observableArrayList(comPortArray);
+    //String[] comPortArray = SerialPortList.getPortNames();
+    //ObservableList<String> comPortList = FXCollections.observableArrayList(comPortArray);
     String[] baudRateArray = new String[]{"300 Baud", "600 Baud", "1200 Baud", "2400 Baud", "4800 Baud", "9600 Baud", "14400 Baud", "19200 Baud", "38400 Baud", "56000 Baud", "57600 Baud", "115200 Baud", "128000 Baud", "256000 Baud"};
     ObservableList<String> baudRateList = FXCollections.observableArrayList(baudRateArray);
     String[] dataBitsArray = new String[]{"7 Data bits", "8 Data bits"};
@@ -51,9 +53,9 @@ public class NewServiceController {
     @FXML
     private VBox serialPortVbox, modbusTcpIpVbox;
     @FXML
-    public ChoiceBox comPortNumber, baudRate, dataBits, parityBit, stopBit, encoding;
-    @FXML
-    private Text noComportText;
+    public ChoiceBox baudRate, dataBits, parityBit, stopBit, encoding;
+    //@FXML
+    //private Text noComportText;
 
     // modbus TCP/IP fx fields
     @FXML
@@ -65,27 +67,24 @@ public class NewServiceController {
 
     @FXML
     void makeService(ActionEvent event) {
-        /*IpAddressValidator ipAddressValidator = new IpAddressValidator();
 
-        serviceName.getValidators().add(ipAddressValidator);
-        ipAddressValidator.setMessage("Enter IPV4 address!");*/
+        boolean isValidServiceName = serviceName.validate();
+        boolean isValidServiceURI = serviceURI.validate();
+        boolean isValidResponseTimeout = responseTimuout.validate();
+        boolean isValidComport = true;
+        boolean isValidIpAddress = true;
+        boolean isValidPortNumber = true;
+        boolean isValidConnectionTimeout = true;
 
-        //serviceName.validate();
-        //serviceName.va
-        boolean preValidation = false;
         if (connectionType.getValue().toString().equals("Serial Port")) {
-            if (comPortArray.length > 0) {
-                preValidation = true;
-            } else {
-                noComportText.setVisible(true);
-            }
+            isValidComport = comPortNumber.validate();
         } else if (connectionType.getValue().toString().equals("Modbus TCP/IP")) {
-            noComportText.setVisible(false);
-            preValidation = true;
-
+            isValidIpAddress = ipAddress.validate();
+            isValidPortNumber = portNumber.validate();
+            isValidConnectionTimeout = connectionTimeout.validate();
         }
 
-        if (preValidation && serviceName.validate() && serviceURI.validate() && connectionTimeout.validate() && responseTimuout.validate() && ipAddress.validate() && portNumber.validate()) {
+        if ( isValidServiceName && isValidServiceURI && isValidResponseTimeout && isValidComport && isValidIpAddress && isValidPortNumber && isValidConnectionTimeout ) {
             this.isMake = true;
             ((Node)(event.getSource())).getScene().getWindow().hide();
         }
@@ -94,8 +93,8 @@ public class NewServiceController {
     @FXML
     private void initialize(){
         System.out.println("init ok");
-        noComportText.setVisible(false);
-        // Connection Type choice list and control there view
+        //noComportText.setVisible(false);
+        // Connection Type choice list and control their view
         connectionType.setValue(connectionTypeArray[0]);
         connectionType.setItems(connectionTypeList);
         connectionType.setOnAction(e->{
@@ -109,8 +108,11 @@ public class NewServiceController {
         });
 
         // Serial or Comm Port List dropdown
-        comPortNumber.setValue(comPortArray.length>0? comPortArray[0]:"");
-        comPortNumber.setItems(comPortList);
+        //comPortNumber.setValue(comPortArray.length>0? comPortArray[0]:"");
+        //comPortNumber.setItems(comPortList);
+
+        // Converted comport dropdown to comport text
+        comPortNumber.setText("COM3"); // in future it will search for free comport
 
         // Serial comm baud rate settings
         baudRate.setValue(baudRateArray[5]);
@@ -134,12 +136,17 @@ public class NewServiceController {
 
         // validation start
 
+        ComPortValidator comPortValidator = new ComPortValidator();
+        comPortValidator.setMessage("Enter a valid COM Port");
+        comPortNumber.getValidators().add(comPortValidator);
+
         ServiceNameValidator serviceNameValidator = new ServiceNameValidator();
         serviceNameValidator.setMessage("Enter a valid Name!");
         serviceName.getValidators().add(serviceNameValidator);
 
         if (isEditing) {
             serviceURI.setDisable(true);
+            connectionType.setDisable(true);
         } else  {
             UriNameValidator uriNameValidator = new UriNameValidator();
             uriNameValidator.setMessage("Enter a valid URI name!");
