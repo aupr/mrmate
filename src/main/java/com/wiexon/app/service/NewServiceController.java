@@ -112,6 +112,7 @@ public class NewServiceController {
         //comPortNumber.setItems(comPortList);
 
         // Converted comport dropdown to comport text
+
         comPortNumber.setText("COM3"); // in future it will search for free comport
 
         // Serial comm baud rate settings
@@ -147,6 +148,7 @@ public class NewServiceController {
         if (isEditing) {
             serviceURI.setDisable(true);
             connectionType.setDisable(true);
+            comPortNumber.setDisable(true);
         } else  {
             UriNameValidator uriNameValidator = new UriNameValidator();
             uriNameValidator.setMessage("Enter a valid URI name!");
@@ -154,6 +156,10 @@ public class NewServiceController {
             UriCopyValidator uriCopyValidator = new UriCopyValidator();
             uriCopyValidator.setMessage("This one exists! Try another.");
             serviceURI.getValidators().add(uriCopyValidator);
+
+            ComPortCopyValidator comPortCopyValidator = new ComPortCopyValidator();
+            comPortCopyValidator.setMessage("This port is already assigned!");
+            comPortNumber.getValidators().add(comPortCopyValidator);
         }
 
         TimeoutValidator timeoutValidator = new TimeoutValidator();

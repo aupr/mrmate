@@ -128,6 +128,8 @@ public class Controller {
 
     @FXML
     void StartServices(ActionEvent event) {
+        playButton.setDisable(true);
+        addButton.setDisable(true);
 
         Task task = new Task() {
             @Override
@@ -140,11 +142,12 @@ public class Controller {
                     server = HttpServerFactory.create("http://127.0.0.1:"+SettingsHolder.getPort()+"/");
                     server.start();
 
-                    buttonDisplayControler("start");
+
                     statusView.setText("Status: Running");
                     LogTable.getDataList().add(new LogTableData("Server started"));
 
                     Resource.setModbusServiceMap(ModbusServiceMap.load());
+                    buttonDisplayControler("start");
                 } catch (IOException e) {
                     multiClickFilter = true;
                     statusView.setText("Status: Error");
@@ -543,7 +546,10 @@ public class Controller {
             preps.setString(5, data.get("ipAddress"));
             preps.setString(6, data.get("portNumber"));
             preps.setInt(7, Integer.parseInt(data.get("connectionTimeout")));
-            preps.setString(8, data.get("comPortNumber"));
+            if (data.get("connectionType").equals("Serial Port"))
+                preps.setString(8, data.get("comPortNumber"));
+            else
+                preps.setString(8, "");
             preps.setString(9, data.get("baudRate"));
             preps.setString(10, data.get("dataBits"));
             preps.setString(11, data.get("parityBit"));

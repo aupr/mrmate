@@ -17,6 +17,45 @@ public class ValidationLogic {
         return matcher.matches();
     }
 
+    public static boolean isDuplicateComPortAddress (String comPortName) {
+        Connection con = null;
+        PreparedStatement preps = null;
+        ResultSet res = null;
+        boolean duplicateComport = false;
+        try {
+            Class.forName("org.sqlite.JDBC");
+            con = DriverManager.getConnection("jdbc:sqlite:Base.db");
+            preps = con.prepareStatement("SELECT * FROM service WHERE comport=?");
+            preps.setString(1, comPortName);
+            res = preps.executeQuery();
+
+            if (res.next()) {
+                duplicateComport = true;
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                res.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                preps.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return duplicateComport;
+    }
+
     public static boolean isValidIpAddress (String ipAddress) {
         String IPADDRESS_PATTERN = "(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)";
 
