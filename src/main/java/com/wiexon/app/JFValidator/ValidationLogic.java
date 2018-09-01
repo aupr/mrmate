@@ -11,7 +11,7 @@ public class ValidationLogic {
     }
 
     public static boolean isValidComPortAddress (String comPortName) {
-        String comPortPattern = "(COM(\\d|\\d{2}|\\d{3}))";
+        String comPortPattern = "COM([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])";//"(COM(\\d|\\d{2}|\\d{3}))";
         Pattern pattern = Pattern.compile(comPortPattern);
         Matcher matcher = pattern.matcher(comPortName);
         return matcher.matches();
